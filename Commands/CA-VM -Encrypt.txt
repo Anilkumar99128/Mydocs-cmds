@@ -1,0 +1,72 @@
+User Name: secroot
+Password: Q1w2e3r4@143$#$
+Url: https://10.6.177.61/vaults/ 
+
+for key control vault
+username: anil.panthangi@cloud4c.com
+password: Q1w2e3r4@123$#$
+
+
+Installing the Policy Agent on Linux
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Install-Guide/Policy-Agent-Install-Linux/Installing-the-Policy-Agent-Linux.html
+
+https://10.6.177.61/vaults/\
+
+
+Enabling Linux Online Encryption with the webGUI:
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Data-Encryption/Linux-Prereqs/Enabling-Linux-Online-Encryption-webGUI.html
+
+
+Encrypting a Disk Using the webGUI:
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Data-Encryption/Encrypting-a-Disk-Using-the-webGUI.html
+
+Enabling Linux Online Encryption with the CLI(Htcrypt from GUI):
+
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Data-Encryption/Linux-Prereqs/Enabling-Linux-Online-Encryption-CLI.html?Highlight=htcrypt
+
+Configuring UEFI Secure Boot in RHEL (CentOS):
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Data-Encryption/Configuring-UEFI-Secure-Boot-RHEL-CentOS.html
+
+Encrypting a Disk Using the CLI:
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Data-Encryption/Encrypting-a-Disk-Using-CLI.html
+
+
+complete link:
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Data-Encryption/Linux-Prereqs/Linux-Encryption-Overview.html
+
+
+disk encryption:
+
+https://docs.hytrust.com/DataControl/Online/Content/Books/Admin-Guide/Linux-Root-Swap-Drive-Encryption/Encrypting-Linux-System-Devices-Admin-Guide.html
+
+
+
+
+
+
+lkmsyh-twqvzO-qa4lgn
+
+
+https://10.6.177.61/vmencryption/48d5e299-698f-476b-a720-ae1035f56992/VMEncryptionvault/
+
+
+
+https://10.6.177.61/vmencryption/48d5e299-698f-476b-a720-ae1035f56992/VMEncryptionvault/#!/workloads
+
+48d5e299-698f-476b-a720-ae1035f56992
+
+
+This discusses how to get it to mount properly at boot time:
+https://docs.hytrust.com/DataControl/10.0/Online/Content/Books/Admin-Guide/Linux-Root-Swap-Drive-Encryption/Automatically-Mounting-Linux-Filesystems.html
+
+This gives more detail on how the online encryption works.
+https://docs.hytrust.com/DataControl/10.0/Online/Content/Books/Admin-Guide/Data-Encryption/Linux-Prereqs/Linux-Encryption-Overview.html
+
+This page provides details on the hcl encrypt command and other hcl commands you can use:
+https://docs.hytrust.com/DataControl/10.0/Online/Content/Books/Programmers-Ref/hcl-man-page.html

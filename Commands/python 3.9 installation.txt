@@ -1,0 +1,22 @@
+mkdir Py3
+cd Py3/
+yum install openssl-devel bzip2-devel libffi-devel zlib-devel wget -y
+yum install wget
+
+
+
+wget https://www.python.org/ftp/python/3.9.14/Python-3.9.14.tgz
+
+
+
+tar -xvzf Python-3.9.14.tgz
+cd  Python-3.9.14
+./configure --enable-optimizations
+make altinstall
+which python3.9
+which python3
+cd /usr/bin/
+ls -l python*
+unlink python3
+ln -s /usr/local/bin/python3.9 python3
+python3 --version

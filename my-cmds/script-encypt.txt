@@ -1,0 +1,30 @@
+This is my script file and the below the file should be automatically encrpted when uploaded in IN folder 
+
+#!/bin/bash
+
+IN_DIR="/DibBANK/IN"
+OUT_DIR="/DibBANK/OUT"
+ARCHIVE_DIR="/DibBANK/ARCHIVE"
+ENCRYPTION_KEY=G7XNtTIGRTXrRRgE
+
+# Ensure the OUT and ARCHIVE directories exist
+mkdir -p "$OUT_DIR"
+mkdir -p "$ARCHIVE_DIR"
+
+# Encrypt and move files
+for file in "$IN_DIR"/*; do
+    if [ -f "$file" ]; then
+        # Generate a date extension (e.g., _20231102 for November 2, 2023)
+        date_extension="_$(date +'%Y%m%d')"
+
+        # Encrypt the file with openssl (you can choose the encryption algorithm and options)
+        openssl enc -aes-256-cbc -salt -in "$file" -out "$OUT_DIR/$(basename "$file")$date_extension.enc" -k "$ENCRYPTION_KEY"
+
+        # Move the original file to the ARCHIVE directory
+        mv "$file" "$ARCHIVE_DIR/$(basename "$file")"
+
+    fi
+done
+
+# Move files in OUT directory to ARCHIVE if they are older than 30 days
+find "$OUT_DIR" -type f -mtime +30 -exec mv {} "$ARCHIVE_DIR/" \;

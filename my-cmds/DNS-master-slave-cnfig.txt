@@ -1,0 +1,274 @@
+=======================DNS-Configuration with master and slave =======================
+Master server:
+Install Bind, bind-utils packages for named service
+open /etc/named.conf 
+and add below enries 
+options {
+        listen-on port 53 { 127.0.0.1; 10.90.17.28; };
+#       listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        recursing-file  "/var/named/data/named.recursing";
+        secroots-file   "/var/named/data/named.secroots";
+#       allow-query     { localhost; };
+        allow-query     { localhost; 10.90.17.0/24; 10.90.244.0/24; 10.90.16.0/24; };
+        allow-transfer     { localhost; 10.90.17.29; };
+
+};
+## Define our forward & reverse Zone file here for UBC RAC Environment
+
+zone "dbs.racprod" IN {
+type master;
+file "dbslocal.fwd.zone";
+allow-update { none; };
+};
+#reverse zone
+zone "17.90.10.in-addr.arpa" IN {
+type master;
+file "dbslocal.rev.zone";
+allow-update { none; };
+};
+#another rev zone
+zone "244.90.10.in-addr.arpa" IN {
+type master;
+file "dbslocal244.rev.zone";
+allow-update { none; };
+};
+
+
+2. go to /var/named path and add forward and reverse zones configurarion as below
+cat dbslocal.fwd.zone
+$TTL 86400
+@   IN  SOA     DBSROCKYDCDNS01.dbs.racprod. root.dbs.racprod. (   --- primary DNS 
+        2011071001  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+                                                )
+
+
+@      IN  NS      DBSROCKYDCDNS01.dbs.racprod.   ---primary DNS
+@      IN  NS      DBSROCKYDCDNS02.dbs.racprod.   ---- secondary DNS
+@       IN      A       10.90.17.28
+@       IN      A       10.90.17.29
+
+# we can add the respective Ips with hostnames here
+DBSROCKYDCDNS01      IN  A       10.90.17.28  
+DBSROCKYDCDNS02      IN  A       10.90.17.29
+dbsdcrac01      IN  A       10.90.17.11
+dbsdcrac02      IN  A       10.90.17.12
+dbsdcrac01-vip  IN  A       10.90.17.13
+dbsdcrac02-vip  IN  A       10.90.17.14
+DBSPRDRAC       IN  A       10.90.17.15
+DBSPRDRAC       IN  A       10.90.17.16
+DBSPRDRAC       IN  A       10.90.17.17
+dbsdcrac01-priv        IN  A       10.90.244.1
+dbsdcrac02-priv        IN  A       10.90.244.2
+
+3. add reverse zone
+
+cat dbslocal.rev.zone
+
+$TTL 86400
+@       IN SOA  ns1.ubc.bank. root.ubc.bank. (
+2014090401      ; serial
+3600      ; refresh
+1800      ; retry
+604800      ; expire
+86400 )    ; minimum
+
+@       IN  NS      DBSROCKYDCDNS01.dbs.racprod.
+@       IN  NS      DBSROCKYDCDNS02.dbs.racprod.
+@       IN  PTR dbs.racprod.
+@       IN      A   10.90.17.28
+@       IN      A   10.90.17.29
+
+DBSROCKYDCDNS01      IN  A       10.90.17.28
+DBSROCKYDCDNS02      IN  A       10.90.17.29
+28        IN  PTR     DBSROCKYDCDNS01.dbs.racprod.  it will take from /etc/named.conf
+29        IN  PTR     DBSROCKYDCDNS02.dbs.racprod.
+11      IN  PTR     dbsdcrac01.dbs.racprod.
+12      IN  PTR     dbsdcrac02.dbs.racprod.
+13      IN  PTR     dbsdcrac01-vip.dbs.racprod.
+14      IN  PTR     dbsdcrac02-vip.dbs.racprod.
+15      IN  PTR     DBSPRDRAC.dbs.racprod.
+16      IN  PTR     DBSPRDRAC.dbs.racprod.
+17      IN  PTR     DBSPRDRAC.dbs.racprod.
+
+cat dbslocal244.rev.zone
+@   IN  SOA     DBSROCKYDCDNS01.dbs.racprod. root.dbs.racprod.  (
+        2011071001  ;Serial
+        3600        ;Refresh
+        1800        ;Retry
+        604800      ;Expire
+        86400       ;Minimum TTL
+)
+
+@      IN  NS      DBSROCKYDCDNS01.dbs.racprod.
+@      IN  NS      DBSROCKYDCDNS02.dbs.racprod.
+@       IN  PTR         dbs.racprod.
+DBSROCKYDCDNS01       IN  A   10.90.17.28
+DBSROCKYDCDNS02       IN  A   10.90.17.29
+
+1      IN  PTR     dbsdcrac01-priv.dbs.racprod.
+2      IN  PTR     dbsdcrac02-priv.dbs.racprod.
+
+systemctl restart named
+
+
+================SALVE=======================================================================
+/etc/named.conf
+
+options {
+        listen-on port 53 { 127.0.0.1; 10.90.17.29; };
+        listen-on-v6 port 53 { ::1; };
+        directory       "/var/named";
+        dump-file       "/var/named/data/cache_dump.db";
+        statistics-file "/var/named/data/named_stats.txt";
+        memstatistics-file "/var/named/data/named_mem_stats.txt";
+        recursing-file  "/var/named/data/named.recursing";
+        secroots-file   "/var/named/data/named.secroots";
+#       allow-query     { localhost; };
+        allow-query     { localhost; 10.90.17.0/24; 10.90.244.0/24; 10.90.16.0/24; };
+        /*
+
+
+};
+###DNS zone creation##############
+zone "dbs.racprod" IN {
+type slave;
+file "slaves/dbslocal.fwd.zone";
+masters { 10.90.17.28; };
+};
+zone "17.90.10.in-addr.arpa" IN {
+type slave;
+file "slaves/dbslocal.rev.zone";
+masters { 10.90.17.28; };
+};
+
+zone "244.90.10.in-addr.arpa" IN {
+type slave;
+file "slaves/dbslocal244.rev.zone";
+masters { 10.90.17.28; };
+};
+
+
+====================================verification====================================
+
+forward:
+[root@DBSROCKYDCDNS01 named]# nslookup
+> server 10.90.17.28
+Default server: 10.90.17.28
+Address: 10.90.17.28#53
+> DBSROCKYDCDNS01
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   DBSROCKYDCDNS01.dbs.racprod
+Address: 10.90.17.28
+> DBSROCKYDCDNS02
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   DBSROCKYDCDNS02.dbs.racprod
+Address: 10.90.17.29
+> dbsdcrac01
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   dbsdcrac01.dbs.racprod
+Address: 10.90.17.11
+> dbsdcrac02
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   dbsdcrac02.dbs.racprod
+Address: 10.90.17.12
+> dbsdcrac01-vip
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   dbsdcrac01-vip.dbs.racprod
+Address: 10.90.17.13
+> dbsdcrac02-vip
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   dbsdcrac02-vip.dbs.racprod
+Address: 10.90.17.14
+> DBSPRDRAC
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.15
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.16
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.17
+> DBSPRDRAC
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.15
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.17
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.16
+> DBSPRDRAC
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.15
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.17
+Name:   DBSPRDRAC.dbs.racprod
+Address: 10.90.17.16
+> dbsdcrac01-priv
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   dbsdcrac01-priv.dbs.racprod
+Address: 10.90.244.1
+> dbsdcrac02-priv
+Server:         10.90.17.28
+Address:        10.90.17.28#53
+
+Name:   dbsdcrac02-priv.dbs.racprod
+Address: 10.90.244.2
+
+
+
+reverse:
+> server 10.90.17.28
+Default server: 10.90.17.28
+Address: 10.90.17.28#53
+> 10.90.17.28
+28.17.90.10.in-addr.arpa        name = DBSROCKYDCDNS01.dbs.racprod.
+> 10.90.17.29
+29.17.90.10.in-addr.arpa        name = DBSROCKYDCDNS02.dbs.racprod.
+> 10.90.17.11
+11.17.90.10.in-addr.arpa        name = dbsdcrac01.dbs.racprod.
+> 10.90.17.12
+12.17.90.10.in-addr.arpa        name = dbsdcrac02.dbs.racprod.
+> 10.90.17.13
+13.17.90.10.in-addr.arpa        name = dbsdcrac01-vip.dbs.racprod.
+> 10.90.17.14
+14.17.90.10.in-addr.arpa        name = dbsdcrac02-vip.dbs.racprod.
+> 10.90.17.15
+15.17.90.10.in-addr.arpa        name = DBSPRDRAC.dbs.racprod.
+> 10.90.17.16
+16.17.90.10.in-addr.arpa        name = DBSPRDRAC.dbs.racprod.
+> 10.90.17.17
+17.17.90.10.in-addr.arpa        name = DBSPRDRAC.dbs.racprod.
+> 10.90.244.1
+1.244.90.10.in-addr.arpa        name = dbsdcrac01-priv.dbs.racprod.
+> 10.90.244.2
+2.244.90.10.in-addr.arpa        name = dbsdcrac02-priv.dbs.racprod.
+>
+

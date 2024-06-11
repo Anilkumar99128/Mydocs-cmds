@@ -1,0 +1,17 @@
+vi /etc/sysconfig/chronyd
+
+ 
+
+SYNC_HWCLOCK=yes
+
+ 
+
+# hwclock --systohc
+
+ 
+
+# hwclock -w   ----> for immediate effect.
+
+ 
+
+# reboot ---> Reboot is required for permanent fix.

@@ -1,0 +1,6 @@
+lsblk -o +SERIAL
+nvme list
+
+Welcome@98765$#$
+
+c4c-automn

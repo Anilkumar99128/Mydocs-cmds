@@ -1,0 +1,7 @@
+cp -r /etc/php.ini /etc/php.ini-$(date +%F_%H-%M-%S);cp -r /etc/httpd  /etc/httpd-$(date +%F_%H-%M-%S)
+httpd -v
+yum update httpd
+cd /etc/httpd/conf.d/
+vi 00-mpm.conf
+httpd -M |grep -i php
+systemctl restart httpd

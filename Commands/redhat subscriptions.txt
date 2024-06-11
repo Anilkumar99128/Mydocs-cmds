@@ -1,0 +1,1 @@
+subscription-manager register --auto-attach --force

@@ -1,0 +1,14 @@
+ceph-deploy disk zap k8node1 /dev/sdc
+ceph-deploy disk zap k8node1 /dev/sdd
+ceph-deploy disk zap k8node2 /dev/sdc
+ceph-deploy disk zap k8node2 /dev/sdd
+ceph-deploy disk zap k8master /dev/sdc
+ceph-deploy disk zap k8master /dev/sdd
+
+
+ceph-deploy osd create --data /dev/sdc k8node1
+ceph-deploy osd create --data  /dev/sdd k8node1
+ceph-deploy osd create --data /dev/sdc k8node2
+ceph-deploy osd create --data /dev/sdd k8node2
+ceph-deploy osd create --data /dev/sdc k8master
+ceph-deploy osd create --data  /dev/sdd k8master

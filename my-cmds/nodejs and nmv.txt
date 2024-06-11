@@ -1,0 +1,31 @@
+yum install  php-mysql php-gd php-zip
+
+yum install httpd
+yum install mod_ssl
+
+curl -sL https://rpm.nodesource.com/setup_14.x -o nodesource_setup.sh
+
+sudo bash nodesource_setup.sh
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+source ~/.bashrc
+
+nvm install 20.17.1
+
+nvm alias default v20.17.1
+
+npm -g install pm2
+
+npm install -g phantomjs-prebuilt@2.1.13 --force --ignore-scripts
+
+npm install -g phantomjs@2.1.7 --force --ignore-scripts
+
+
+
+pm2 start index.js --cron="0 */2 * * *"
+
+
+
+
+

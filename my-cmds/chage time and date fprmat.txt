@@ -1,0 +1,3 @@
+Eg:
+# echo "alias date='date +\"%a %b %e %r %Z %Y\"'" >> /etc/bashrc
+# source /etc/bashrc

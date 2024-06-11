@@ -1,0 +1,8 @@
+mokutil --sb-state
+
+output: SecureBoot enabled
+
+cat /proc/cmdline
+
+
+ls /sys/firmware/efi/efivars | grep SecureBoot

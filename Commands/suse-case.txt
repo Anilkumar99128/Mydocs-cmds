@@ -1,0 +1,1 @@
+supportconfig -r 19012023 will generate in  /var/log

@@ -1,0 +1,7 @@
+grep -q '^max_log_file =' $CONF && sed -i 's/^max_log_file =.*/max_log_file = 50/' $CONF || echo 'max_log_file = 50' >> $CONF
+grep -q '^num_logs =' $CONF && sed -i 's/^num_logs =.*/num_logs = 10/' $CONF || echo 'num_logs = 10' >> $CONF
+grep -q '^max_log_file_action =' $CONF && sed -i 's/^max_log_file_action =.*/max_log_file_action = ROTATE/' $CONF || echo 'max_log_file_action = ROTATE' >> $CONF
+grep -q '^admin_space_left_action =' $CONF && sed -i 's/^admin_space_left_action =.*/admin_space_left_action = SUSPEND/' $CONF || echo 'admin_space_left_action = SUSPEND' >> $CONF
+
+
+ln -s /etc/apache2/sites-available/cxp.ctrls.in.conf /etc/apache2/sites-enabled/

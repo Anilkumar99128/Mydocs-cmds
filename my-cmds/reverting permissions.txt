@@ -1,0 +1,8 @@
+rpm -a --setguids
+rpm -a --setugids
+rpm -a --setperms
+
+https://access.redhat.com/solutions/281923
+
+
+

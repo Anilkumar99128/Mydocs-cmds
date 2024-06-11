@@ -1,0 +1,9 @@
+*/10 * * * * rsync -aAX /home/ec2-user/tmp/scb/ root@172.16.2.63:/home/ec2-user/tmp/scb/.
+*/15 * * * * rsync -aAX /home/ec2-user/deploy_package/ root@172.16.2.63:/home/ec2-user/deploy_package/.
+
+From 172.16.2.34 to 172.16.2.38 every 5 minutes
+From 172.16.2.38 to 172.16.2.34 every 5 minutes
+
+
+	P@ssw0rd@123
+

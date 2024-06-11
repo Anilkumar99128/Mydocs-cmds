@@ -1,0 +1,2 @@
+define(function(){void 0!==window.Raven&&"function"==typeof window.Raven.captureMessage&&7168<document.cookie.length&&cookieStore.getAll().then(function(e){var n=e.map(function(e){return{name:e.name,length:e.value.length+e.name.length+1,domain:e.domain,path:e.path}}).sort(function(e,n){return n.length-e.length});Raven.captureMessage("Cookie monster report",{level:"warning",extra:{cookieSizes:n,totalCookieSize:document.cookie.length}})})});
+//# sourceMappingURL=cookie-monster.js.map

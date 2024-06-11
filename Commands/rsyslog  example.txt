@@ -1,0 +1,4 @@
+*.* @:514
+
+
+SOP-SAP-LNX-959 : SYSLOG Configuration

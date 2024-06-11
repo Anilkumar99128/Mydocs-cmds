@@ -1,0 +1,16 @@
+---
+  - hosts: local
+
+    tasks:
+      - name: Backup of SSHD configuration
+        ansible.builtin.copy:
+          src: /etc/ssh/sshd_config
+          dest: /etc/ssh/sshd_config-04102023
+
+      - name: Line In Below
+        lineinfile:
+          path: /etc/ssh/sshd_config
+          insertafter: "ciphers aes256-ctr,aes192-ctr,aes128-ctr"
+          line: "KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256"
+          firstmatch: yes
+          state: present

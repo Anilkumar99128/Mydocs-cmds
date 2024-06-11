@@ -1,0 +1,45 @@
+sudo yum install postfix cyrus-sasl cyrus-sasl-plain
+sudo nano /etc/postfix/sasl_passwd
+[smtp.office365.com]:587    <email_address>:<password>
+
+sudo chmod 600 /etc/postfix/sasl_passwd
+sudo chown root:root /etc/postfix/sasl_passwd
+cat sender_canonical
+root@AFEXUAT.localdomain        db.alerts@alfardanexchange.com
+
+postmap sender_canonical
+
+
+sudo postmap /etc/postfix/sasl_passwd
+
+sudo nano /etc/postfix/main.cf
+relayhost = [smtp.office365.com]:587
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_tls_security_level = encrypt
+smtp_tls_CAfile = /etc/pki/tls/certs/ca-bundle.crt
+sender_canonical_maps = hash:/etc/postfix/sender_canonical
+
+
+sudo systemctl restart postfix
+
+linuxadmin	ay$FLP73kY$q^p_q
+
+
+MACs hmac-sha2-512,hmac-sha2-256,hmac-ripemd160
+
+Ciphers aes128-ctr,aes192-ctr,aes256-ctr
+
+[smtp.office365.com]:587    UTKTACACSAlerts@utkarsh.bank:Ek=189ysS@
+
+Akshay Mehra <akshay.mehra@utkarsh.bank>
+
+relayhost = [smtp.office365.com]:587
+
+[smtp.office365.com]:587    db.alerts@alfardanexchange.com:Or@c1e2O22Alert
+
+
+
+
+faisal.hameed@alfardangroup.com

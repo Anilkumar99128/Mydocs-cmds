@@ -1,0 +1,18 @@
+Put the below script on required user home directory so when ever you are switching to user it will run automatically 
+
+sudo su - serviaccount 
+
+#!/bin/bash
+
+# Set your OpenShift cluster URL
+export OCP_CLUSTER_URL="https://api.nabfid-prod.evnabfid.local:6443"
+
+# Set your OpenShift username and password
+export OCP_USERNAME="fasprodrw"
+export OCP_PASSWORD="z,xLFmq+nO+CfF~sn"
+
+# Set your OpenShift project/namespace
+export NAMESPACE="fas-nabfid-prod"
+
+# Log in to OpenShift cluster
+oc login -u "${OCP_USERNAME}" -p "${OCP_PASSWORD}" "${OCP_CLUSTER_URL}" -n "${NAMESPACE}"

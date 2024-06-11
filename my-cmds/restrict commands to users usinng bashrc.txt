@@ -1,0 +1,13 @@
+sudo() {
+    case "$1" in
+        -i|-s|su|/bin/bash|/bin/sh)
+            echo "This sudo command is not allowed for you."
+            ;;
+        *)
+            command sudo "$@"
+            ;;
+    esac
+}
+
+# Protect the function from being unset or redefined
+readonly -f sudo

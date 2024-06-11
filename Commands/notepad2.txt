@@ -1,0 +1,251 @@
+10.10.146.10 
+  permitted-groups: C4C-INTATM-MUC4CAUTLPAPP10-ROOT-ACCESS
+10.10.146.11 
+  permitted-groups: C4C-INTATM-MUC4CAUTLPDB11-ROOT-ACCESS
+10.10.121.197 
+  permitted-groups: C4C-INTATM-MUCSAuTlUsHp197uB-ROOT-ACCESS
+10.10.141.12 
+  permitted-groups: C4C-INTATM-mumautplnps12-ROOT-ACCESS
+10.10.121.203 
+  permitted-groups: C4C-INTATM-c4ctestrail-ROOT-ACCESS
+10.10.141.11 
+  permitted-groups: C4C-INTATM-MUMAUTPLNPS11-ROOT-ACCESS
+10.10.120.85 
+  permitted-groups: C4C-INTATM-Resolve-App3-ROOT-ACCESS
+10.10.120.86 
+  permitted-groups: C4C-INTATM-cloudc15345-ROOT-ACCESS
+10.10.120.49 
+  permitted-groups: C4C-INTATM-netflow-ROOT-ACCESS
+10.10.120.48 
+  permitted-groups: C4C-INTATM-ctrlsbilling-ROOT-ACCESS
+10.10.120.84 
+  permitted-groups: C4C-INTATM-Resolve-App2-ROOT-ACCESS
+10.10.120.81 
+  permitted-groups: C4C-INTATM-Resolve-db1-ROOT-ACCESS
+10.10.121.32 
+  permitted-groups: C4C-INTATM-cmdb-asset.ctrls.in-ROOT-ACCESS
+10.10.120.159 
+  permitted-groups: C4C-INTATM-shop-ROOT-ACCESS
+10.10.120.171 
+  permitted-groups: C4C-INTATM-shopsso-ROOT-ACCESS
+10.10.120.46 
+  permitted-groups: C4C-INTATM-dlp-ROOT-ACCESS
+10.10.120.83 
+  permitted-groups: C4C-INTATM-ops-app2-ROOT-ACCESS
+10.10.120.139 
+  permitted-groups: C4C-INTATM-cmdb-billing-db2-ROOT-ACCESS
+10.10.120.45 
+  permitted-groups: C4C-INTATM-wikicloud4c-ROOT-ACCESS
+10.10.121.13 
+  permitted-groups: C4C-INTATM-SHOP-API-Engine-ROOT-ACCESS
+10.10.121.61 
+  permitted-groups: C4C-INTATM-opfservice-ROOT-ACCESS
+10.10.121.195 
+  permitted-groups: C4C-INTATM-muc4cshopcolo-ROOT-ACCESS
+10.10.121.56 
+  permitted-groups: C4C-INTATM-kube-master-ROOT-ACCESS
+10.10.121.23 
+  permitted-groups: C4C-INTATM-kube-node3-ROOT-ACCESS
+10.10.121.201 
+  permitted-groups: C4C-INTATM-confluence-new-ROOT-ACCESS
+10.10.121.58 
+  permitted-groups: C4C-INTATM-node3-ROOT-ACCESS
+10.10.121.167 
+  permitted-groups: C4C-INTATM-jira-ROOT-ACCESS
+10.10.121.25 
+  permitted-groups: C4C-INTATM-cloud3_c12625-ROOT-ACCESS
+  10.10.121.57 
+  permitted-groups: C4C-INTATM-node2-ROOT-ACCESS
+10.10.121.71 
+  permitted-groups: C4C-INTATM-kube-node2-ROOT-ACCESS
+10.10.138.71 
+  permitted-groups: C4C-INTATM-MUMAULPK8W071-ROOT-ACCESS
+10.10.121.168 
+  permitted-groups: C4C-INTATM-gitlab-ROOT-ACCESS
+10.10.138.11 
+  permitted-groups: C4C-INTATM-MUMAULPK8W011-ROOT-ACCESS
+10.10.138.13 
+  permitted-groups: C4C-INTATM-MUMAULPK8W013-ROOT-ACCESS
+10.10.138.12 
+  permitted-groups: C4C-INTATM-MUMAULPK8W012-ROOT-ACCESS
+10.10.138.14 
+  permitted-groups: C4C-INTATM-MUMAULPK8W014-ROOT-ACCESS
+10.10.138.15 
+  permitted-groups: C4C-INTATM-MUMAULPK8W015-ROOT-ACCESS
+10.10.138.16 
+  permitted-groups: C4C-INTATM-MUMAULPK8W016-ROOT-ACCESS
+10.10.138.17 
+  permitted-groups: C4C-INTATM-MUMAULPK8W017-ROOT-ACCESS
+10.10.123.106 
+  permitted-groups: C4C-INTATM-csmyshift_db01-ROOT-ACCESS
+10.10.123.108 
+  permitted-groups: C4C-INTATM-csmyshift_db02-ROOT-ACCESS
+10.10.138.18 
+  permitted-groups: C4C-INTATM-MUMAULPK8W018-ROOT-ACCESS
+10.10.123.101 
+  permitted-groups: C4C-INTATM-csmyshiftapp01-ROOT-ACCESS
+10.10.120.122 
+  permitted-groups: C4C-INTATM-shopuat-ROOT-ACCESS
+10.10.123.102 
+  permitted-groups: C4C-INTATM-csmyshiftapp02-ROOT-ACCESS
+10.10.123.103 
+  permitted-groups: C4C-INTATM-csmyshiftapp03-ROOT-ACCESS
+10.10.123.104 
+  permitted-groups: C4C-INTATM-csmyshiftapp04-ROOT-ACCESS
+10.10.123.105 
+  permitted-groups: C4C-INTATM-csmyshiftapp05-ROOT-ACCESS
+10.10.123.110 
+  permitted-groups: C4C-INTATM-myshift-api1-ROOT-ACCESS
+10.10.123.109 
+  permitted-groups: C4C-INTATM-mucsautluapp109-ROOT-ACCESS
+10.10.123.111 
+  permitted-groups: C4C-INTATM-mucsautlpapp111-ROOT-ACCESS
+10.10.123.112 
+  permitted-groups: C4C-INTATM-MyShiftApp2-New-ROOT-ACCESS
+10.10.121.29 
+  permitted-groups: C4C-INTATM-cloud6_c12625-ROOT-ACCESS
+10.10.120.21 
+  permitted-groups: C4C-INTATM-myshiftarchive_app1-ROOT-ACCESS
+10.10.121.11 
+  permitted-groups: C4C-INTATM-apifactory-ROOT-ACCESS
+10.10.121.31 
+  permitted-groups: C4C-INTATM-uat-docker-1-ROOT-ACCESS
+10.10.120.22 
+  permitted-groups: C4C-INTATM-myshiftarchive_app2-ROOT-ACCESS
+10.10.121.63 
+  permitted-groups: C4C-INTATM-qc.ctrls.in-ROOT-ACCESS
+10.10.120.23 
+  permitted-groups: C4C-INTATM-myshiftarchive_app3-ROOT-ACCESS
+10.10.120.24 
+  permitted-groups: C4C-INTATM-myshiftarchive_app4-ROOT-ACCESS
+10.10.120.25 
+  permitted-groups: C4C-INTATM-myshiftarchive_app5-ROOT-ACCESS
+10.10.120.26 
+  permitted-groups: C4C-INTATM-myshiftarchive_db1-ROOT-ACCESS
+10.10.120.27 
+  permitted-groups: C4C-INTATM-myshiftarchive-db2-ROOT-ACCESS
+10.10.123.118 
+  permitted-groups: C4C-INTATM-mumautplnfs118-ROOT-ACCESS
+10.10.120.28 
+  permitted-groups: C4C-INTATM-myshiftarchive_db3-ROOT-ACCESS
+10.10.121.46 
+  permitted-groups: C4C-INTATM-products-db-ROOT-ACCESS
+
+10.10.120.101 
+  permitted-groups: C4C-INTATM-MyShiftApp1-New-ROOT-ACCESS
+10.10.120.114 
+  permitted-groups: C4C-INTATM-myshiftapp-new-ROOT-ACCESS
+10.10.120.43 
+  permitted-groups: C4C-INTATM-cloud-shop-api-app-ROOT-ACCESS
+10.10.120.44 
+  permitted-groups: C4C-INTATM-Cloud-SHOP-API-DB-ROOT-ACCESS
+10.10.123.181 
+  permitted-groups: C4C-INTATM-esupport360-ROOT-ACCESS
+10.10.120.118 
+  permitted-groups: C4C-INTATM-MYSHIFT_NFS-ROOT-ACCESS
+10.10.137.11 
+  permitted-groups: C4C-INTATM-mucsautlprod11-ROOT-ACCESS
+10.10.121.34 
+  permitted-groups: C4C-INTATM-opf-csp-ROOT-ACCESS
+10.10.120.42 
+  permitted-groups: C4C-INTATM-Cloud-SHOP-DB-ROOT-ACCESS
+10.10.120.178 
+  permitted-groups: C4C-INTATM-Myshift-DB3-ROOT-ACCESS
+10.10.120.67 
+  permitted-groups: C4C-INTATM-dwh02-ROOT-ACCESS
+10.10.121.62 
+  permitted-groups: C4C-INTATM-datalake-ROOT-ACCESS
+10.10.121.77 
+  permitted-groups: C4C-INTATM-es-data-5-ROOT-ACCESS
+10.10.121.76 
+  permitted-groups: C4C-INTATM-es-data-4-ROOT-ACCESS
+10.10.121.28 
+  permitted-groups: C4C-INTATM-cloud5_c12625-ROOT-ACCESS
+10.10.121.73 
+  permitted-groups: C4C-INTATM-es-data-1-ROOT-ACCESS
+10.10.121.78 
+  permitted-groups: C4C-INTATM-es-data-6-ROOT-ACCESS
+10.10.120.102 
+  permitted-groups: C4C-INTATM-MyShiftApp2-New-ROOT-ACCESS
+10.10.121.74 
+  permitted-groups: C4C-INTATM-es-data-2-ROOT-ACCESS
+10.10.121.75 
+  permitted-groups: C4C-INTATM-es-data-3-ROOT-ACCESS
+10.10.121.80 
+  permitted-groups: C4C-INTATM-es-data-8-ROOT-ACCESS
+10.10.121.79 
+  permitted-groups: C4C-INTATM-es-data-7-ROOT-ACCESS
+10.10.120.110 
+  permitted-groups: C4C-INTATM-myshift-api2-ROOT-ACCESS
+10.10.121.83 
+  permitted-groups: C4C-INTATM-es-master-1-ROOT-ACCESS
+10.10.121.89 
+  permitted-groups: C4C-INTATM-es-master-3-ROOT-ACCESS
+10.10.120.111 
+  permitted-groups: C4C-INTATM-myshift-api3-ROOT-ACCESS
+10.10.121.91 
+  permitted-groups: C4C-INTATM-ambarinode1-ROOT-ACCESS
+10.10.121.88 
+  permitted-groups: C4C-INTATM-es-master-2-ROOT-ACCESS
+10.10.121.90 
+  permitted-groups: C4C-INTATM-ambarimaster-ROOT-ACCESS
+10.10.121.81 
+  permitted-groups: C4C-INTATM-es-data-9-ROOT-ACCESS
+10.10.121.98 
+  permitted-groups: C4C-INTATM-ambarinode2-ROOT-ACCESS
+10.10.121.37 
+  permitted-groups: C4C-INTATM-ambarinode3-ROOT-ACCESS
+10.10.121.38 
+  permitted-groups: C4C-INTATM-ambarinode4-ROOT-ACCESS
+10.10.121.194 
+  permitted-groups: C4C-INTATM-muc4auludb194-ROOT-ACCESS
+10.10.120.104 
+  permitted-groups: C4C-INTATM-MyShiftApp4-New-ROOT-ACCESS
+10.10.120.19 
+  permitted-groups: C4C-INTATM-srecentralserver-ROOT-ACCESS
+10.10.121.94 
+  permitted-groups: C4C-INTATM-uatelk_node1-ROOT-ACCESS
+10.10.121.105 
+  permitted-groups: C4C-INTATM-uatelk_node2-ROOT-ACCESS
+10.10.121.59 
+  permitted-groups: C4C-INTATM-MUC4AUTLPSHP59-ROOT-ACCESS
+10.10.121.30 
+  permitted-groups: C4C-INTATM-uatelk_node3-ROOT-ACCESS
+10.10.121.35 
+  permitted-groups: C4C-INTATM-prodlogstash_2-ROOT-ACCESS
+10.10.121.123 
+  permitted-groups: C4C-INTATM-gemsapi001-ROOT-ACCESS
+10.10.121.126 
+  permitted-groups: C4C-INTATM-gemsrgs001-ROOT-ACCESS
+10.10.120.103 
+  permitted-groups: C4C-INTATM-MyshiftApp3-New-ROOT-ACCESS
+10.10.121.36 
+  permitted-groups: C4C-INTATM-service_portal-ROOT-ACCESS
+10.10.121.33 
+  permitted-groups: C4C-INTATM-prodlogstash_1-ROOT-ACCESS
+10.10.121.124 
+  permitted-groups: C4C-INTATM-gemsspt001-ROOT-ACCESS
+10.10.121.127 
+  permitted-groups: C4C-INTATM-gemshcr001.cloud4c.com-ROOT-ACCESS
+10.10.121.101 
+  permitted-groups: C4C-INTATM-mumaulukaf101-ROOT-ACCESS
+10.10.144.10 
+  permitted-groups: C4C-INTATM-mucsautlpa10-ROOT-ACCESS
+10.10.120.79 
+  permitted-groups: C4C-INTATM-ROX_backend-ROOT-ACCESS
+10.10.121.102 
+  permitted-groups: C4C-INTATM-mumaulured102-ROOT-ACCESS
+10.10.120.78 
+  permitted-groups: C4C-INTATM-REPO-Server-ROOT-ACCESS
+10.10.120.123 
+  permitted-groups: C4C-INTATM-esupport360-ROOT-ACCESS
+10.10.121.64 
+  permitted-groups: C4C-INTATM-MUC4AGSLPELK64-ROOT-ACCESS
+10.10.120.106 
+  permitted-groups: C4C-INTATM-Myshift-DB1-ROOT-ACCESS
+10.10.120.105 
+  permitted-groups: C4C-INTATM-MyShiftApp5-New-ROOT-ACCESS
+10.10.120.128 
+  permitted-groups: C4C-INTATM-myshift-db5-ROOT-ACCESS
+10.10.120.177 
+  permitted-groups: C4C-INTATM-Myshift-DB3-ROOT-ACCESS

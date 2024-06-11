@@ -1,0 +1,362 @@
+=============to get the pod service statefulset deployment_name================
+oc get pod <pod_name> 
+oc get deployment <deployment_name> 
+oc get endpoints <service_name>
+oc get statefulset <statefulset_name>
+
+===================to get the information about above objects=====
+oc get deployment biz-sgb-service -n boi-investments-biz-prod to get the deployment information
+oc describe deployment biz-sgb-service --- to get the yaml file
+
+    Mounts:
+      /config from ciamregsrvc (ro)
+  Volumes:
+   ciamregsrvc:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  ciamregsrvc
+    Optional:    false
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      False   MinimumReplicasUnavailable
+  Progressing    True    ReplicaSetUpdated
+OldReplicaSets:  ciamregsrvc-v1-7d86cc6ddb (2/2 replicas created), ciamregsrvc-v1-68bf9d9ffb (3/3 replicas created)
+NewReplicaSet:   ciamregsrvc-v1-6c6d5d8776 (3/3 replicas created)
+Events:          <none>
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$ oc get deployment ciamregsrvc-v1
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+ciamregsrvc-v1   0/6     3            0           150d
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$ ip r ;date
+default via 10.174.8.1 dev enp1s0 proto static metric 100
+10.174.8.0/22 dev enp1s0 proto kernel scope link src 10.174.8.161 metric 100
+10.174.246.0/23 dev enp3s0 proto kernel scope link src 10.174.246.161 metric 101
+Wed Nov 22 17:26:25 IST 2023
+
+
+===========to check the pods events=================
+oc get events --field-selector involvedObject.name=biz-nps-contribution-service-667ffdb7cd-2czgr
+
+LAST SEEN   TYPE      REASON    OBJECT                                              MESSAGE
+13m         Normal    Pulled    pod/biz-nps-contribution-service-667ffdb7cd-2czgr   Container image "dr-quay-quay-quay-enterprise.apps.dr.ibm.local/ibmprod/biz-nps-contribution-service:2f7efc8" already present on machine
+143m        Normal    Created   pod/biz-nps-contribution-service-667ffdb7cd-2czgr   Created container biz-nps-contribution-service
+3m42s       Warning   BackOff   pod/biz-nps-contribution-service-667ffdb7cd-2czgr   Back-off restarting failed container biz-nps-contribution-service in pod biz-nps-contribution-service-667ffdb7cd-2czgr_boi-money-movement-biz-prod(2f22f067-6ee8-41fc-8fdf-cc1a4a6df4f7)
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$ oc get po
+NAME                                            READY   STATUS             RESTARTS           AGE
+biz-nps-contribution-service-667ffdb7cd-2czgr   1/2     CrashLoopBackOff   2151 (2m56s ago)   8d
+biz-nps-contribution-service-667ffdb7cd-4w9zw   1/2     CrashLoopBackOff   2150 (2m10s ago)   8d
+biz-nps-contribution-service-667ffdb7cd-dgfrn   1/2     CrashLoopBackOff   2153 (3m11s ago)   8d
+============== To check the existing pod is replica for removed one====================
+
+oc get pods  --show-labels |grep -i kieserver-dr
+kieserver-dr-2-deploy                           0/1     Completed   0               5d20h   openshift.io/deployer-pod-for.name=kieserver-dr-2
+kieserver-dr-2-xq7qq                            1/1     Running     1 (3d19h ago)   5d20h   app=rhpam-dr,application=rhpam-dr,cluster=jgrp.k8s.kieserver-dr,com.company=Red_Hat,deployment=kieserver-dr-2,deploymentConfig=kieserver-dr,deploymentconfig=kieserver-dr,rht.comp=PAM,rht.comp_ver=7.13.4,rht.prod_name=Red_Hat_Process_Automation,rht.prod_ver=7.13.4,rht.subcomp=rhpam-kieserver-rhel8,rht.subcomp_t=application,service=kieserver-dr,services.server.kie.org/kie-server-id=kieserver-prod
+
+
+oc get po
+NAME                                            READY   STATUS      RESTARTS        AGE
+business-automation-operator-5f8bb4d995-6vpsb   1/1     Running     0               5d20h
+console-cr-form                                 2/2     Running     0               8d
+kieserver-dr-2-deploy                           0/1     Completed   0               5d20h
+kieserver-dr-2-xq7qq                            1/1     Running     1 (3d19h ago)   5d20h
+rhpam-dr-rhpamcentrmon-3-ph4r5                  1/1     Running     0               8d
+rhpam-dr-rhpamcentrmon-4-deploy                 0/1     Error       0               5d20h
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$
+
+=================== How to check the jobs================================
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$ oc get jobs
+NAME                    COMPLETIONS   DURATION   AGE
+image-pruner-27982080   0/1           251d       251d
+image-pruner-28340640   1/1           9s         2d13h
+image-pruner-28342080   1/1           17s        37h
+image-pruner-28343520   1/1           19s        13h
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$ oc get po |grep -i image-pruner
+image-pruner-28340640-g49jn                        0/1     Completed   0          2d13h
+image-pruner-28342080-dwls8                        0/1     Completed   0          37h
+image-pruner-28343520-nx9hz                        0/1     Completed   0          13h
+
+Read the deployemt config to understand the job 
+
+[l301@IBM.LOCAL@drinstlrcp4i01 ~]$ oc describe cronjob image-pruner
+Name:                          image-pruner
+Namespace:                     openshift-image-registry
+Labels:                        <none>
+Annotations:                   imageregistry.operator.openshift.io/checksum: sha256:d0d5d91fe589a3c666c1340c59931371b1db9f3a65d8b6a50039095793f9dec4
+Schedule:                      0 0 * * *
+Concurrency Policy:            Forbid
+Suspend:                       False
+Successful Job History Limit:  3
+Failed Job History Limit:      3
+Starting Deadline Seconds:     3600s
+Selector:                      <unset>
+Parallelism:                   <unset>
+Completions:                   <unset>
+Pod Template:
+  Labels:           <none>
+  Service Account:  pruner
+  Containers:
+   image-pruner:
+    Image:      quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:504f69082c90b3885d737888d3cea231f6577eb517424c80372745ca688a0379
+    Port:       <none>
+    Host Port:  <none>
+    Command:
+      /bin/sh
+
+===========================Openshift-deamonset=======================================
+
+first check the specific nodes are running on project 
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get po  |grep -i dns-default
+dns-default-4s2cx     2/2     Running   0          82d
+dns-default-8qzc4     2/2     Running   0          89d
+dns-default-8vtqs     2/2     Running   0          90d
+dns-default-d9b69     2/2     Running   0          84d
+dns-default-gcn4p     2/2     Running   0          85d
+dns-default-j7p6j     2/2     Running   4          199d
+dns-default-jfqj4     2/2     Running   4          83d
+dns-default-k9jlm     2/2     Running   0          87d
+dns-default-m777t     2/2     Running   14         199d
+dns-default-mq7h7     2/2     Running   0          86d
+dns-default-nn6rq     2/2     Running   0          88d
+dns-default-q8jng     2/2     Running   4          91d
+dns-default-vhxnd     2/2     Running   4          199d
+dns-default-w2kzv     2/2     Running   0          87d
+
+
+
+
+then  check demonset config with below flgas to versify node selector where pods should be run
+
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get daemonset  dns-default -o yaml |grep -i kubernetes.io/os
+        kubernetes.io/os: linux
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get daemonset  dns-default -o yaml |grep -i key
+        - --tls-private-key-file=/etc/tls/private/tls.key
+      - key: node-role.kubernetes.io/master
+          - key: Corefile
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$
+
+
+
+compair above node selector wih below values 
+
+
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc  get pods -o wide -n openshift-dns
+NAME                  READY   STATUS    RESTARTS   AGE    IP             NODE                         NOMINATED NODE   READINESS GATES
+dns-default-4s2cx     2/2     Running   0          82d    10.128.8.4     infra-rh-01.prd.ibm.local    <none>           <none>
+dns-default-8qzc4     2/2     Running   0          89d    10.131.2.2     worker-rh-03.prd.ibm.local   <none>           <none>
+dns-default-8vtqs     2/2     Running   0          90d    10.130.2.2     worker-rh-02.prd.ibm.local   <none>           <none>
+dns-default-d9b69     2/2     Running   0          84d    10.130.6.3     worker-rh-09.prd.ibm.local   <none>           <none>
+dns-default-gcn4p     2/2     Running   0          85d    10.129.6.2     worker-rh-08.prd.ibm.local   <none>           <none>
+dns-default-j7p6j     2/2     Running   4          199d   10.129.0.7     master-rh-02.prd.ibm.local   <none>           <none>
+dns-default-jfqj4     2/2     Running   4          83d    10.131.6.81    worker-rh-10.prd.ibm.local   <none>           <none>
+dns-default-k9jlm     2/2     Running   0          87d    10.130.4.4     worker-rh-05.prd.ibm.local   <none>           <none>
+dns-default-m777t     2/2     Running   14         199d   10.128.0.3     master-rh-03.prd.ibm.local   <none>           <none>
+dns-default-mq7h7     2/2     Running   0          86d    10.128.6.4     worker-rh-07.prd.ibm.local   <none>           <none>
+dns-default-nn6rq     2/2     Running   0          88d    10.128.4.3     worker-rh-04.prd.ibm.local   <none>           <none>
+dns-default-q8jng     2/2     Running   4          91d    10.128.2.9     worker-rh-01.prd.ibm.local   <none>           <none>
+dns-default-vhxnd     2/2     Running   4          199d   10.130.0.7     master-rh-01.prd.ibm.local   <none>           <none>
+dns-default-w2kzv     2/2     Running   0          87d    10.131.4.2     worker-rh-06.prd.ibm.local   <none>           <none>
+node-resolver-7v52t   1/1     Running   2          91d    10.172.8.57    worker-rh-01.prd.ibm.local   <none>           <none>
+node-resolver-bcsnr   1/1     Running   0          88d    10.172.8.60    worker-rh-04.prd.ibm.local   <none>           <none>
+node-resolver-bwhcq   1/1     Running   0          84d    10.172.8.55    worker-rh-09.prd.ibm.local   <none>           <none>
+node-resolver-bzff9   1/1     Running   2          199d   10.172.8.168   master-rh-01.prd.ibm.local   <none>           <none>
+node-resolver-fnnm4   1/1     Running   0          87d    10.172.8.61    worker-rh-05.prd.ibm.local   <none>           <none>
+node-resolver-h698r   1/1     Running   0          87d    10.172.8.62    worker-rh-06.prd.ibm.local   <none>           <none>
+node-resolver-hbfnx   1/1     Running   0          86d    10.172.8.63    worker-rh-07.prd.ibm.local   <none>           <none>
+node-resolver-hxrtt   1/1     Running   0          90d    10.172.8.58    worker-rh-02.prd.ibm.local   <none>           <none>
+node-resolver-jbg24   1/1     Running   0          82d    10.172.8.51    infra-rh-01.prd.ibm.local    <none>           <none>
+node-resolver-lqkjw   1/1     Running   3          199d   10.172.8.52    infra-rh-02.prd.ibm.local    <none>           <none>
+node-resolver-mdjzz   1/1     Running   3          83d    10.172.8.56    worker-rh-10.prd.ibm.local   <none>           <none>
+node-resolver-rjdfw   1/1     Running   2          199d   10.172.8.169   master-rh-02.prd.ibm.local   <none>           <none>
+node-resolver-t6skj   1/1     Running   7          199d   10.172.8.170   master-rh-03.prd.ibm.local   <none>           <none>
+node-resolver-vqcff   1/1     Running   0          85d    10.172.8.54    worker-rh-08.prd.ibm.local   <none>           <none>
+node-resolver-z6rmh   1/1     Running   0          89d    10.172.8.59    worker-rh-03.prd.ibm.local   <none>           <none>
+node-resolver-ztd48   1/1     Running   0          81d    10.172.8.53    infra-rh-03.prd.ibm.local    <none>           <none>
+
+
+
+
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get node infra-rh-01.prd.ibm.local --show-labels
+NAME                        STATUS   ROLES          AGE   VERSION           LABELS
+infra-rh-01.prd.ibm.local   Ready    infra,worker   82d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=infra-rh-01.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/infra=,node-role.kubernetes.io/worker=,node-role.kubernetes.io=infra,node.openshift.io/os_id=rhcos
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get node worker-rh-03.prd.ibm.local --show-labels
+NAME                         STATUS   ROLES    AGE   VERSION           LABELS
+worker-rh-03.prd.ibm.local   Ready    worker   89d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-03.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get node worker-rh-02.prd.ibm.local --show-labels
+NAME                         STATUS   ROLES    AGE   VERSION           LABELS
+worker-rh-02.prd.ibm.local   Ready    worker   90d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-02.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get node worker-rh-09.prd.ibm.local --show-labels
+NAME                         STATUS   ROLES    AGE   VERSION           LABELS
+worker-rh-09.prd.ibm.local   Ready    worker   84d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-09.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get node worker-rh-08.prd.ibm.local master-rh-02.prd.ibm.local worker-rh-10.prd.ibm.local worker-rh-05.prd.ibm.local master-rh-03.prd.ibm.local worker-rh-07.prd.ibm.local worker-rh-04.prd.ibm.local worker-rh-01.prd.ibm.local master-rh-01.prd.ibm.local worker-rh-06.prd.ibm.local  --show-labels
+NAME                         STATUS   ROLES    AGE    VERSION           LABELS
+worker-rh-08.prd.ibm.local   Ready    worker   85d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-08.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+master-rh-02.prd.ibm.local   Ready    master   357d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master-rh-02.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node.openshift.io/os_id=rhcos
+worker-rh-10.prd.ibm.local   Ready    worker   83d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-10.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+worker-rh-05.prd.ibm.local   Ready    worker   87d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-05.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+master-rh-03.prd.ibm.local   Ready    master   357d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master-rh-03.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node.openshift.io/os_id=rhcos
+worker-rh-07.prd.ibm.local   Ready    worker   86d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-07.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+worker-rh-04.prd.ibm.local   Ready    worker   88d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-04.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+worker-rh-01.prd.ibm.local   Ready    worker   91d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-01.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+master-rh-01.prd.ibm.local   Ready    master   357d   v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master-rh-01.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node.openshift.io/os_id=rhcos
+worker-rh-06.prd.ibm.local   Ready    worker   87d    v1.25.8+27e744f   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker-rh-06.prd.ibm.local,kubernetes.io/os=linux,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
+
+
+===================Cluster operator failure====================================
+check csv running on which project 
+oc get svc --all-namespaces  |grep -i insights
+openshift-insights                                 metrics                                                           ClusterIP      172.30.150.117   <none>                                                                              443/TCP                                                                                                    362d
+
+and enter inot project and verify the repective pod status 
+ oc get project |grep -i insights
+openshift-insights                                                              Active
+
+verify the operator configuration
+oc describe clusteroperator insights
+
+and  verify the eroor code on repective pod logs
+oc logs pod/insights-operator-6bf6b7967d-tvql7 |grep -i UploadFailed
+I1119 16:16:45.392872       1 controllerstatus.go:79] name=insightsuploader healthy=false reason=UploadFailed message=Unable to report: unable to build request to connect to Insights server: Post "https://console.redhat.com/api/ingress/v1/upload": net/http: TLS handshake timeout
+I1119 16:36:43.506522       1 controllerstatus.go:79] name=insightsuploader healthy=false reason=UploadFailed message=Unable to report: unable to build request to connect to Insights server: Post "https://console.redhat.com/api/ingress/v1/upload": x509: certificate signed by unknown authority
+
+======================PVC===============================
+oc get pv  |grep -i prodamqbroker-prodamqbroker-ss-0
+pvc-809fd0d7-9a4e-4ca0-ae72-4d0b652ce90c   990Gi      RWO            Retain           Bound      boiprod-amq/prodamqbroker-prodamqbroker-ss-0                                         ocs-external-storagecluster-ceph-rbd            154d
+
+oc project boiprod-amq
+
+
+oc get po |grep -i prodamqbroker-prodamqbroker-ss-0
+prodamqbroker-ss-0   1/1     Running   1 (5d7h ago)   89d
+prodamqbroker-ss-1   1/1     Running   0              89d
+
+oc get pod prodamqbroker-ss-0 -n boiprod-amq -o yaml 
+
+  - name: prodamqbroker
+      claimName: prodamqbroker-prodamqbroker-ss-0
+      name: prodamqbroker-props-00000001
+    name: configmap-prodamqbroker-props-00000001
+    name: amq-cfg-dir
+    name: tool-dir
+  - name: kube-api-access-6blnm
+          name: kube-root-ca.crt
+              fieldPath: metadata.namespace
+            path: namespace
+          name: openshift-service-ca.crt
+    name: prodamqbroker-container
+    name: prodamqbroker-container-init
+
+======================cluster updates===============================
+
+oc get clusterversion
+
+NAME      VERSION   AVAILABLE   PROGRESSING   SINCE   STATUS
+version   4.12.15   True        False         199d    Error while reconciling 4.12.15: the cluster operator insights is not availabl
+
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get clusteroperator insights
+NAME       VERSION   AVAILABLE   PROGRESSING   DEGRADED   SINCE   MESSAGE
+insights   4.12.15   False       False         True       35d     Unable to report: unable to build request to connect to Insights server: Post "https://console.redhat.com/api/ingress/v1/upload": x509: certificate signed by unknown authority
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ ip r l;date
+default via 10.172.8.1 dev enp1s0 proto static metric 100
+10.172.8.0/22 dev enp1s0 proto kernel scope link src 10.172.8.166 metric 100
+10.172.246.0/23 dev enp3s0 proto kernel scope link src 10.172.246.166 metric 101
+Thu Nov 23 08:57:00 IST 2023
+
+========================Promotious monitoring not sending mails=================
+enter into project 
+oc project openshift-monitoring
+
+check the monitoring pod logs 
+oc get po
+prometheus-k8s-0
+oc logs pod/prometheus-k8s-0 |grep -i send
+
+ts=2023-09-01T20:58:18.172Z caller=notifier.go:534 level=error component=notifier alertmanager=https://alertmanager-open-cluster-management-observability.apps.prd.ibm.local/api/v2/alerts count=1 msg="Error sending alert" err="Post \"https://alertmanager-open-cluster-management-observability.apps.prd.ibm.local/api/v2/alerts\": read tcp 10.129.9.152:56102->10.172.8.233:443: read: connection reset by peer"
+
+enter into pod 
+oc rsh prometheus-k8s-0
+
+check the communication
+
+ curl -v https://alertmanager-open-cluster-management-observability.apps.prd.ibm.local/api/v2/alerts
+*   Trying 10.172.8.233...
+* TCP_NODELAY set
+* Connected to alertmanager-open-cluster-management-observability.apps.prd.ibm.local (10.172.8.233) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/pki/tls/certs/ca-bundle.crt
+  CApath: none
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, [no content] (0):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (OUT), TLS alert, unknown CA (560):
+* SSL certificate problem: self signed certificate in certificate chain
+* Closing connection 0
+curl: (60) SSL certificate problem: self signed certificate in certificate chain
+More details here: https://curl.haxx.se/docs/sslcerts.html
+
+curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the web page mentioned above.
+
+===================Ceph======================
+ceph orch ps  |grep -i mon.phmumrhnprdodf01
+mon.phmumrhnprdodf01                             phmumrhnprdodf01               running (6M)    12s ago  12M    1128M    2048M  16.2.8-85.el8cp  b2c997ff1898  d820ef38faf3
+
+
+ceph -s
+
+  cluster:
+    id:     30ab7650-5b59-11ed-b0ea-566fde920028
+    health: HEALTH_OK
+
+  services:
+    mon: 5 daemons, quorum nprdcephadmin01,phmumrhnprdodf01,phmumrhnprdodf02,phmumrhnprdodf03,nprdcephdash01 (age 8d)
+    mgr: phmumrhnprdodf02.lxldya(active, since 6w), standbys: nprdcephadmin01.flzbni, phmumrhnprdodf03.zzlsgc, phmumrhnprdodf01.qpjtxu, nprdcephdash01.gorhgr
+    mds: 2/2 daemons up, 4 standby
+    osd: 21 osds: 21 up (since 8d), 21 in (since 6M)
+    rgw: 6 daemons active (3 hosts, 1 zones)
+
+  data:
+    volumes: 2/2 healthy
+    pools:   29 pools, 1089 pgs
+    objects: 20.60M objects, 9.6 TiB
+    usage:   29 TiB used, 44 TiB / 73 TiB avail
+    pgs:     1089 active+clean
+
+  io:
+    client:   21 KiB/s rd, 5.6 MiB/s wr, 4 op/s rd, 346 op/s wr
+
+
+
+ceph osd status
+
+
+
+===================fluentd log collector configmaps=================
+
+oc project openshift-logging
+
+
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc get po |grep -i collector-dkgpj
+collector-dkgpj                                 1/1     Running     0          12d
+[l301@IBM.LOCAL@prdintrlrrh01 ~]$ oc logs pod/collector-dkgpj  |grep -i slow_flush_log_threshold
+2023-11-10 08:47:18 +0000 [warn]: [fluentd_logforword] buffer flush took longer time than slow_flush_log_threshold: elapsed_time=26.713233618065715 slow_flush_log_threshold=20.0 plugin_id="fluentd_logforword"
+2023-11-13 12:57:07 +0000 [warn]: [fluentd_logforword] buffer flush took longer time than slow_flush_log_threshold: elapsed_time=42.38737848959863 slow_flush_log_threshold=20.0 plugin_id="fluentd_logforword"
+2023-11-15 06:49:46 +0000 [warn]: [fluentd_logforword] buffer flush took longer time than slow_flush_log_threshold: elapsed_time=28.851968499831855 slow_flush_log_threshold=20.0 plugin_id="fluentd_logforword"
+2023-11-18 18:22:52 +0000 [warn]: [fluentd_logforword] buffer flush took longer time than slow_flush_log_threshold: elapsed_time=21.737713905982673 slow_flush_log_threshold=20.0 plugin_id="fluentd_logforword"
+2023-11-18 18:23:53 +0000 [warn]: [fluentd_logforword] buffer flush took longer time than slow_flush_log_threshold: elapsed_time=59.64234469458461 slow_flush_log_threshold=20.0 plugin_id="fluentd_logforword"
+
+
+
+==================crash loopbackoff================
+connect to project 
+
+check the pod status 
+
+ oc get po |grep -i ibm-apiconnect
+ ibm-apiconnect-756697c7c7-9mx5n                          0/1     CrashLoopBackOff   38810 (2m8s ago)   182d
+
+

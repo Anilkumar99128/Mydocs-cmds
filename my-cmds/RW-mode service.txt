@@ -1,0 +1,27 @@
+systemctl status systemd-remount-fs.service -l
+ systemctl status boot.mount
+ 
+ 
+ tar -cvzf /u01/app/oracle.ahf/data/repository/suptools/gtocitddb01/oswbb  /tmp/osw_gtocitddb01.tar.gz
+  tar -cvzf 
+  
+  "nL1NBY-lXLS-kC0L-gzrY-MXbB-7OfC-fMhVb4"
+  ZOnjwG-1dA3-6OP3-fvco-rc4I-I0yU-wqi9Vq
+  
+  
+ vgcfgbackup -f anil app_vg
+ xxd -c 32 anil | grep 'id='
+ vgcfgrestore -f anil app_vg
+ 
+ lvchange --uuid 8fe649a6-6097-4772-8be0-ca772cffc3cc  /dev/app_vg/app_lv
+ 
+ 
+ LV UUID                0mQrPY-570e-fcuT-I3I2-0YKx-Okg1-Mrfg0l
+   VG UUID               ZOnjwG-1dA3-6OP3-fvco-rc4I-I0yU-wqi9Vq
+ PV UUID               3MIulc-jwyX-JeVu-NWmv-382s-cedY-WALW8g
+ 
+ 
+ today 6:19 12:17
+ yesrt 1:18PM 4:17PM
+ 
+ 

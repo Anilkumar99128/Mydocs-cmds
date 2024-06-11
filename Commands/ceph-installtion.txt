@@ -1,0 +1,1 @@
+https://www.linuxtechi.com/install-configure-ceph-cluster-centos-7/

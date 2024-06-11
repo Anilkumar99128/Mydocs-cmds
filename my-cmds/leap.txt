@@ -1,0 +1,46 @@
+===========================Upgrade CentOS 7 to Rocky Linux 8====================================
+yum update -y
+
+reboot
+
+cat /etc/redhat-release
+
+CentOS Linux release 7.9.2009 (Core)
+
+Install Elevate:
+First, install the Elevate release package to configure the project repo and install the GPG key.
+
+yum install -y http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm
+
+Then, install the leapp packages and migration data for Rocky Linux
+
+yum install -y leapp-upgrade leapp-data-rocky
+
+Perform Pre-check
+Initiate the pre-upgrade check with the below command. This check will determine the possibility of an OS upgrade and report potential problems you will need to fix before upgrading.
+
+NOTE: No packages will be installed at the pre-upgrade check phase.
+
+leapp preupgrade
+
+In addition, you can get more information about the reported upgrade blockers (Risk Factor: high (inhibitor) and recommended solutions in the /var/log/leapp/leapp-report.txt file. Apart from the blockers, the file will also contain other RISKs ranging from info to high, which you can review and proceed further.
+
+rmmod pata_acpi
+echo PermitRootLogin yes | tee -a /etc/ssh/sshd_config
+leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+
+
+
+leapp upgrade
+
+
+
+reboot
+
+cat /etc/redhat-release
+
+Rocky Linux release 8.4 (Green Obsidian)
+
+rpm -qa | grep centos
+rpm -qf | grep el7
+

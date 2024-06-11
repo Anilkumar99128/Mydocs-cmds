@@ -1,0 +1,31 @@
+apt install apache2
+systemctl enable apache2
+mkdir -p /var/www/html/REPO
+chown www-data:www-data /var/www/html/REPO
+apt install apt-mirror
+apt update
+cp /etc/apt/mirror.list /etc/apt/mirror.list.org
+mkdir -p /var/www/html/REPO/var 
+cp /var/spool/apt-mirror/var/postmirror.sh /var/www/html/REPO/var/
+apt-mirror
+ 
+ 
+ 
+for ubuntu-22.04
+need to add below mirros in /etc/apt/mirror.list
+
+	deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse
+	deb http://archive.ubuntu.com/ubuntu jammy-security main restricted universe multiverse
+	deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse
+
+for ubuntu-20.04
+need to add below mirros in /etc/apt/mirror.list
+
+deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu focal-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
+
+client
+
+sed -i.bak0 "s/archive\.ubuntu\.com/10\.0\.0\.\42/g" /etc/apt/sources.list
+deb http://10.10.120.72/var/www/html/ubuntu focal main restricted universe multiverse

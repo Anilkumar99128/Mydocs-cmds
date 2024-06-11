@@ -1,0 +1,110 @@
+Preactivity
+-----------------------
+Every uear  We need to ask CLoud IMPL team for the renewed certificate
+
+
+We will recieve the certificate in .pfx format
+
+Extract .crt and .key file sfrom the .pfx file
+
+openssl pkcs12 -in filename.pfx -out cert.txt  -nodes
+
+.txt file will get generated
+
+1. extract key from file and create new file ssl.key
+2. extract certificates and create new file ssl.crt
+
+
+
+[22:40] Ummadi Jilanmohan Reddy
+CURL Error: SSL certificate problem CA certificate key too weak
+
+# update-crypto-policies --show
+FUTURE
+
+# update-crypto-policies --set DEFAULT
+
+# update-crypto-policies --show
+DEFAULT
+
+
+
+
+
+
+
+
+
+Actual Activity
+
+------------------------------------
+Connect to server
+Check the port status of 80 and 443
+Identify which process running (Httpd/nginx)
+
+ 
+
+
+
+CHeck the ssl configuration file used 
+
+ httpd -S|grep 443
+Example output: /etc/httpd/conf.d/ssl.conf
+
+[root@localhost ~]# httpd -S|grep 443
+*:443                  is a NameVirtualHost
+         port 443 namevhost 127.0.0.1 (/etc/httpd/conf.d/ssl.conf:56)
+         port 443 namevhost cmdb-asset.ctrls.in (/etc/httpd/conf.d/ssl.conf:218)
+         port 443 namevhost cmdb-asset.cloud4c.com (/etc/httpd/conf.d/ssl.conf:236)
+
+
+
+
+Validate current ssl certificate file path
+
+/etc/ssl/certs/
+
+Take the backup of exisitng ssl configuration  (Mandatory)
+Ex: cp -p /etc/httpd/conf.d/ssl.conf /etc/httpd/conf.d/ssl.conf-bkup-14102022
+
+
+
+sed -i 's#SSLCertificateFile.*#SSLCertificateFile /etc/ssl/certs/c4c-ssl.crt#g' /etc/httpd/conf.d/ssl.conf
+sed -i 's#SSLCertificateKeyFile.*#SSLCertificateKeyFile /etc/ssl/certs/c4c-ssl.key#g' /etc/httpd/conf.d/ssl.conf
+
+
+Validate if both crt and key file updated with new file path
+
+cat /etc/httpd/conf.d/ssl.conf|grep -i sslcertificatefile
+
+cat /etc/httpd/conf.d/ssl.conf|grep -i sslcertificatekeyfile
+
+Replace the certificate and key path with latest ssl certificate and key
+
+Verify http config test
+
+[root@localhost ~]# httpd -t
+Syntax OK
+
+
+
+reload httpd
+
+systemctl reload httpd
+
+
+
+------------------------------------------------
+
+Post Activity
+
+
+Open Web browser, validate certificate updated or not
+
+Option 2: Using curl
+
+curl --insecure -vvI https://shopuat.cloud4c.com 2>&1 | awk 'BEGIN { cert=0 } /^\* SSL connection/ { cert=1 } /^\*/ { if (cert) print }'|grep "expire date"
+
+Example Output:
+
+*       expire date: Nov 08 12:16:06 2023 GMT

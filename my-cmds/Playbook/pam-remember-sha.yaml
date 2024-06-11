@@ -1,0 +1,14 @@
+---
+  - name: Line in below
+    hosts: SCD 
+
+    tasks:
+      - name: Backup of password-auth configuration
+        shell: cp /etc/pam.d/password-auth /etc/pam.d/password-auth-05242023-bkp ;cp /etc/pam.d/system-auth /etc/pam.d/system-auth-auth-05242023-bkp
+
+      - name: "Line In Below - password-auth"
+        lineinfile:
+          path: /etc/pam.d/password-auth
+          insertafter: "password    requisite                                    pam_pwquality.so local_users_only"
+          line: "password    sufficient                                   pam_unix.so sha512 shadow  try_first_pass use_authtok remember=5"
+

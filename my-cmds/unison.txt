@@ -1,0 +1,51 @@
+Create a Unison Profile File on Server A (sync.prf):
+
+# Unison profile for bidirectional synchronization
+root = ssh://root@10.10.120.159//var/www/html/ccm/BOT_Files
+root = ssh://root@10.10.120.171//var/www/html/ccm/BOT_Files
+
+# Synchronization options
+# Add any specific options based on your requirements
+
+
+Create a Unison Profile File on Server B (sync.prf):
+
+# Unison profile for bidirectional synchronization
+root = ssh://root@10.10.120.159//var/www/html/ccm/BOT_Files
+root = ssh://root@10.10.120.171//var/www/html/ccm/BOT_Files
+
+# Synchronization options
+# Add any specific options based on your requirements
+
+
+Run Unison on Server A:
+
+unison -auto -batch /path/to/sync.prf
+
+
+Run Unison on Server B:
+
+unison -auto -batch /path/to/sync.prf
+
+
+Automate Sync (Optional):
+
+
+
+
+unison -auto -batch ssh://root@10.10.120.159:2232//var/www/html/ccm/BOT_Files /var/www/html/ccm/BOT_Files 
+
+
+unison -auto -batch ssh://root@10.10.120.171:2232//var/www/html/ccm/BOT_Files /var/www/html/ccm/BOT_Files 
+
+
+#!/bin/bash
+
+unison -auto -batch /path/to/sync.prf
+
+
+chmod +x sync.sh
+
+
+create a cronjob
+

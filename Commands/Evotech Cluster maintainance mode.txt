@@ -1,0 +1,14 @@
+Maintainence mode ==================================================================================
+ crm status (for checking)
+ crm configure property maintenance-mode="true" -> to keep in maintenance-mode 
+(once done status showing unmanaged) 
+crm configure property maintenance-mode="false" -> removing from maintenance mode
+
+need to enable replication from DB End 
+crm resource cleanup rsc_SAPHana_HDP_HDB00
+
+
+DB failover 
+
+
+need to stop pacemaker

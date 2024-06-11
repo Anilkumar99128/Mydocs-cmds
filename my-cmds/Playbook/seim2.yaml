@@ -1,0 +1,16 @@
+---
+- hosts: AMAN
+  become: true
+  gather_facts: no
+    
+  tasks:
+    - name: copy syslog file
+      ansible.builtin.copy:
+       src: /etc/rsyslog.conf
+       dest: /etc/rsyslog.conf-20230712
+     
+    - name: Update backup IP
+      replace:
+        path: /etc/rsyslog.conf
+        regexp: '^(\*\.\*)\s+@172\.16\.215\.18:514'
+        replace: '\1 @172.16.215.40:514'

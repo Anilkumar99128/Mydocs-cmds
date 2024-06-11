@@ -1,0 +1,1 @@
+for i in `cat /etc/passwd |awk -F: '$3 >= 1000 {print $1}'`; do echo -e "\n User Name: $i "; echo -e "\nSudo User: `egrep -v  "^#|^$" /etc/sudoers |grep -i $i |awk '{print $1}'`"; echo " --------------------- "; done

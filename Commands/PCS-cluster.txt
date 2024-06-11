@@ -1,0 +1,32 @@
+yum install pcs pacemaker resource-agents fence-agents-all
+passwd hacluster RH:eBW'wYupyuq!J
+systemctl start pcsd.service
+systemctl enable pcsd.service
+vi /etc/hosts
+pcs cluster auth node1 node2 -u hacluster
+pcs cluster setup --name app_cluster node1 node2
+pcs cluster status
+pcs cluster start --all
+systemctl start pacemaker.service
+systemctl start corosync.service
+systemctl enable pacemaker.service
+systemctl enable corosync.service
+pcs property set no-quorum-policy=ignore
+pcs resource defaults migration-threshold=1
+
+
+
+pcs resource create VIP_ClusterIP ocf:heartbeat: ip=10.172.40.49 cidr_netmask=23 nic=enp1s0:1 op monitor interval=20s
+
+pcs resource create backupIP ocf:heartbeat:IPaddr2 ip=10.6.200.37 cidr_netmask=25 op monitor interval=20s
+
+pcs stonith create disk_fencing fence_scsi pcmk_host_list="ovm01 ovm02" pcmk_monitor_action="metadata" pcmk_reboot_action="off" devices="/dev/xvde" meta povides="unfencing"
+pcs constraint --full
+pcs constraint location disk_fencing prefers ovm01=INFINITY
+pcs constraint location disk_fencing prefers ovm02=INFINITY
+pcs property 
+pcs property set stonith-enabled=false
+
+pcs cluster setup --start --name db_cluster ovm01 ovm02
+
+pcs resource move VIP_ClusterIP 

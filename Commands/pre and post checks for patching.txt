@@ -1,0 +1,10 @@
+(echo -e '\nCMD: cat /etc/redhat-release\n'; cat /etc/redhat-release; echo -e '\nCMD date\n'; date; echo -e '\n CMD: ifconfig -a\n'; ifconfig -a; echo -e '\nCMD:df -h\n'; df -h|grep -v tmpfs; echo -e '\nCMD:df -h|grep -v tmpfs|wc -l\n'; df -h|grep -v tmpfs|wc -l; echo -e '\nCMD: netstat -ntlp\n'; netstat -ntlp; echo -e '\nCMD: uptime\n'; uptime; echo -e '\nCMD:route -n\n'; route -n; echo -e '\nCMD: ntpq -p\n'; chronyc sources; echo -e '\nCMD: uname -a\n'; uname -a; echo -e '\nCMD: free -m\n'; free -m; echo -e '\nCMD: cat /etc/fstab\n'; cat /etc/fstab; echo -e '\nCMD: cat /proc/mounts\n'; cat /proc/mounts; echo -e '\nCMD: cat /etc/exports\n'; cat /etc/exports; echo -e '\nCMD: uname -r\n'; uname -r; echo -e '\nCMD: dmidecode\n'; dmidecode | grep -i vm;echo -e '\nCMD: multipath -ll\n'; multipath -ll;echo -e '\nCMD: multipath -ll\n'; multipath -ll|wc -l;)>/opt/prechk-20230930
+
+(echo -e '\nCMD: cat /etc/redhat-release\n'; cat /etc/redhat-release; echo -e '\nCMD date\n'; date; echo -e '\n CMD: ifconfig -a\n'; ifconfig -a; echo -e '\nCMD:df -h\n'; df -h|grep -v tmpfs; echo -e '\nCMD:df -h|grep -v tmpfs|wc -l\n'; df -h|grep -v tmpfs|wc -l; echo -e '\nCMD: netstat -ntlp\n'; netstat -ntlp; echo -e '\nCMD: uptime\n'; uptime; echo -e '\nCMD:route -n\n'; route -n; echo -e '\nCMD: ntpq -p\n'; chronyc sources; echo -e '\nCMD: uname -a\n'; uname -a; echo -e '\nCMD: free -m\n'; free -m; echo -e '\nCMD: cat /etc/fstab\n'; cat /etc/fstab; echo -e '\nCMD: cat /proc/mounts\n'; cat /proc/mounts; echo -e '\nCMD: cat /etc/exports\n'; cat /etc/exports; echo -e '\nCMD: uname -r\n'; uname -r; echo -e '\nCMD: dmidecode\n'; dmidecode | grep -i vm;echo -e '\nCMD: multipath -ll\n'; multipath -ll;echo -e '\nCMD: multipath -ll\n'; multipath -ll|wc -l;)>/opt/postchk-20230930
+
+
+
+grep -v "^#" /etc/security/limits.conf |grep -v "^$";ip r l
+
+
+sysctl -a |grep -i kernel |more

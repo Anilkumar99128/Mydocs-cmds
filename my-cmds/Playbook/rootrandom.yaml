@@ -1,0 +1,19 @@
+---
+- name: Change root password for all servers
+  hosts: MY
+
+  tasks:
+    - name: Generate random password
+      shell: "pwgen -s 12 1"
+      register: random_password
+      ignore_errors: yes
+
+    - name: Set root password
+      user:
+        name: root
+        password: "{{ random_password }}"
+        update_password: always
+
+    - name: Display root password
+      debug:
+        msg: "Root password for {{ inventory_hostname }}: {{ random_password.stdout }}"

@@ -1,0 +1,21 @@
+hugepages
+
+
+cat /proc/meminfo
+AnonPages:       2534148 kB
+PageTables:       243520 kB
+AnonHugePages:    540672 kB
+ShmemHugePages:        0 kB
+HugePages_Total:   10243
+HugePages_Free:       37
+HugePages_Rsvd:       35
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+
+/etc/sysctl.conf
+vm.nr_hugepages=10243
+
+/etc/security/limits.conf
+
+orakay   soft   memlock    30198988
+orakay   hard   memlock    30198988

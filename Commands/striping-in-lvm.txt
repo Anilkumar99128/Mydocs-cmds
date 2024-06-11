@@ -1,0 +1,87 @@
+=============================Striping in LVM===========================
+
+In a striped configuration, data is divided into fixed-size chunks (stripes) and written to different physical volumes in a round-robin fashion.
+In linear configurations, data is allocated linearly on a single physical volume.
+
+==================creating a striped voulme====================================
+
+lvcreate --size <size> --type striped --stripes <number_of_stripes> --stripesize <stripe_size> -n new_striped_lv vg_name
+
+ lvcreate --name stripe1 --size 1020M --type striped --stripes 2 --stripesize 64K test_vg
+  Logical Volume "stripe1" already exists in volume group "test_vg"
+[root@Test-Vupgrade ~]# lvdisplay -m /dev/test_vg/stripe1
+  --- Logical volume ---
+  LV Path                /dev/test_vg/stripe1
+  LV Name                stripe1
+  VG Name                test_vg
+  LV UUID                fcSkIj-n1Ri-U9Qv-PfEJ-qdxN-tL2Z-OMlUUq
+  LV Write Access        read/write
+  LV Creation host, time Test-Vupgrade, 2023-11-24 20:12:35 +0530
+  LV Status              available
+  # open                 0
+  LV Size                1.00 GiB
+  Current LE             256
+  Segments               1
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     512
+  Block device           253:2
+
+  --- Segments ---
+  Logical extents 0 to 255:
+    Type                striped
+    Stripes             2
+    Stripe size         64.00 KiB
+    Stripe 0:
+      Physical volume   /dev/sdb
+      Physical extents  0 to 127
+    Stripe 1:
+      Physical volume   /dev/sdc
+      Physical extents  0 to 127
+==========================extedning a striped volume==========================
+
+lvextend --size +<additional_size> --stripes <new_total_stripes> --stripesize <stripe_size> /dev/vg_name/striped_lv
+
+lvextend --size +4G --stripes 2 --stripesize 64K /dev/test_vg/stripe1
+
+[root@Test-Vupgrade ~]# lvdisplay -m /dev/test_vg/stripe1
+  --- Logical volume ---
+  LV Path                /dev/test_vg/stripe1
+  LV Name                stripe1
+  VG Name                test_vg
+  LV UUID                fcSkIj-n1Ri-U9Qv-PfEJ-qdxN-tL2Z-OMlUUq
+  LV Write Access        read/write
+  LV Creation host, time Test-Vupgrade, 2023-11-24 20:12:35 +0530
+  LV Status              available
+  # open                 0
+  LV Size                5.00 GiB
+  Current LE             1280
+  Segments               2
+  Allocation             inherit
+  Read ahead sectors     auto
+  - currently set to     512
+  Block device           253:2
+
+  --- Segments ---
+  Logical extents 0 to 509:
+    Type                striped
+    Stripes             2
+    Stripe size         64.00 KiB
+    Stripe 0:
+      Physical volume   /dev/sdb
+      Physical extents  0 to 254
+    Stripe 1:
+      Physical volume   /dev/sdc
+      Physical extents  0 to 254
+
+  Logical extents 510 to 1279:
+    Type                striped
+    Stripes             2
+    Stripe size         64.00 KiB
+    Stripe 0:
+      Physical volume   /dev/sdd
+      Physical extents  0 to 384
+    Stripe 1:
+      Physical volume   /dev/sde
+      Physical extents  0 to 384
+

@@ -1,0 +1,188 @@
+#/bin/bash
+echo "-------1.1 Initial Setup - Filesystem Configuration----"
+echo "-------Ensure mounting of jfss2 filesystems is disabled---"
+cat /etc/modprobe.d/CIS.conf |grep -i jffs2
+
+echo
+echo "-------Ensure mounting of hfs filesystems is disabled---"
+cat /etc/modprobe.d/CIS.conf |grep -i hfs
+
+echo
+echo "-------Ensure mounting of udf filesystems is disabled---"
+cat /etc/modprobe.d/CIS.conf |grep -i udf
+df -TH
+
+echo
+echo "----Disable Automounting----"
+systemctl status automount|head -20
+systemctl status autofs.service|head -20
+
+echo
+echo "----Initial Setup - Secure Boot Settings---"
+echo "-----Ensure permissions on bootloader config are configured----"
+ls -l /boot/grub2/grub.cfg
+ls -l /boot/grub/user.cfg
+ls -l /boot/grub2/user.cfg
+cat /etc/os-release
+ls -ld /boot/grub2/grub.cfg
+
+
+echo "----Ensure authentication required for single user mode----"
+cat /boot/grub2/grub.cfg |grep -i password
+echo"-------Initial Setup - Additional Process Hardening-----"
+echo"------Ensure address space layout randomization (ASLR) is enabled----"
+cat /etc/sysctl.conf |random
+cat /etc/sysctl.conf |grep -i random
+echo "-----Ensure prelink is disabled----"
+rpm -qa |grep -i prelink
+echo "-----Initial Setup - Warning Banners----"
+echo "-----Ensure message of the day is configured properly---"
+cat /etc/motd
+echo "------Ensure local login warning banner is configured properly--"
+cat /etc/issue.net
+cat "-------Ensure remote login warning banner is configured properly----"
+cat ssh_config
+echo "-------Ensure permissions on /etc/motd are configured-----"
+ls -lrt /etc/motd
+echo "-------Ensure permissions on /etc/issue are configured----"
+ls -lrt /etc/issue
+echo "-------Ensure permissions on /etc/issue.net are configured----"
+ls -ld /etc/issue.net
+echo "-------Services - inetd Services----"
+echo "-------Ensure xinetd is not enabled----"
+systemctl disable xinetd
+systemctl status  xinetd
+rpm -qa |grep -i openbsd-inetd
+echo "-------Ensure chron configured ----"
+rpm -qa |grep -i chrony
+cat /etc/chrony.conf |grep -i iburst
+cat /etc/sysconfig/chronyd
+cat /etc/ntp.conf
+echo "-------Ensurethe xclock installed----"
+rpm -qa |grep -i xserver-xorg*
+echo "-----Ensure IMAP and POP3 server is not enabled---"
+systemctl status dovecot
+echo "-----Ensure Avahi Server is not enabled---"
+systemctl status avahi-daemon
+echo "-----Ensure cups Server is not enabled---"
+systemctl status cups
+echo "-----Ensure dhcp Server is not enabled---"
+systemctl status isc-dhcp-server
+systemctl status isc-dhcp-server6
+echo "-----Ensure slapd  is not enabled---"
+systemctl status slapd
+echo "-----Ensure bind9---"
+systemctl status bind9
+echo "-----Ensure nisis disabled----"
+systemctl status nis
+rpm -qa |grep -i nis
+rpm -qa |grep -i NIS
+echo "-----Ensure dhcp Server is not enabled---"
+systemctl status rsh-redone-client
+systemctl status rsh
+echo "-----Ensure rshconfigured"
+rpm -qa |grep -i  rsh
+rpm -qa |grep -i  rsh-client rsh-redone-client
+rpm -qa |grep -i  rsh-client,rsh-redone-client
+echo "-----Ensure IPV4setings----"
+cat /etc/sysctl.conf |grep -i net.ipv4.ip_forward
+systemctl -a |grep -i net.ipv4.ip_forward
+echo "-----Ensure dhcp Server is not enabled---"
+rpm -qa |grep -i  rsh-client,rsh-redone-client cat /etc/sysctl.conf |grep -i net.ipv4.ip_forward
+cat /etc/sysctl.conf |grep -i net.ipv4.conf.all.send_redirects
+cat /etc/sysctl.conf |grep -i net.ipv4.conf.all.accept_source_route
+cat /etc/sysctl.conf |grep -i net.ipv4.conf.all.accept_redirects
+cat /etc/sysctl.conf |grep -i net.ipv4.conf.all.secure_redirects
+cat /etc/sysctl.conf |grep -i net.ipv4.conf.all.log_martians
+cat /etc/sysctl.conf |grep -i net.ipv4.icmp_echo_ignore_broadcasts
+cat /etc/sysctl.conf |grep -i net.ipv4.icmp_ignore_bogus_error_responses
+cat /etc/sysctl.conf |grep -i net.ipv4.conf.all.rp_filter
+cat /etc/sysctl.conf |grep -i net.ipv4.tcp_syncookies
+echo "-----Ensure IPV6----"
+cat /etc/sysctl.conf |grep -i net.ipv6.conf.all.accept_ra
+cat /etc/sysctl.conf |grep -i net.ipv6.conf.all.accept_redirects
+cat /etc/sysctl.conf |grep -i net.ipv6.conf.default.accept_redirects
+cat /etc/default/grub |grep -i GRUB_CMDLINE_LINUX
+cat /etc/default/grub |grep -i ipv6
+echo "-----Ensure dccp configured -----"
+lsmod | egrep "^dccp\s" && rmmod dccp
+lsmod  |grep -i DCCP
+lsmod | egrep "^sctp\s" && rmmod sctp
+lsmod | egrep "^dccp\s" && rmmod dccp
+lsmod | egrep "^rds\s" && rmmod rds
+lsmod | egrep "^tipc\s" && rmmod tipc
+echo "-----Ensure Rsyslog configured---"
+systemctl status rsyslog|head -20
+ls -lrt /etc/rsyslog.conf*
+ls -ld /etc/rsyslog.conf.d
+ls -ld /etc/rsyslog.d/
+ls -lrt /etc/rsyslog.d/
+ls -lrt /etc/rsyslog.conf*
+cat /etc/rsyslog.conf |grep -i ModLoad imtcp.so
+cat /etc/rsyslog.conf |grep -i ModLoad
+cat /etc/rsyslog.conf |grep -i imtcp.so
+cat /etc/rsyslog.conf |grep -i $InputTCPServerRun
+cat /etc/rsyslog.conf |grep -i InputTCPServerRun
+cat /etc/rsyslog.conf |grep -i imtcp.so
+rpm -qa |grep -i rsyslog*
+rpm -qa |grep -i syslog-ng
+rpm -qa |grep -i rsyslog*
+echo "-----Ensure /var/log permissions was set"
+ls -lrt /var/log/ |head
+echo "-----cron ------"
+systemctl status  cron
+systemctl status  crond
+ls -ld /etc/crontab
+ls -ld /etc/cron.hourly
+ls -ld /etc/cron.daily/
+ls -ld /etc/cron.weekly/
+ls -ld /etc/cron.monthly
+ls -ls /etc/cron.d
+echo "-----ensure the sshd configuration---"
+ls -ld /etc/ssh/sshd_config 
+grep -i proto /etc/ssh/sshd_config
+grep -i LogLevel /etc/ssh/sshd_config 
+grep -i X11 /etc/ssh/sshd_config 
+grep -i MaxAuthTries /etc/ssh/sshd_config 
+grep -i IgnoreRhosts /etc/ssh/sshd_config
+grep -i HostbasedAuthentication /etc/ssh/sshd_config 
+grep -i permitroot /etc/ssh/sshd_config 
+grep -i PermitEmptyPasswords /etc/ssh/sshd_config
+grep -i PermitUserEnvironment /etc/ssh/sshd_config 
+grep -i MACs /etc/ssh/sshd_config
+grep -i client /etc/ssh/sshd_config 
+grep -i LoginGraceTime /etc/ssh/sshd_config 
+grep -i Banner /etc/ssh/sshd_config
+echo "-----/etc/passwd,shadow,group files settings----"
+ls -ld /etc/passwd ls -l /etc/shadow ls -l /etc/group ls -ld /etc/gshadow
+cat /etc/passwd |grep -i $
+cat /etc/passwd |grep -i /
+cat /etc/passwd |grep -i "+"
+cat /etc/passwd |grep -i '/^\+:.*$/ d'
+cat /etc/group |grep -i '/^\+:.*$/ d'
+cat /etc/shadow  |grep -i '/^\+:.*$/ d'
+cat /etc/gshadow |grep -i '/^\+:.*$/ d'
+echo "----audit rules-----"
+systemctl status auditd
+grep space_left_action /etc/audit/auditd.conf
+grep action_mail_acct /etc/audit/auditd.conf grep Remediated /etc/audit/auditd.conf
+grep -i max_log_file_action /etc/audit/audit.conf
+grep -i max_log_file_action /etc/audit/auditd.conf cat /etc/audit/auditd.conf
+grep -i GRUB_CMDLINE_LINUX /etc/default/grub cat /etc/audit/rules.d/audit.rules |grep -i always
+cat /etc/audit/rules.d/audit.rules |grep -i always |more cat /etc/audit/rules.d/audit.rules |grep -i always |more
+echo "-----PASSWORD POLOCIES----"
+cat /etc/security/pwquality.conf grep -i PASS_MAX_DAYS /etc/login.defs
+grep -i PASS_MIN_DAYS /etc/login.defs grep -i PASS_WARN_AGE /etc/login.defs 
+echo "-----UMASK VALUES-----"
+grep -i umask /etc/bash.bashrc
+grep -i umask /etc/profile/*
+grep -i umask /etc/profile.d/*
+grep -i umask /etc/profile.d/.sh*
+grep -i umask /etc/bash.bashrc
+grep -i umask /etc/profile grep -i TMOUT /etc/profile
+grep -i TMOUT /etc/bash.bashrc
+
+
+
+echo "-----------------audit-repors--------------"
+auditctl -l

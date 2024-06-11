@@ -1,0 +1,20 @@
+---
+- hosts: PHP
+  become: true
+  gather_facts: no
+
+  tasks:
+    - name: taking backup
+      copy:
+        src: /etc/php.ini
+        dest: /etc/php.ini-20231211
+
+    - name: changing name
+      replace:
+        path: /etc/php.ini
+        regexp: "disable_functions ="
+        replace: "disable_functions = exec,passthru,shell_exec,system,proc_open,popen,parse_ini_file,show_source,allow_url_fopen=Off,allow_url_include=Off"
+
+    - name: restarting HTTPD
+      shell: systemctl restart httpd
+

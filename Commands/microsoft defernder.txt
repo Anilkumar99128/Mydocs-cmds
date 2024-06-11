@@ -1,0 +1,18 @@
+https://packages.microsoft.com/config/[distro]/[version]/[channel]
+
+
+.repo
+
+
+yum-config-manager --add-repo=https://packages.microsoft.com/config/centos/8/prod.repo
+
+
+
+sudo yum-config-manager --add-repo=https://packages.microsoft.com/config/rhel/8/prod.repo
+
+sudo yum-config-manager --add-repo=https://packages.microsoft.com/config/rhel/[version]/[channel].repo
+
+yum-config-manager --add-repo=https://packages.microsoft.com/config/rhel/8/prod.repo
+
+
+rpm --import http://packages.microsoft.com/keys/microsoft.asc

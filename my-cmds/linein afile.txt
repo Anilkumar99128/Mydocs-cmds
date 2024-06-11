@@ -1,0 +1,15 @@
+      
+	  ---
+- hosts: heal
+  become: true
+  gather_facts: no
+---
+- hosts: no
+  become: true
+  gather_facts: no
+ 
+   - name: Ensure php extension matches new pattern
+     ansible.builtin.lineinfile:
+       path: /etc/ssh/sshd_config
+       insertafter: 'ciphers aes256-ctr,aes192-ctr,aes128-ctr'
+       line: 'KexAlgorithms curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp521,ecdh-sha2-nistp384,ecdh-sha2-nistp256'

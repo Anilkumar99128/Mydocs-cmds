@@ -1,0 +1,11 @@
+10.10.120.159 & 10.10.120.171 
+pm2 status
+pm2 start index.js --name=sso
+pm2 start server.js --name=cmdbv2
+pm2 start server.js --name=ccm
+pm2 start server.js --name=cmdbcloud
+pm2 start server.js --name=cmdbctrls
+pm2 start index.js --name=Apimicroservice
+pm2 start app.js --name=aws
+pm2 start app.js --name=azure
+pm2 start app.js --name=gcp

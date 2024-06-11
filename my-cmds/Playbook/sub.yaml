@@ -1,0 +1,14 @@
+---
+- hosts: SUBDR
+  become: true
+  gather_facts: no
+  vars:
+   newpass: Welcome@123
+  
+  tasks:
+  
+ 
+  - name: Joinining the AD realm
+    shell: echo '{{ newpass }}' | 
+
+

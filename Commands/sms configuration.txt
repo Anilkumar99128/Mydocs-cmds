@@ -1,0 +1,53 @@
+ cp /etc/postfix/main.cf /etc/postfix/main.cf-09212022
+ vi /etc/postfix/main.cf
+smtp_tls_note_starttls_offer = yes
+smtp_tls_security_level = encrypt
+smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+relayhost = [email-smtp.ap-south-1.amazonaws.com]:587
+smtp_sasl_auth_enable = yes
+smtp_use_tls = yes
+smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
+
+smtp_generic_maps = hash:/etc/postfix/generic
+smtp_enforce_tls = yes
+ 
+
+ cat /etc/postfix/sasl_passwd
+ vi /etc/postfix/sasl_passwd
+ [email-smtp.ap-south-1.amazonaws.com]:587 AKIAXEWTO7Z6CDCI2DEP:kYMuroyfo3YhfvgzSYrNUJX1l/rTCcxnixIKD+2Z
+
+ cat /etc/postfix/sasl_passwd
+
+ systemctl restart postfix;systemctl status postfix;yum install cyrus-sasl-plain -y
+
+ systemctl status postfix ;systemctl restart postfix;systemctl status postfix
+ 
+ cat /etc/postfix/main.cf | grep email-smtp.ap-so
+ postmap hash:/etc/postfix/sasl_passwd
+ chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+ cd /etc/postfix/ ; ls -rlth ;chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+ postconf -e 'smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt'
+ systemctl restart postfix;sudo postfix start; sudo postfix reload
+ postmap hash:/etc/postfix/sasl_passwd ;postmap hash:/etc/postfix/generic;systemctl restart postfix
+ 
+ systemctl restart postfix
+ 
+ mailx -r no-replay@etradeonline.in -s "Information" indgstdba@infosys.com
+ tailf /var/log/maillog
+ cat /etc/postfix/main.cf
+ cat /etc/postfix/main.cf  | grep -i inet
+ tailf /var/log/maillog
+ nslookup infosyslimited.in.tmes.trendmicro.eu
+ telnet 18.185.115.146 25
+ cat /etc/hosts
+ hostname -s
+ hostname -f
+ history|grep -i mail
+ mailx -r no-replay@cocoblu.in -s "Information" indgstdba@infosys.com
+ 
+ mail -s "Information" -r prd_csr_alert@insidemail.cloud4c.com BOI-API-PROS@ibm.onmicrosoft.com
+ 
+ 
+ 
+nohup rsync -avzh  EXPDP_MISREP_P02_03042023_223001_full.dmp  adm.anilp@10.172.214.29:/archivebackup/MISREP_BKP/ &

@@ -1,0 +1,21 @@
+---
+- hosts: KEY
+  become: true
+  gather_facts: no
+  vars:
+   newpass: n1dpsI$`W>4i]yOT
+  
+  tasks:
+  
+  - name: Remove AD ROOT ACCESS
+    shell: cd /etc/sudoers.d/;rm -f INTATM-*-ROOT-ACCESS
+   
+  - name: Joinining the AD realm
+    shell: echo '{{ newpass }}' | realm join --user srv.linux automation.local -v
+
+  - name: ssh
+    shell: realm permit -g C4C-INTATM-`hostname`-SSH-ACCESS
+
+  - name: add AD group access permit
+    shell: echo  "%C4C-INTATM-`hostname|tr “[a-z]” “[A-Z]”`-ROOT-ACCESS        ALL=(ALL)       ALL" > /etc/sudoers.d/C4C-INTATM-`hostname|tr “[a-z]” “[A-Z]”`-ROOT-ACCESS
+

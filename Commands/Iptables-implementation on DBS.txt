@@ -1,0 +1,18 @@
+# Block all incoming and outgoing traffic from/to the other server
+sudo iptables -A INPUT -s <other_server_IP> -j DROP
+sudo iptables -A OUTPUT -d <other_server_IP> -j DROP
+
+iptables-save > /etc/sysconfig/iptables
+
+Example:
+to apply the port level blockage beteen both the vms.
+
+iptables -A OUTPUT -d 192.168.67.21 -d 192.168.67.40 -j DROP
+iptables -L
+iptables -A INPUT -s 192.168.67.21 -d 192.168.67.40 -j DROP
+
+TO save the configiration:
+iptables-save > /etc/sysconfig/iptables
+
+TO restore  the configiration if Iptbales got Flushed:
+iptables-restore < /etc/sysconfig/iptables

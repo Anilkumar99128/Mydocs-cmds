@@ -1,0 +1,31 @@
+yum install pcs pacemaker resource-agents fence-agents-all
+dnf --enablerepo=ha -y install pacemaker pcs
+passwd hacluster   RH:eBW'wYupyuq!J
+pcs cluster auth LIBMDRGTPIM1.IBM.LOCAL LIBMDRGTPIM2.IBM.LOCAL -u hacluster
+pcs cluster setup --name app_cluster LIBMDRGTPIM1.IBM.LOCAL LIBMDRGTPIM2.IBM.LOCAL -u hacluster
+pcs cluster start --all
+systemctl status pcscd.service
+systemctl start pcscd.service
+systemctl enable pcscd.service
+systemctl start pacemaker.service
+systemctl start corosync.service
+systemctl enable pacemaker.service
+systemctl enable corosync.service
+pcs property set no-quorum-policy=ignore
+pcs resource defaults migration-threshold=1
+pcs resource create VIP_ClusterIP ocf:heartbeat:IPaddr2 ip=10.174.40.49 cidr_netmask=24 nic=enp1s0:1 op monitor interval=20s
+pcs resource create backupIP ocf:heartbeat:IPaddr2 ip=10.6.200.37 cidr_netmask=25 op monitor interval=20s
+
+pcs stonith create disk_fencing fence_scsi pcmk_host_list="ovm01 ovm02" pcmk_monitor_action="metadata" pcmk_reboot_action="off" devices="/dev/xvde" meta povides="unfencing"
+pcs constraint --full
+pcs constraint location disk_fencing prefers ovm01=INFINITY
+pcs constraint location disk_fencing prefers ovm02=INFINITY
+pcs property 
+pcs property set stonith-enabled=false
+pcs resource move VIP_ClusterIP 
+
+
+
+
+pcs resouce delete resoucename
+

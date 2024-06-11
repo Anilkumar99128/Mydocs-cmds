@@ -1,0 +1,9 @@
+Swtiching AD to AD
+
+add the below entries in /etc/sudoers
+adm.anilp@EVNABFID.LOCAL       ALL=(srv.ubssitrw@EVNABFID.LOCAL)       NOPASSWD: ALL
+
+
+and switch to the ad.anilp and run below command to switch to srv.ubssitrw
+
+sudo -u srv.ubssitrw -i

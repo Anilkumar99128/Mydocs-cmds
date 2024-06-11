@@ -1,0 +1,40 @@
+yum install -y http://repo.almalinux.org/elevate/elevate-release-latest-el7.noarch.rpm
+sudo yum install -y leapp-upgrade leapp-data-rocky
+
+sudo leapp preupgrade
+
+fix inhabitors
+
+sudo leapp upgrade
+
+reboot
+2. Clean up any orphaned packages from CentOS 7:
+
+
+rpm -qa | grep -E 'el7[.-]' | xargs rpm -e
+
+
+
+rocky 8 to 9
+
+yum install -y http://repo.almalinux.org/elevate/elevate-release-latest-el8.noarch.rpm
+
+The yum configuration excluded several packages during the upgrade. Change the configuration so no packages are excluded, some of which are Leapp dependencies:
+
+yum config-manager --save --setopt exclude=''
+
+sudo yum install -y leapp-upgrade leapp-data-rocky
+sudo leapp preupgrade
+
+fix below inhabitors if required 
+
+rm /etc/sysconfig/network-scripts/ifcfg-[device_name]
+
+
+sudo leapp upgrade
+reboot
+
+
+
+
+

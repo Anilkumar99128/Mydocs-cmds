@@ -1,0 +1,11 @@
+==========Ubuntu upgrade from 18 to 22==================
+check any packages are 
+apt-mark showhohold
+apt-mark unhold package_name
+apt update
+apt upgrade
+apt full-upgrade
+apt --purge autoremove
+apt install update-manager-core
+do-release-upgrade
+

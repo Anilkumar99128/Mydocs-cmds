@@ -1,0 +1,3 @@
+depmod -a 5.4.17-2136.328.3.el8uek.x86_64
+sudo dracut -f /boot/initramfs-5.4.17-2136.328.3.el8uek.x86_64.img 5.4.17-2136.328.3.el8uek.x86_64
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg

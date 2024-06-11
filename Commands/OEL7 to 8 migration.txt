@@ -1,0 +1,65 @@
+
+yum install -y leapp-upgrade --enablerepo=ol7_leapp,ol7_latest
+
+yum update -y
+
+reboot
+
+# On-Prem or other cloud providers
+leapp preupgrade --oraclelinux
+
+# OCI
+leapp preupgrade --oci
+
+cd /var/log/leapp
+ls
+answerfile  answerfile.userchoices  archive  leapp-preupgrade.log  leapp-report.json  leapp-report.txt
+#
+
+# Before upgrade
+
+# Answer an additional question.
+leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+
+
+# After upgrade
+alternatives --set python /usr/bin/python3
+
+# On-Prem or other cloud providers
+leapp preupgrade --oraclelinux
+
+# OCI
+leapp preupgrade --oci
+
+cat /etc/redhat-release
+Red Hat Enterprise Linux Server release 7.9 (Maipo)
+#
+
+cat /etc/oracle-release
+Oracle Linux Server release 7.9
+#
+
+# On-Prem or other cloud providers
+leapp upgrade --oraclelinux
+
+# OCI
+leapp upgrade --oci
+
+reboot
+
+cat /etc/redhat-release
+Red Hat Enterprise Linux release 8.6 (Ootpa)
+#
+
+cat /etc/oracle-release
+Oracle Linux Server release 8.6
+#
+
+uname -r
+5.4.17-2136.311.6.el8uek.x86_64
+#
+
+sudo grubby --default-kernel
+/boot/vmlinuz-5.4.17-2136.311.6.el8uek.x86_64
+#
+

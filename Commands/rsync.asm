@@ -1,0 +1,1 @@
+rsync -aAX /var/www/html/ccm/BOT_Files  root@172.16.2.63:/var/www/html/ccm/BOT_Files/

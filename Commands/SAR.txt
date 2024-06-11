@@ -1,0 +1,20 @@
+4. To report CPU details total 5 times with the interval of 2 seconds. If the interval command is set to zero, average statistics from the time system started are presented. If the count is not provided and the interval is given, statistics are provided continuously after every interval. 
+ 
+
+ sar -u 2 5
+
+5. To report about the amount of memory used, amount of memory free, available cache, available buffers total 3 times with the interval of 1 second. 
+ 
+
+sar -r 1 3
+
+6. To report about file systems mounted on the device total 5 times with the interval of 2 seconds. 
+ 
+
+hduser@mahesh-Inspiron-3543:~$ sar -F 2 5
+
+8. To report run queue length, number of processes and load average 
+ 
+
+hduser@mahesh-Inspiron-3543:~$ sar -q 2 5
+

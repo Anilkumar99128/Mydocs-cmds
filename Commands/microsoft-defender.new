@@ -1,0 +1,29 @@
+for RHEL:
+yum-config-manager --add-repo=https://packages.microsoft.com/config/rhel/8/prod.repo
+ 
+ for Suse:
+zypper addrepo -c -f -n microsoft-prod https://packages.microsoft.com/config/sles/15/prod.repo
+ 
+ 
+rpm -qa --last|grep -i mde
+rpm -qa --last|grep -i mdatp
+rpm -qa --last|grep -i policycoreutils
+rpm -qa --last|grep -i libnetfilter_queue
+ 
+ 
+ 
+yum install policycoreutils
+ 
+ 
+To check status
+mdatp health --field real_time_protection_enabled
+To enable
+ 
+mdatp config real-time-protection --value enabled
+ 
+sudo yum-config-manager --add-repo=https://packages.microsoft.com/config/rhel/8/prod.repo
+ 
+dnf update --disablerepo=* --enablerepo='*microsoft*' rhui-azure-rhel8-eus
+sudo yum update -y --disablerepo='*' --enablerepo='*microsoft*'
+ 
+yum install mdatp

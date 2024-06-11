@@ -1,0 +1,44 @@
+#!/bin/bash
+zypper remove falcon-sensor
+sudo zypper addrepo -c -f -n microsoft-prod https://packages.microsoft.com/config/sles/15/prod.repo 
+sudo rpm --import http://packages.microsoft.com/keys/microsoft.asc 
+zypper install mdatp 
+sudo phython3 defender.py 
+systemctl status mdatp
+
+MicroSoft Defender in GT
+------------------------------
+- check status
+mdatp health --field real_time_protection_enabled
+
+ 
+
+- To enable
+mdatp config real-time-protection --value enabled
+
+ 
+
+- To disable
+mdatp config real-time-protection --value disabled
+
+
+ wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
+sh ./onboard_agent.sh -w f27c735f-dd71-48b7-8c65-a7232b3cf56f -s wHq7tRyP23flg0DCAg81ELs1+VSG3j9UG2Kq4yP77Db1vDOWcCugxBkT7P2bOib++19CiC1DMMa0PdXFCyhvoA==
+ 
+
+
+
+
+
+slotIds
+
+xvdi	8
+xvdg	6
+xvdo	14
+
+
+xvdab 202:6912  0  500G  0 disk
+xvdr  202:4352  0  500G  0 disk
+xvdv  202:5376  0  200G  0 disk
+xvdx  202:5888  0  500G  0 disk
+

@@ -1,0 +1,32 @@
+============================================SR94171049==================================================================
+What is the reason for DSAT?                                
+What is the resolution given?                               
+Why was there a Delay in resolution? (If Applicable)          
+Did you spoke to customer on this and pacified him?         yes
+Are you ready for the resurvey?                             yes 
+What is the Plan of action to avoid this in future?          
+Closure confirmation from customer after DSAT?              yes
+Is there any risk for client/CTRLS?                         No
+
+
+==============================================SR00143373=====================================================================
+
+What is the reason for DSAT?                             Client  unable to access Monitoring console   
+What is the resolution given?                            We have suggested him to check with Zabbix Team
+Why was there a Delay in resolution? (If Applicable)     The Ticket Assigned to wrong Team we are not aware of whome handling it we  asked Doc Team route for concern team
+Did you spoke to customer on this and pacified him?      Yes 
+Are you ready for the resurvey?                          Yes
+What is the Plan of action to avoid this in future?      We Suggested customer to the request should directly go respective Team  
+Closure confirmation from customer after DSAT?           Yes
+Is there any risk for client/CTRLS?                      No 
+
+==============================================IM01851800=====================================================================
+
+What is the reason for DSAT?                             Regarding server memory utilization 
+What is the resolution given?                            we have Proided the consumption details to customer 
+Why was there a Delay in resolution? (If Applicable)     Due to mutliple activities the Ticket updation got delayed 
+Did you spoke to customer on this and pacified him?      Yes 
+Are you ready for the resurvey?                          yes 
+What is the Plan of action to avoid this in future?      we wll make sure the update to the customer wont be late from our end 
+Closure confirmation from customer after DSAT?           Yes
+Is there any risk for client/CTRLS?                      No

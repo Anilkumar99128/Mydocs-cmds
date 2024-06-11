@@ -1,0 +1,18 @@
+---
+- name: Line in below
+  hosts: test
+  tasks:
+     
+    - name: copy syslog file
+      ansible.builtin.copy:
+       src: /etc/rsyslog.conf
+       dest: /etc/rsyslog.conf-04242023
+     
+    - name: Replace SIEM logs
+      ansible.builtin.command: sed -i 's/*.* @10.174.40.69/authpriv.*	@10.174.40.69/' /etc/rsyslog.conf
+       	  
+    - name: Restart rsyslog service
+      service:
+       name: rsyslog
+       state: restarted
+

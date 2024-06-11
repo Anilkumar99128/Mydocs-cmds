@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Define the directory where you want to store your backup files
+BACKUP_DIR="/var/opt/tableau/tableau_server/data/tabsvc/files/backups"
+
+# Create a timestamp variable
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+
+# Define the backup file name with date
+BACKUP_FILE_NAME="tableau_backup_${TIMESTAMP}.tsbak"
+
+echo "Backup file name: ${BACKUP_DIR}/${BACKUP_FILE_NAME}"
+
+# Stop Tableau Server
+echo "Stopping Tableau Server..."
+tsm stop
+
+# Perform maintenance cleanup
+echo "Cleaning up Tableau Server logs..."
+tsm maintenance cleanup
+
+# Perform maintenance backup
+echo "Backing up Tableau Server..."
+tsm maintenance backup --file "${BACKUP_FILE_NAME}"
+
+# Start Tableau Server
+echo "Starting Tableau Server..."
+tsm start
+
+echo "Tableau Server maintenance tasks are complete."
+
+mv "${BACKUP_DIR}/${BACKUP_FILE_NAME}" /var/backup-tableau/
+
+echo " copying the backup file to s3"
+
+aws s3 cp "/var/backup-tableau/${BACKUP_FILE_NAME}" s3://bluepencil-tableau-backup/var-backup-tableau/
+
+
+export BACKUP_FILE_NAME=tableau_backup_20240125-151620.tsbak
+aws s3 cp "/var/backup-tableau/${BACKUP_FILE_NAME}" s3://bluepencil-tableau-backup/var-backup-tableau/
+

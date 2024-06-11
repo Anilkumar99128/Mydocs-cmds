@@ -1,0 +1,6 @@
+cat /etc/lvm/devices/system.devices
+lvmdevices --delpvid
+lvmdevices --deldev sdb
+vgimportdevices -a  
+lvmdevices --adddev /dev/sdb
+  

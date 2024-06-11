@@ -1,0 +1,55 @@
+
+register your serevr in oracle portal
+
+sudo yum repoinfo
+sudo yum repoinfo ol7_x86_64_latest
+Loaded plugins: langpacks, rhnplugin, ulninfo
+This system is receiving updates from ULN.
+Repo-id      : ol7_x86_64_latest
+Repo-name    : Oracle Linux 7 Latest (x86_64)
+Repo-status  : enabled
+Repo-updated : Tue Feb 23 03:30:36 2021
+Repo-pkgs    : 17,366
+Repo-size    : 27 G
+Repo-baseurl : https://linux-update.oracle.com/XMLRPC/GET-REQ/ol7_x86_64_latest
+Repo-expire  : 21,600 second(s) (last: Wed Feb 24 20:43:12 2021)
+  Filter     : read-only:present
+Repo-excluded: 4,560
+
+repolist: 17,366
+
+# yum install httpd
+# mkdir -p /var/www/html/yum
+# /usr/sbin/semanage fcontext -a -t httpd_sys_content_t "/var/yum(/.*)?"
+# /sbin/restorecon -R -v /var/yum
+# ln -s /var/yum /var/www/html/yum
+vi /etc/httpd/conf/httpd.conf, 
+ServerName server_addr:80
+Options Indexes FollowSymLinks
+
+
+# service httpd start
+# chkconfig httpd on
+
+
+# systemctl start httpd
+# systemctl enable httpd
+
+
+# iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
+# service iptables save
+
+# yum install uln-yum-mirror
+
+No package uln-yum-mirror available  need to enable addons on portal level
+
+vi  /etc/sysconfig/uln-yum-mirror mention the path 
+
+REP_BASE=/var/yum
+vi /etc/cron.daily/uln-yum-mirror disable the daily cron 
+CRON_ENABLED=0
+
+
+
+# /usr/bin/uln-yum-mirror run this command to sync the repos
+

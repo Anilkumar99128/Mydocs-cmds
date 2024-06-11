@@ -1,0 +1,7 @@
+ mkdir /rescue mount -o nouuid
+ /dev/sdc4 /rescue mount -o nouuid /dev/sdc3
+ /rescue/boot/ mount /dev/sdc2 
+/rescue/boot/efi mount -t proc /proc
+/rescue/proc mount -t sysfs /sys /rescue/sys
+mount -o bind /dev /rescue/dev mount -o bind /dev/pts
+/rescue/dev/pts mount -o bind /run /rescue/run chroot /rescue

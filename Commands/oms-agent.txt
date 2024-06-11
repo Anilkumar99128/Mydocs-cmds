@@ -1,0 +1,14 @@
+https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh
+
+
+[19:49] Sai Shiva Polishetty
+wget https://raw.githubusercontent.com/Microsoft/OMS-Agent-for-Linux/master/installer/scripts/onboard_agent.sh && sh onboard_agent.sh -w <YOUR WORKSPACE ID> -s <YOUR WORKSPACE PRIMARY KEY>
+
+[19:50] Sai Shiva Polishetty
+528cdcf8-dee5-48c0-8b4b-da7e3038275e
+
+[19:50] Sai Shiva Polishetty
+cGMoWbMqYhYjO15A1d1xmPR//rWfIVcwAVQ4U4ZgXKt6zxN7xGVGfF6gvqwgwg8WzsqQpVJdOdYYJPDojRnuWQ==
+
+RTBuser
+harshit.verma

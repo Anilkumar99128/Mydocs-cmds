@@ -1,0 +1,10 @@
+apt-mark hold kubelet* kubeadm* kubectl*  docker*  nginx*  Jenkins* openjdk*   git*  amd64*
+ apt-mark hold  Jenkins* nodejs*  deb-1nodesource1* amd64*  openjdk*  
+ apt-mark hold   kubelet* kubeadm* kubectl* docker*
+apt-mark hold nginx* mysql* Distrib*  EditLine* wrapper* openjdk*
+dpkg --list | grep linux-image list out the kernel images 
+
+
+
+
+for file_list in `ls -rt /var/lib/dpkg/info/*.list`; do \ stat_result=$(stat --format=%y "$file_list"); \ printf "%-50s %s\n" $(basename $file_list .list) "$stat_result"; \ done

@@ -1,0 +1,33 @@
+"5.4.2 Ensure lockout for failed password attempts is configured" : [FAILED]
+
+grep -E '^\s*auth\s+required\s+pam_faillock.so\s+' /etc/pam.d/password-auth /etc/pam.d/system-auth
+
+cp /etc/pam.d/password-auth /etc/pam.d/password-auth-052023 ;cp /etc/pam.d/system-auth /etc/pam.d/system-auth-auth-052023
+
+/etc/pam.d/password-auth:    auth required pam_faillock.so preauth silent deny=5 unlock_time=900
+/etc/pam.d/password-auth:    auth required pam_faillock.so authfail deny=5 unlock_time=900
+
+/etc/pam.d/system-auth:	     auth required pam_faillock.so preauth silent deny=5 unlock_time=900
+/etc/pam.d/system-auth:      auth required pam_faillock.so authfail deny=5 unlock_time=900
+
+
+/etc/pam.d/password-auth:auth        required                                     pam_faillock.so preauth silent deny=5 unlock_time=900
+/etc/pam.d/password-auth:auth       required                                      pam_faillock.so authfail deny=5 unlock_time=900
+
+/etc/pam.d/system-auth:auth        required                                     pam_faillock.so preauth silent deny=5 unlock_time=900
+/etc/pam.d/system-auth:auth        required                                     pam_faillock.so authfail deny=5 unlock_time=900
+-----------------------------------------------------------------------------------------------------------------------------------
+echo --- 5.4.2 Ensure lockout for failed password attempts is configured" : [FAILED] ----
+
+grep -E '^\s*auth\s+required\s+pam_faillock.so\s+' /etc/pam.d/password-auth /etc/pam.d/system-auth
+
+cp /etc/pam.d/password-auth /etc/pam.d/password-auth-052023 ;cp /etc/pam.d/system-auth /etc/pam.d/system-auth-auth-052023
+
+
+/etc/pam.d/password-auth
+auth        required                                     pam_faillock.so preauth silent deny=5 unlock_time=900
+auth        required                                     pam_faillock.so authfail deny=5 unlock_time=900
+
+/etc/pam.d/system-auth
+auth        required                                     pam_faillock.so preauth silent deny=5 unlock_time=900
+auth        required                                     pam_faillock.so authfail deny=5 unlock_time=900

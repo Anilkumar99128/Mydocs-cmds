@@ -1,0 +1,14 @@
+        ServerAdmin root@reports.ctrls.in
+        ServerName billing.cloud4c.com
+        ServerAlias www.billing.cloud4c.com
+        ErrorDocument 404 https://livetest.cloud4c.com
+        DocumentRoot /var/www/html/ctrlsbilling
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/c4c-ssl.crt
+        SSLCertificateKeyFile /etc/ssl/certs/c4c-ssl.key
+        SSLCertificateChainFile /etc/httpd/conf.d/ssl/IntermediateCA_Bundle_ctrls.innew1.crt
+        SSLProtocol -all +TLSv1.2
+        SSLCipherSuite ALL:!ADH:!EXPORT:!SSLv2:RC4+RSA:+HIGH:+MEDIUM:+LOW
+        ErrorLog logs/myshift.ctrls.in-ssl-error_log
+        CustomLog logs/myshift.ctrls.in-ssl-access_log common
+        LoadModule php_module modules/libphp.so

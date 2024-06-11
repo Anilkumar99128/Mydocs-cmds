@@ -1,0 +1,52 @@
+Swtiching AD to AD
+
+add the below entries in /etc/sudoers
+adm.anilp@EVNABFID.LOCAL       ALL=(srv.ubssitrw@EVNABFID.LOCAL)       NOPASSWD: ALL
+Venkateswarao.B@EVNABFID.LOCAL       ALL=(SRV.ubssitrw@EVNABFID.LOCAL, SRV.fassitrw@EVNABFID.LOCAL, fasuatro@EVNABFID.LOCAL, fasuatrw@EVNABFID.LOCAL, ubsuatrw@EVNABFID.LOCAL, ubsuatro@EVNABFID.LOCAL, fasprodrw@EVNABFID.LOCAL, fasprodro@EVNABFID.LOCAL, ubsprodrw@EVNABFID.LOCAL, ubsprodro@EVNABFID.LOCAL) NOPASSWD: ALL
+
+
+and switch to the ad.anilp and run below command to switch to srv.ubssitrw
+
+sudo -u srv.ubssitrw -i
+
+
+sudo -l -U Venkateswarao.B@EVNABFID.LOCAL
+
+
+examples
+
+
+#=================== ALL Service accpunt access============================
+
+Venkateswarao.B@EVNABFID.LOCAL       ALL=(SRV.ubssitrw@EVNABFID.LOCAL, SRV.fassitrw@EVNABFID.LOCAL, fasuatro, fasuatrw, ubsuatrw, ubsuatro, fasprodrw, fasprodro, ubsprodrw, ubsprodro) NOPASSWD: ALL
+
+archana.cr@EVNABFID.LOCAL            ALL=(SRV.ubssitrw@EVNABFID.LOCAL, SRV.fassitrw@EVNABFID.LOCAL, fasuatro, fasuatrw, ubsuatrw, ubsuatro, fasprodrw, fasprodro, ubsprodrw, ubsprodro) NOPASSWD: ALL
+
+nayibrahmina.k@EVNABFID.LOCAL        ALL=(SRV.ubssitrw@EVNABFID.LOCAL, SRV.fassitrw@EVNABFID.LOCAL, fasuatro, fasuatrw, ubsuatrw, ubsuatro, fasprodrw, fasprodro, ubsprodrw, ubsprodro) NOPASSWD: ALL
+
+Abhishek.P@EVNABFID.LOCAL            ALL=(SRV.ubssitrw@EVNABFID.LOCAL, SRV.fassitrw@EVNABFID.LOCAL, fasuatro, fasuatrw, ubsuatrw, ubsuatro, fasprodrw, fasprodro, ubsprodrw, ubsprodro) NOPASSWD: ALL
+
+dasari.aswarthamma@EVNABFID.LOCAL    ALL=(SRV.ubssitrw@EVNABFID.LOCAL, SRV.fassitrw@EVNABFID.LOCAL, fasuatro, fasuatrw, ubsuatrw, ubsuatro, fasprodrw, fasprodro, ubsprodrw, ubsprodro) NOPASSWD: ALL
+
+#================Specific accounts=================
+
+Chandrakant.J@EVNABFID.LOCAL, Kalpana.R@EVNABFID.LOCAL, monojit.P@EVNABFID.LOCAL, janhavi.A@EVNABFID.LOCAL, Srikar.I@EVNABFID.LOCAL, Sannithreddy.L@EVNABFID.LOCAL, nitin.k@EVNABFID.LOCAL      ALL=(SRV.almsitrw@EVNABFID.LOCAL)       NOPASSWD: ALL
+
+Jagadeesh.a@EVNABFID.LOCAL, vakul.m@EVNABFID.LOCAL, pooja.g@EVNABFID.LOCAL, chaitrali.G@EVNABFID.LOCAL, arvind.w@EVNABFID.LOCAL         ALL=(SRV.trsitrw@EVNABFID.LOCAL)NOPASSWD: ALL
+#=======================Read-only user===================
+
+Hari.mahalingham@EVNABFID.LOCAL ALL=(fasuatro, ubsuatro, truatro)       NOPASSWD: ALL
+Sangeetha.jayaraman@EVNABFID.LOCAL      ALL=(fasuatro, ubsuatro, truatro)       NOPASSWD: ALL
+Harshal.arora@EVNABFID.LOCAL    ALL=(fasuatro, ubsuatro, truatro)       NOPASSWD: ALL
+Vedashri.Patel@EVNABFID.LOCAL   ALL=(fasuatro, ubsuatro, truatro)       NOPASSWD: ALL
+ydivya.sree@EVNABFID.LOCAL      ALL=(fasuatro, ubsuatro, truatro)       NOPASSWD: ALL
+
+
+
+===========================setting envirement variables to provide command access=====================
+echo $PATH
+/home/srv.ubssitrw@EVNABFID.LOCAL/.local/bin:/home/srv.ubssitrw@EVNABFID.LOCAL/bin:/usr/share/Modules/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+add the required path for the commands on .bashrc
+export PATH=$PATH:/usr/local/bin
+source ~/.bashrc   # or source ~/.zshrc for Zsh
+it will update the Env chages

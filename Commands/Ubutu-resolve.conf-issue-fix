@@ -1,0 +1,20 @@
+resolving DNS issue in Ubuntu20.04
+
+step1: take the backup of /etc/resolv.conf
+cp /etc/resolv.conf /etc/resolv.conf.bkp
+
+step: since the resolv.conf is sym link so remove the  existing /etc/resolv.cof  and create manually
+
+rm -f /etc/resolv.conf ;touch /etc/resolv.conf
+
+step3: chage the permissions of /etc/resolv.conf to 644 and add the  nameserver entries
+chmod 644 /etc/resolv.conf
+
+step4: restart the Network service to check the chages
+
+systemctl restart systemd-network-service
+
+
+Note: Since the removal of resolv.conf file the server willl effect with DNS issues make sure the resovld service shoud be active and running on the server
+
+systemctl status systemd-resolvd-service

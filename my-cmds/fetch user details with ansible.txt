@@ -1,0 +1,33 @@
+---
+- name: Fetch users data from Linux servers
+  hosts: TEST
+  gather_facts: no
+  tasks:
+    - name: Get users list excluding system users
+      shell: awk -F':' '$3 >= 1000 { print $1 }' /etc/passwd
+      register: users_list
+
+    - name: Get sudo users from sudoers file
+      shell: "cat /etc/sudoers | egrep -v '^#|^$|root|wheel' | grep -i 'ALL=' | awk '{print $1}'"
+      register: sudoers_file_users
+
+    - name: Get sudo users from sudo group
+      shell: "getent group sudo | cut -d: -f4 | tr ',' '\n'"
+      register: sudo_group_users
+
+    - name: Combine sudo users
+      set_fact:
+        sudo_users: "{{ sudoers_file_users.stdout_lines + sudo_group_users.stdout_lines | unique }}"
+
+    - name: Assemble user data
+      set_fact:
+        user_data: |
+          Server IP Address: {{ ansible_host }}
+          {% for user in users_list.stdout_lines %}
+          User Name: {{ user }}
+          Privilege/Role: {% if user in sudo_users %}sudo access{% else %}Normal user{% endif %}
+          {% endfor %}
+
+    - name: Save user data to file on Ansible VM
+      delegate_to: localhost
+      

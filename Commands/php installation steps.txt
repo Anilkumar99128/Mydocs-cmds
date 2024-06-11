@@ -1,0 +1,21 @@
+PHP - 8.1
+----------
+yum -y install https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum-config-manager --disable 'remi-php*'
+yum-config-manager --enable remi-php81
+yum repolist
+yum list php
+yum update php-8.1.10
+php -v
+
+
+
+PHP - 8.0
+-----------
+yum install -y https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install yum-utils
+yum-config-manager --disable 'remi-php*'
+yum-config-manager --enable remi-php74
+yum list php
+yum update php
+php -v

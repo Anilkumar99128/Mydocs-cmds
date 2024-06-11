@@ -1,0 +1,24 @@
+[Unit]
+Description=Apache Kafka
+After=network.target
+
+[Service]
+Type=simple
+User=<kafka_user>  # Replace with the user who will run Kafka
+ExecStart=/fassit/softwares/kafka_latest/kafka_2.13-3.0.0_old/bin/kafka-server-start.sh /fassit/softwares/kafka_latest/kafka_2.13-3.0.0_old/config/server.properties
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+
+
+[Unit]
+Description=Apache ZooKeeper
+
+[Service]
+Type=simple
+ExecStart=/fassit/softwares/kafka_latest/kafka_2.13-3.0.0_old/bin/zookeeper-server-start.sh /fassit/softwares/kafka_latest/kafka_2.13-3.0.0_old/config/zookeeper.properties
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

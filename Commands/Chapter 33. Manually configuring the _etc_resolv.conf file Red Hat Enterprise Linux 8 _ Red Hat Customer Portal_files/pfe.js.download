@@ -1,0 +1,2 @@
+define(["webcomponentsjs/custom-elements-es5-adapter","webcomponentsjs/webcomponents-bundle"],function(){return{include:function(e,n){void 0===n&&(n=function(){}),chrometwo_require(["public_modules/@patternfly/"+e+"/dist/"+e+".umd.min"],n)}}});
+//# sourceMappingURL=pfe.js.map

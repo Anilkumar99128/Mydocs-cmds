@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Directory to monitor
+TARGET_DIR="/HDFC/MT940/rev2"
+
+# User to apply ACL permissions
+USER="ocm-snorkel"
+
+# Apply ACL permissions to the new file
+apply_acl() {
+    setfacl -m u:$USER:rwx "$1"
+}
+
+# Export the function so it can be used by the subshell
+export -f apply_acl
+export USER
+
+# Monitor the directory for new files and apply ACL permissions
+inotifywait -m -r -e create --format '%w%f' "$TARGET_DIR" | while read NEWFILE
+do
+    apply_acl "$NEWFILE"
+done

@@ -1,0 +1,53 @@
+SUSEConnect -s
+SUSEConnect --status-text to chck the subscription 
+
+SUSEConnect -r 96D349949F5B001A -slse-sap 
+SUSEConnect -s                                                                                
+SUSEConnect -r 8F877234726F36C4  -slse                                                         
+ cat /etc/os-release                                                                           
+ SUSEConnect -r 96D349949F5B001A                                                               
+ zypper install python-azure-agent                                                             
+ cd /etc/products.d/                                                                           
+ ll                                                                                            
+ zypper lr -d                                                                                  
+ zypper install python-azure-agent                                                             
+ cat /etc/os-release                                                                           
+ SUSEConnect --list-extensions                                                                 
+ SUSEConnect --list-extensions |more     to check the list of the modules                                                       
+ SUSEConnect -p sle-module-public-cloud/12/x86_64   to add perticular module                                             
+ zypper install python-azure-agent                                                             
+ rpm -qa |grep -i python-azure-agent                                                           
+ systemctl status python-azure-agent
+ sed -i 's/AutoUpdate.Enabled=n.*/AutoUpdate.Enabled=y/g' /etc/waagent.conf
+ zypper ps -s
+ 
+ 
+  zypper rm kernel-default-4.12.14-122.103
+ 
+ omsagent-1.12.25-0.x86_64
+xlsatoms-1.1.1-1.16.x86_64
+omsconfig-1.1.1-927.x86_64
+auoms-2.0.1-19.x86_64
+172.31.4.166
+
+
+
+SUSEConnect -s
+
+SUSEConnect -r 96D349949F5B001A
+SUSEConnect -s                                                                                
+SUSEConnect -r 8F877234726F36C4                                                               
+ cat /etc/os-release                                                                           
+ SUSEConnect -r 96D349949F5B001A                                                               
+ zypper install python-azure-agent                                                             
+ cd /etc/products.d/                                                                           
+ ll                                                                                            
+ zypper lr -d                                                                                  
+ zypper install python-azure-agent                                                             
+ cat /etc/os-release                                                                           
+ SUSEConnect --list-extensions                                                                 
+ SUSEConnect --list-extensions |more                                                           
+ SUSEConnect -p sle-module-public-cloud/12/x86_64                                              
+ zypper install python-azure-agent                                                             
+ rpm -qa |grep -i python-azure-agent                                                           
+ systemctl status python-azure-agent      

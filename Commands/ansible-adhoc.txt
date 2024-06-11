@@ -1,0 +1,1 @@
+ansible DC  -m shell -a "systemctl restart  rsyslog" -u ctrls --ask-pass -K  --become

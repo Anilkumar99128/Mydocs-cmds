@@ -1,0 +1,47 @@
+---
+- name: Fetch users data from Linux servers
+  hosts: TEST
+  gather_facts: no
+  tasks:
+    - name: Get users list
+      shell: "awk -F':' '{ print $1 }' /etc/passwd"
+      register: users_list
+
+    - name: Get sudo users
+      shell: "cat /etc/sudoers |egrep -v "^#|^$|root|wheel" |grep -i "ALL=" |awk '{print $1}"
+      register: sudo_users
+
+    - name: Assemble user data
+      set_fact:
+        user_data: |
+          Server IP Address: {{ ansible_host }}
+          {% for user in users_list.stdout_lines %}
+          User Name: {{ user }}
+          Privilege/Role: {% if user in sudo_users.stdout %}sudo access{% else %}Normal user{% endif %}
+          {% endfor %}
+
+    - name: Save user data to file on Ansible VM
+      delegate_to: localhost
+      copy:
+        content: "{{ user_data }}"
+        dest: /tmp/user_data_{{ inventory_hostname }}.txt
+
+- name: Consolidate all user data
+  hosts: localhost
+  tasks:
+    - name: Gather all user data files
+      find:
+        paths: /tmp
+        patterns: "user_data_*.txt"
+      register: user_data_files
+
+    - name: Read user data files
+      slurp:
+        src: "{{ item.path }}"
+      with_items: "{{ user_data_files.files }}"
+      register: slurped_files
+
+    - name: Write consolidated user data to a single file
+      copy:
+        content: "{% for file in slurped_files.results %}{{ file.content | b64decode }}{% endfor %}"
+        dest: /tmp/consolidated_user_data.txt

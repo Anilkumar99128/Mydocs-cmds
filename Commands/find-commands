@@ -1,0 +1,33 @@
+
+ 
+
+
+mount -t cifs -o username=<adm.ramug> //10.90.17.137/S:\DBS_BA   /DBS_BA
+
+Siddhu@0301$#$
+
+
+
+
+  pam_pwquality.so minlen=14 maxrepeat=3 ucredit=-1 lcredit=-1 dcredit=-1 ocredit=-1 
+
+
+
+mount -t cifs -o vers=1.0,username=adm.ramug //10.90.17.137/S:\DBS_BA   /DBS_BA
+
+
+mount -v -t cifs -o username=adm.ramug,sec=ntlm //10.90.17.137/S:\DBS_BA   /DBS_BA
+
+smbclient -L <10.90.17.137> -U <adm.ramug> -d 256
+
+find . -type f -mtime +30 -delete
+find <PATH> -type f -mtime +30  ---> To list all files older than 30 days.
+
+find . -xdev -type f -size +1G
+
+[domain/default]
+cache_credentials = False
+
+find . -size 0  -delete
+
+ssh-keygen -R 192.168.0.78

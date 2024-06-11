@@ -1,0 +1,17 @@
+net.ipv4.tcp_syncookies = 1
+
+ 
+ rpm -a --setguids
+rpm -a --setugids
+rpm -a --setperms
+
+
+audit 
+# EXAMPLE
+max_log_file = 8
+num_logs =5
+max_log_file_action = ROTATE
+ 
+ 
+  grep -i single etc/audit/auditd.conf    server goes into hung state at low disk space it will put the server in single user mode           
+admin_space_left_action = single

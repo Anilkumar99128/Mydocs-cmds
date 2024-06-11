@@ -1,0 +1,2 @@
+lsblk -b | grep disk | awk '{total += $4} END {print total/1024/1024/1024 " GB"}'
+ansible -i hosts.txt -m shell -a "lsblk -b | grep disk | awk '{total += \$4} END {print total/1024/1024/1024 \" GB\"}'" my_servers

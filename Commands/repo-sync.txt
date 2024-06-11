@@ -1,0 +1,3 @@
+reposync -p /data --download-metadata --repo=rhel-8-for-x86_64-baseos-rpms
+reposync -p /data --download-metadata --repo=rhel-8-for-x86_64-appstream-rpms
+nohup createrepo -v /data/ &

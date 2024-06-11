@@ -1,0 +1,38 @@
+1- The above message needs to be fixed on the AD side, it could be impacting the authentication process.
+
+2- Remove these lines on sssd.conf during troubleshooting steps:
+
+  access_provider = simple
+  simple_allow_groups = IBM-prd_yellow_messenger_06-SSH-ACCESS
+
+
+
+3- Restart the sssd and clear cache again.
+  # service sssd stop ; rm -rf /var/log/sssd/* ; rm -rf /var/lib/sss/db/* ; service sssd start
+
+4- Try to login after 2 min from step 3.
+
+
+ Failed to initialize credentials using keytab [MEMORY:/etc/krb5.keytab]: Client 'ABNDEVAMSDB02$@ABNAMRO.LOCAL' not f
+ad_maximum_machine_account_password_age = 0
+
+ 
+ rm /etc/krb5.keytab
+
+KDC has no support for encryption type:
+
+add below entries in below file
+/etc/krb5.conf
+[libdefaults]
+    default_realm = IBM.LOCAL
+    default_tgs_enctypes = aes256-cts-hmac-sha1-96
+    default_tkt_enctypes = aes256-cts-hmac-sha1-96
+    default_keytab_name = /etc/krb5.keytab
+
+generated key tab file
+sudo yum install krb5-workstation
+
+ktutil
+addent -password -p SRV.LINUX@IBM.LOCAL -k 1 -e aes256-cts-hmac-sha1-96
+Q1w2e3r4@143$#$
+wkt /etc/krb5.keytab

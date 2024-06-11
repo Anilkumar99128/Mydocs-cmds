@@ -1,0 +1,25 @@
+[root@localhost ~]# cat /etc/logrotate.d/httpd
+/var/log/httpd/*log {
+daily
+rotate 3
+size 5M
+missingok
+notifempty
+sharedscripts
+delaycompress
+}
+daily : log files are rotated every day. More on logrotate Man Page.
+
+rotate : Log files are rotated count times before being removed or mailed to the address specified in a mail directive.
+
+size : Log files are rotated only if they grow bigger then size bytes. More on logrotate Man Page.
+
+missingok : If the log file is missing, go on to the next one without issuing an error message.
+
+notifempty : Do not rotate the log if it is empty (this overrides the ifempty option). More on logrotate Man Page.
+
+sharedscripts : this option makes scripts run only once, no matter how many logs match the wildcarded pattern, and whole pattern is passed to them. More on logrotate Man Page.
+
+delaycompress : Postpone compression of the previous log file to the next rotation cycle. More on logrotate Man Page.
+
+You can even test the logrotation feature for Apache logs using logrotate -d /etc/logrotate.d/httpd command as shown below.

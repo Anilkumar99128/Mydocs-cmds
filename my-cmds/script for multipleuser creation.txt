@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Define an array of usernames and passwords
+usernames=("adm.rjilan" "adm.vijaym" "adm.srinathp")
+passwords=("Ji!@n\$spr!nGag@3625" "P@t1l@12345\$#\$" "M@\$ter@1234\$#\$")
+
+# Loop through the usernames and passwords
+for ((i=0; i<${#usernames[@]}; i++)); do
+    username="${usernames[i]}"
+    password="${passwords[i]}"
+
+    # Check if the user already exists
+    if id "$username" &>/dev/null; then
+        echo "User '$username' already exists."
+    else
+        # Create the user with the specified password
+        useradd -m "$username"
+        echo "$username:$password" | chpasswd
+
+        # Check if user creation was successful
+        if [ $? -eq 0 ]; then
+            echo "User '$username' created successfully."
+        else
+            echo "Failed to create user '$username'."
+            continue
+        fi
+    fi
+
+    # Add the user to sudoers with appropriate permissions
+    echo "$username ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/"$username"
+    echo "User '$username' added to sudoers."
+done
+
+# Print a message when the script is finished
+echo "User creation and sudoers setup completed."
+
+
+echo "adm.rjilan   ALL=(ALL)       ALL" >> /etc/sudoers
+echo "adm.vijaym  ALL=(ALL)       ALL" >> /etc/sudoers
+echo "adm.srinathp   ALL=(ALL)       ALL" >> /etc/sudoers
+

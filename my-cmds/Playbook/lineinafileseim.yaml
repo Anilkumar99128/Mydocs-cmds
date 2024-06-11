@@ -1,0 +1,9 @@
+---
+- hosts: TEST
+  become: true
+  gather_facts: no
+  tasks: 
+    - name: algorithm entry
+      lineinfile:
+        path: /etc/rsyslog.conf
+        line: 'authpriv.*	@10.172.40.78:514'

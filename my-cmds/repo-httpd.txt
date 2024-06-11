@@ -1,0 +1,113 @@
+base
+updates
+extras
+nohup reposync -g -l -d -m --repoid=base --download_path=/repo &
+nohup reposync -g -l -d -m --repoid=updates --download_path=/repo &
+nohup reposync -g -l -d -m --repoid=extras --download_path=/repo &
+
+
+
+
+
+
+
+
+[root@UTKDCREPO ~]# crontab -l
+
+#54 11 * * * /root/repodownload.sh
+
+#00 03 * * * /root/repodownload-optional.sh
+
+#00 04 * * * /root/repoupdate.sh
+
+[root@UTKDCREPO ~]#
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+[root@UTKDCREPO ~]# cat /root/repodownload.sh
+
+reposync --gpgcheck -l --repoid=rhel-7-server-rpms --download_path=/repo/
+
+[root@UTKDCREPO ~]#
+
+[root@UTKDCREPO ~]# cat /root/repodownload-optional.sh
+
+reposync --gpgcheck -l --repoid=rhel-7-server-optional-rpms --download_path=/repo/
+
+[root@UTKDCREPO ~]#
+
+[root@UTKDCREPO ~]# cat /root/repoupdate.sh
+
+createrepo --update -v /repo/
+
+[root@UTKDCREPO ~]#
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+reposync -p /data --download-metadata --repo=rhel-8-for-x86_64-baseos-rpms
+
+reposync -p /data --download-metadata --repo=rhel-8-for-x86_64-appstream-rpms
+
+nohup createrepo --update -v /repo &
+
+------------------------------------------------------------------------------------------------------------------------------
+
+createrepo --update -v  /data -g comps.xml
+
+
+
+
+
+
+
+[10:12] Ummadi Jilanmohan Reddy
+--------------------------------------------------------------------------------------------
+
+Alias /repo /repo
+<Directory /repo>
+    options Indexes MultiViews FollowSymLinks
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Directory>
+
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+<Directory />
+    options FollowSymLinks
+    AllowOverride none
+    Require all denied
+</Directory>
+
+Alias /repo /repo
+<Directory /repo>
+    options Indexes MultiViews FollowSymLinks
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Directory>
+
+
+
+
+<Directory />
+    AllowOverride none
+    Require all denied
+</Directory>
+
+Alias /repo /repo
+<Directory /repo>
+    options Indexes MultiViews FollowSymLinks
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Directory>
+
+
+reposync -g -l -d -m --repoid=base --download_path=/repo

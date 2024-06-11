@@ -1,0 +1,42 @@
+---
+- hosts: BACKUP
+  become: true
+  gather_facts: no
+   
+  tasks:
+    - name: Update backup IP
+      lineinfile:
+        path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+        regexp: '^IPADDR='
+        line: "IPADDR={{ new_backup_ip }}"
+    - name: changing subnet
+      lineinfile:
+             path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+             regexp: '^NETMASK'
+             line: "NETMASK=255.255.255.0"
+    - name: change prefix
+      replace:
+           path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+           regexp: "PREFIX"
+           replace: "#PREFIX"
+    - name: removeing UUID
+      replace:
+          path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+          regexp: "UUID"
+          replace: "#UUID" 
+    - name: changing Device
+      lineinfile:
+             path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+             regexp: "^DEVICE"
+             line: "DEVICE=enp3s0"
+    - name: changing name
+      replace:
+          path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+          regexp: "NAME"
+          replace: "#NAME" 
+    - name: changing name
+      replace:
+          path: /etc/sysconfig/network-scripts/ifcfg-enp3s0
+          regexp: "GATEWAY"
+          replace: "#GATEWAY"
+        

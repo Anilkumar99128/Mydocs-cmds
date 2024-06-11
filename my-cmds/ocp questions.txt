@@ -1,0 +1,109 @@
+You can access required help from the given below url
+
+Open in Browser:
+
+https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10
+
+
+Login using jobs user and password is cloudadmin
+
+API Access : https://api.ocp4.example.com:6443
+
+After Login , Before starting Exam Please run
+
+cloud4cexam $USER
+
+Just copy paste, then it will prepare environment for Exam
+
+1)
+Create Projects and Assign permissions
+
+project1-urname
+project2-urname
+project3-urname
+project4-urname
+project5-urname
+
+user john should have admin privileges on project1-urname and project2-urname
+user harry should have admin privileges on project3-urname
+user smith should have view privileges on project3-urname
+
+2)
+
+create  groups: pro-urname,  dev-urname, testgrp-urname
+
+Assign the john  user to the pro-urname group, the harry  user to the dev-urname group,  the smith user to the dev-urname group and the robert user to the testgrp-urnam
+e group
+
+dev-urname group can create or delete applications in project4
+
+testgrp-urname group can view in project5
+
+3)
+Quota
+
+
+Create a resource quota "<urname>-quota" for defining limits for resource access for projects in quota-<urname> project.
+i. Total memory amount for max usage is 2Gi
+ii. Total CPU unit for max usage is "2" kubernetes units
+iii. Total no of pods should be limited to 13
+iv. Total no services should not exceed 10
+v. Total no of replication controllers should be 3
+
+4)
+
+Limits
+
+Create another resource limit file "urname-quotalimit" for defining range of resource access for projects in quota-<urname>  project limits
+based on soft/hard limit.
+i. For pods min cpu limit is "5m" and max is "500m"
+ii. For containers min cpu limit is "5m" and max is "500m" and default request of "300m"
+iii. For pods min memory is "300Mi" and max is "500Mi"
+iv. For containers min memory is "300Mi" and max is "500Mi" and default request of "400Mi"
+
+
+5)
+Manually scale testing-<urname> project  application to 5 replicas
+
+6)
+Application in the autodev-<urname> project always has min 6 pods running; that number can be increased to a maximum of 10 pods when CPU load exceeds 60%.
+containers  should use requests 25m and limit requests 100m
+
+7)
+Secure Route for application running in web-<urname> project
+
+ssl command available , you can run ssl with the arguments to generate certificates
+
+Note: Without Double Quote
+
+Create secure route with "/C=US/ST=North Carolina/L=Raleigh/O=Red Hat/CN=secure-<urname>.apps.ocp4.example.com"
+
+application should be accessible from https://secure-<urname>.apps.ocp4.example.com
+
+8)
+create service account <urname>-sa for prod-<urname> project
+
+Allow all privileges to run application
+
+Attach <urname>-sa to the application to fix the application issues
+
+Access Application using  http://apples-<urname>.apps.ocp4.example.com
+
+9)
+Create a secret with the credentials and connection information to access an App  in secret-<urname> project
+
+Create a mysecret to store the value of mysql_root_password variable with a value of r3dh4t123 to the secret
+
+
+Apply secret to the application to fix the application issues
+
+with Name MYSQL_ROOT_PASSWORD in secret.
+
+Pods must be running
+
+10)
+Deployed pod in india-<urname> project and should be accessible
+
+Access http://maths-<urname>.apps.ocp4.example.com application
+
+Don't modify deployment configuration to fix the problem

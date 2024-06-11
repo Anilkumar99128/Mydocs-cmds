@@ -1,0 +1,14 @@
+yum intall tigervnc
+
+cat /etc/tigervnc/vncservers
+
+:2=username
+
+su -user
+vpnpasswd password
+
+/usr/lib/systemd/system/vncserver@.service 
+cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/stem/vncserver@:2
+
+systemctl restart vncservers:2/service
+

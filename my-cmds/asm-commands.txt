@@ -1,0 +1,15 @@
+oracleasm listdisks --> to check the asm disk groups in the server.
+
+oracleasm init ---> to intialise the disk groups
+
+oracleasm scandisks ---> scan the disks
+
+oracleasm listdisks ---> to check the disk groups
+oracleasm querydisk -d volumegroup --- to check the which disk the 
+
+
+
+
+
+ netstat -na |less
+

@@ -1,0 +1,7 @@
+vim /etc/NetworkManager/NetworkManager.conf
+dns=none
+rc-manager=unmanaged
+systemctl disable systemd-resolved.service
+systemctl stop systemd-resolved 
+rm /etc/resolv.conf
+service network-manager restart

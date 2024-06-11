@@ -1,0 +1,32 @@
+ vi /etc/postfix/sasl_passwd
+ cat /etc/postfix/sasl_passwd
+ clear
+ cd
+ clear
+ systemctl restart postfix;systemctl status postfix;yum install cyrus-sasl-plain -y
+ cat /etc/postfix/sasl_passwd
+ systemctl status postfix ;systemctl restart postfix;systemctl status postfix
+ cat /etc/postfix/main.cf
+ cat /etc/postfix/main.cf | grep email-smtp.ap-so
+ postmap hash:/etc/postfix/sasl_passwd
+ chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+ cd /etc/postfix/ ; ls -rlth ;chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+ postconf -e 'smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt'
+ systemctl restart postfix;sudo postfix start; sudo postfix reload
+ postmap hash:/etc/postfix/sasl_passwd ;postmap hash:/etc/postfix/generic;systemctl restart postfix
+ cd
+ clear
+ history |grpe -i mail
+ history |grep -i mail
+  mailx -r "no-replay@cocoblu.in" -s "Information" nitin.joshi03@infosys.com
+ cat /var/log/maillog|grep -i niti
+ history |grep -i mai
+ mailx -r no-reply@etradeonline.in -s "Information Mail" indgstdba@infosys.com
+ cat /var/log/maillog|grep -i dba
+ hostname -f
+ mailx -r no-reply@cocoblu.in -s "Information Mail" indgstdba@infosys.com
+ cat /var/log/maillog|grep -i dba
+ hostname -f
+ cat /etc/hosts
+ mailx -r no-reply@ccbedb1.cocoblu.in -s "Information Mail" indgstdba@infosys.com
+ cat /var/log/maillog|grep -i dba

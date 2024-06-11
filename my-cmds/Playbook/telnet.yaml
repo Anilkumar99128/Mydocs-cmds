@@ -1,0 +1,16 @@
+---
+- name: Check Telnet Connectivity
+  hosts: IN 
+  gather_facts: false
+
+  tasks:
+    - name: Check telnet connection
+      wait_for:
+        host: 10.10.120.38
+        port: 389  
+        timeout: 5 
+      register: result
+
+    - name: Print connection status
+      debug:
+        msg: "Telnet connection to {{ inventory_hostname }} is {{ result['elapsed'] is defined and result['elapsed'] < timeout }}"

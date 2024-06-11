@@ -1,0 +1,23 @@
+Alias /repo /repo
+<Directory /repo>
+    options Indexes MultiViews FollowSymLinks
+    Order allow,deny
+    Allow from all
+    Require all granted
+</Directory>
+
+[rhel]
+name=RedHat 8
+gpgcheck=0
+enabled=1
+baseurl=http://10.58.52.54/repo
+
+
+[root@IBMDCREPO ~]# cat /root/repodownload.sh
+reposync -p /repo --download-metarepo --repo=rhel-8-for-x86_64-baseos-rpms
+[root@IBMDCREPO ~]# cat /root/repodownload-optional.sh
+reposync -p /repo --download-metarepo --repo=rhel-8-for-x86_64-appstream-rpms
+[root@IBMDCREPO ~]# cat /root/repoupdate.sh
+	createrepo --update -v /repo/
+
+

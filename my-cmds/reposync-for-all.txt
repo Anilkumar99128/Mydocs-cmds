@@ -1,0 +1,15 @@
+For Centos7:
+reposync -g -l -d -m --repoid=base --newest-only --download-metadata --download_path=/repo
+reposync -g -l -d -m --repoid=extras --newest-only --download-metadata --download_path=/repo
+reposync -g -l -d -m --repoid=updates --newest-only --download-metadata --download_path=/repo
+createrepo -v /repo &
+
+for rhel8:
+reposync -p /data --download-metadata --repo=rhel-8-for-x86_64-baseos-rpms
+reposync -p /data --download-metadata --repo=rhel-8-for-x86_64-appstream-rpms
+createrepo -v /data &
+
+for rhel7:
+reposync --gpgcheck -l --repoid=rhel-7-server-rpms --download_path=/repo/
+reposync --gpgcheck -l --repoid=rhel-7-server-optional-rpms --download_path=/repo/
+createrepo -v /repo &

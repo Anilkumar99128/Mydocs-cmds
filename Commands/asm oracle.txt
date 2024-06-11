@@ -1,0 +1,9 @@
+
+
+oracleasm listdisks
+
+oracleasm init
+
+oracleasm scandisks
+
+oracleasm listdisks

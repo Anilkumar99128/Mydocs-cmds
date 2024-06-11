@@ -1,0 +1,31 @@
+dpkg-query -l
+
+grep remove /var/log/dpkg.log
+
+grep upgrade /var/log/dpkg.log
+
+grep installed /var/log/dpkg.log
+
+Disable Automatic Updates from Command Line
+--------------------------------------------
+vi /etc/apt/apt.conf.d/20auto-upgrades
+
+APT::Periodic::Update-Package-Lists "0";
+APT::Periodic::Download-Upgradeable-Packages "0";
+APT::Periodic::AutocleanInterval "0";
+APT::Periodic::Unattended-Upgrade "0";
+
+disable these automatic updates the right way
+----------------------------------------------
+dpkg-reconfigure unattended-upgrades
+
+removing this feature permanently
+----------------------------------
+apt remove unattended-upgrades
+
+Disable the system upgrade timers
+---------------------------------
+systemctl disable apt-daily-upgrade.timer
+systemctl mask apt-daily-upgrade.service
+systemctl disable apt-daily.timer
+systemctl mask apt-daily.service

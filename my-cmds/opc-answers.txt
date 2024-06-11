@@ -1,0 +1,147 @@
+creaing new projects:
+
+oc new-project project1-anilp
+oc new-project project2-anilp
+oc new-project project3-anilp
+oc new-project project4-anilp
+oc new-project project5-anilp
+
+Oc get projetcs 
+
+adding polocies to users for Pods:
+oc adm policy add-role-to-user admin john -n project1-anilp
+oc adm policy add-role-to-user admin john -n project2-anilp
+oc adm policy add-role-to-user admin harry -n project3-anilp
+oc adm policy add-role-to-user view smith -n project3-anilp
+
+oc get user
+oc get rolebindings -n project-name
+
+adding groups and assinging permissions:
+oc adm groups new pro-anilp
+oc adm groups new dev-anilp
+oc adm groups new testgrp-anilp
+
+oc get groups
+
+
+
+
+oc adm groups add-users pro-anilp john
+oc adm groups add-users dev-anilp harry smith
+oc adm groups add-users testgrp-anilp robert
+
+
+
+oc adm policy add-role-to-group admin dev-anilp -n project4
+oc adm policy add-role-to-group view testgrp-anilp -n project5
+
+
+
+QUOTA:
+
+create a quota file anilp-quota
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: anilp-quota
+spec:
+  hard:
+    memory: 2Gi
+    cpu: "2"
+    pods: "13"
+    services: "10"
+    replicationcontrollers: "3"
+	
+oc apply -f anilp-quota.yaml -n quota-anilp
+
+ oc describe resourcequota anilp-quota -n quota-anilp
+
+Quota LIMIT:
+
+
+create a file quotalimit.yaml
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: anilp-quotalimit
+spec:
+  hard:
+    requests.cpu: "500m" 
+    limits.cpu: "500m"    
+    requests.memory: "500Mi"
+    limits.memory: "500Mi"  
+
+
+oc apply -f quotalimit.yaml -n quota-anilp
+
+oc describe resourcequota anilp-quotalimit -n quota-anilp
+
+scaling :
+
+oc scale dc/scale-anilp(dc name) --replicas=5 -n testing-anilp(project name)
+
+AUTO SCAling:
+
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+name: autoscale-anilp
+spec:
+  replicas: 6  
+  template:
+    spec:
+      containers:
+      - name: autoscale-anilp
+        image: quay.io/redhattraining/scaling
+        resources:
+          requests:
+            cpu: 25m  
+            memory: 50Mi 
+          limits:
+            cpu: 100m  
+            memory: 200Mi
+			
+			
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: autoscale-anilp-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: DeploymentConfig
+    name: autoscale-anilp  
+  minReplicas: 6  
+  maxReplicas: 10 
+  targetCPUUtilizationPercentage: 60 
+
+
+
+SSL creation
+
+secure-anilp.apps.ocp4.example.com
+
+openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout anilp-key.pem -out anilp-cert.pem
+
+
+oc create secret tls secure-route-tls-secret \
+  --cert=anilp-cert.pem \
+  --key=anilp-key.pem \
+  -n web-<anilp>
+
+
+oc create route edge secure-route \
+  --service=secure-anilp.apps.ocp4.example.com \
+  --port=443 \
+  --key=anilp-key.pem \
+  --cert=anilp-cert.pem \
+  --hostname=secure-anilp.apps.ocp4.example.com \
+  -n web-anilp
+
+creating service accounts to access application
+
+oc create serviceaccount anilp-sa -n prod-anilp
+oc adm policy add-role-to-user admin system:serviceaccount:prod-anilp:anilp-sa -n prod-anilp
+

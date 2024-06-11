@@ -1,0 +1,7 @@
+===========================setting envirement variables to provide command access=====================
+echo $PATH
+/home/srv.ubssitrw@EVNABFID.LOCAL/.local/bin:/home/srv.ubssitrw@EVNABFID.LOCAL/bin:/usr/share/Modules/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+add the required path for the commands on .bashrc
+export PATH=$PATH:/usr/local/bin
+source ~/.bashrc   # or source ~/.zshrc for Zsh
+it will update the Env chages

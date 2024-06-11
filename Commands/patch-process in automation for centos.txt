@@ -1,0 +1,51 @@
+------------------------- patch process in automation for centos --------------------------------------
+1.Take prechecks:
+note: check the latest patches are coming or not (and check the /boot and /var file system utilization if its above 90% please make sure to clear the space)
+
+yum check-update 
+yum check-update |grep -i kernel
+
+2.go to /etc/yum.repos.d
+vi /etc/centos.repos (remove all application repos other than centos)
+ex: 
+
+[CentOS]
+name=CentOS 7
+enabled=1
+gpgcheck=0
+baseurl=http://10.10.120.78/repo/centos/
+
+[Apache]
+name= Apache
+enabled=1
+gpgcheck=0
+baseurl=http://10.10.120.78/repo/APACHE
+
+[PHP]
+name= PHP
+enabled=1
+gpgcheck=0
+baseurl=http://10.10.120.78/repo/PHP
+
+3.Remove the APACHE and PHP entries in centos.repo file
+
+Centos.repo file should be as fallows
+
+[CentOS]
+name=CentOS 7
+enabled=1
+gpgcheck=0
+baseurl=http://10.10.120.78/repo/centos/
+
+4. apply the OS patches 
+
+nohup yum update -y &
+
+5.check the new kernel in /boot
+cd /boot
+ls -lrt
+
+6.reboot the server 
+
+7. take the post check and validate the services once server came to online
+

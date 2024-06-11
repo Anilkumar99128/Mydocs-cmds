@@ -1,0 +1,18 @@
+---
+- hosts: hostname
+  become: true
+  gather_facts: no
+  
+  tasks:
+  
+   - name: Copy file with owner and permissions
+     ansible.builtin.copy:
+       src: /home/mohan/anil.tar.gz
+       dest: /root/anil.tar.gz
+   - name: unzip
+     unarchive:  
+       src:  /root/anil.tar.gz
+       dest: /root/anil 
+       remote_src: yes
+    	   
+     

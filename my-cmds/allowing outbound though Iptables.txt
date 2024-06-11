@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# List of ports to allow
+ports=(
+    10034 40021 9525 40022 1527 40024 40025 40026 7002 10011
+    40027 40028 40061 40029 40030 33726 40031 40032 40064 30048
+    40065 40001 40034 40066 40002 40003 40995 40004 40036 40997
+    40037 40005 40006 40070 40039 40999 40007 40008 40041 40042
+    40011 40044 40012 20077 40045 40013 40046 40014 9998 20047
+    40015 40047 40016 40048 40049 40081 10065 22 443 80 10050
+	4118 323 43427 2049 111 
+)
+
+# Loop through each port and add an iptables rule
+for port in "${ports[@]}"; do
+    sudo iptables -A INPUT -p tcp --dport "$port" -j ACCEPT
+    echo "Allowing port $port"
+done
+
+# Display all rules for verification
+echo "List of current iptables rules:"
+sudo iptables -L -n -v

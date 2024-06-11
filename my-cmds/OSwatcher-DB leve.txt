@@ -1,0 +1,22 @@
+$ cd /u01/app/oracle/product/19.3.0/grid
+Replace the path with the actual path to your Oracle Grid Infrastructure home.
+
+Configure the OSWatcher using the ocrconfig utility by running the following command:
+
+shell
+Copy code
+$ ./bin/ocrconfig -add osdiagcfg 'OSWDirectory=/path/to/oswbb/directory'
+Replace /path/to/oswbb/directory with the desired directory where you want the OSWatcher diagnostic data to be stored.
+
+Start the OSWatcher by running the following command:
+
+shell
+Copy code
+$ ./bin/ocrconfig -enable osdiagcfg
+This command enables the OSWatcher configuration.
+
+Verify the status of the OSWatcher by running the following command:
+
+shell
+Copy code
+$ ./bin/ocrconfig -show osdiagcfg

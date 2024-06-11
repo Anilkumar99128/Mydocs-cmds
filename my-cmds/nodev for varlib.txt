@@ -1,0 +1,5 @@
+iptables -A INPUT -p tcp --dport 8082 -j ACCEPT
+
+
+cat  /etc/modprobe.d/modprobe.conf.dist
+install sunrpc /sbin/modprobe --first-time --ignore-install sunrpc && { /bin/mount -o nodev -t rpc_pipefs sunrpc /var/lib/nfs/rpc_pipefs > /dev/null 2>&1 || :; }

@@ -1,0 +1,10 @@
+PHP-8 for rockey
+
+dnf install http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+dnf install yum-utils -y
+
+dnf module reset php -y
+dnf module install php:remi-8.0 -y
+yum install php-8.0.30-3.el8.remi.x86_64
+yum install  php-mysql php-gd php-zip
+

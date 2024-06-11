@@ -1,0 +1,90 @@
+
+Steps Taken:
+
+Validated the subscription status.
+
+Enabled the subscription suitable for AWS.
+
+Applied the security patches and rebooted the VMs.
+
+Started the migration with AWS subscription, which failed.
+
+Cleared the current registration and deregistered the VMs.
+
+Registered the VMs with the shared SUSE subscription code.
+
+Enabled SUSE 12 modules.
+
+Installed the SUSE migration activation package.
+
+Initiated the migration.
+
+Used the serial console to monitor issues and progress.
+
+Observed the migration progressing to SUSE 15 SP1.
+
+Successfully migrated to SUSE 15 SP1, then rebooted the VMs.
+
+Verified VMs were accessible with SUSE 15 SP1.
+
+Migrated from SP1 to SP3, which succeeded.
+
+Deregistered and cleared the subscription.
+
+Re-registered the VMs with the AWS default subscription.
+
+Now, the VMs are successfully running SUSE 15 SP3.
+
+Commands :
+
+-------------
+
+registercloudguest --clean
+
+SUSEConnect --cleanup
+
+SUSEConnect -r 48D0F08E84036590
+
+SUSEConnect -p sle-module-public-cloud/12/x86_64
+
+SUSEConnect -p sle-module-toolchain/12/x86_64
+
+SUSEConnect -p sle-module-web-scripting/12/x86_64
+
+SUSEConnect -p sle-module-legacy/12/x86_64
+
+SUSEConnect -p sle-module-containers/12/x86_64
+
+SUSEConnect -p sle-module-hpc/12/x86_64
+
+SUSEConnect -p sle-module-adv-systems-management/12/x86_64
+
+SUSEConnect -p sle-module-cap-tools/12/x86_64
+
+SUSEConnect -p sle-sdk/12.5/x86_64
+
+SUSEConnect -p PackageHub/12.5/x86_64
+
+zypper in suse-migration-sle15-activation
+
+run_migration
+
+SUSEConnect -l
+
+zypper  refresh
+
+zypper lr
+
+zypper update
+
+zypper migration
+
+registercloudguest --clean
+
+SUSEConnect --cleanup
+
+registercloudguest --force-new
+
+SUSEConnect --url https://smt-ec2.susecloud.net -p SLES/15.3/x86_64
+
+zypper install net-tools-deprecated

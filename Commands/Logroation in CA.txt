@@ -1,0 +1,18 @@
+========================Log rotation on CA===================================
+Add the fallowing configuration in /etc/logrotate.d/filename  note: we need to chage the file path as per the client requirement 
+/DC/config/DC_DOMAIN/DCSERVER_CONSOLE.err
+{
+        size 100M
+        rotate 100000
+        missingok
+        maxage 21
+        dateext
+        dateformat -%Y-%m-%d-%s.err
+        compress
+        copytruncate
+        su oracle oinstall
+}
+
+and add the below cron for oracle user to run the rotation for every 2 minutes
+
+*/2 * * * * /sbin/logrotate -v /etc/logrotate.d/DCSERVERCONSOLE.ERR

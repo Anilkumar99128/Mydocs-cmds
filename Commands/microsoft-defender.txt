@@ -1,0 +1,22 @@
+#!/bin/bash
+zypper remove falcon-sensor
+sudo zypper addrepo -c -f -n microsoft-prod https://packages.microsoft.com/config/sles/15/prod.repo 
+sudo rpm --import http://packages.microsoft.com/keys/microsoft.asc 
+zypper install mdatp 
+sudo phython3 defender.py 
+systemctl status mdatp
+
+MicroSoft Defender in GT
+------------------------------
+- check status
+mdatp health --field real_time_protection_enabled
+
+ 
+
+- To enable
+mdatp config real-time-protection --value enabled
+
+ 
+
+- To disable
+mdatp config real-time-protection --value disabled

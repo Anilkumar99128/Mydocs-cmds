@@ -1,0 +1,5 @@
+yum remove --oldinstallonly
+ yum remove kernel-core-<VERSION>
+ df -h |grep -v tmpfs;cd /var; echo ---- cache ---- ; du -sh * |sort -hr|head -10 |grep -i cache;cd
+ nohup yum update -C -y &
+ 

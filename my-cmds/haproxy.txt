@@ -1,0 +1,63 @@
+global
+   log         /dev/log local0
+  pidfile     /var/run/haproxy.pid
+  maxconn     4000
+  tune.ssl.default-dh-param 2048
+  daemon
+defaults
+  mode                    http
+  log                     global
+  option                  dontlognull
+  option httplog
+  option http-server-close
+  option                  redispatch
+  retries                 3
+  timeout http-request    10s
+  timeout queue           1m
+  timeout connect         10s
+  timeout client          1m
+  timeout server          1m
+  timeout http-keep-alive 10s
+  timeout check           10s
+  maxconn                 3000
+  option forwardfor
+  option http-server-close
+frontend stats
+  bind *:1936
+  mode            http
+  log             global
+  maxconn 10
+  stats enable
+  stats hide-version
+  stats refresh 30s
+  stats show-node
+  stats show-desc Stats for ocp4 cluster
+  stats auth admin:abn
+  stats uri /stats
+frontend http_frontend_uatelme
+      tcp-request inspect-delay 5s
+      acl acl_uatelme hdr(host) -i uatelme.ngcp.abnamro.org
+      acl acl_uatportal hdr(host) -i uatportal.ngcp.abnamro.org
+      use_backend uatelme-workers if acl_uatelme
+      use_backend uatportal-workers if acl_uatportal
+      bind *:443 ssl crt  /etc/haproxy/ssl/
+backend uatelme-workers
+  balance source
+  mode http
+  http-request set-header Connection keep-alive
+  http-request set-header Host uatelme.ngcp.abnamro.org
+  http-request set-header X-Forwarded-Proto https
+  server abnppdwrknd01 172.25.8.36:443  ssl verify none check-sni uatelme.ngcp.abnamro.org sni str(uatelme.ngcp.abnamro.org) check port 443
+  server abnppdwrknd02 172.25.8.37:443  ssl verify none check-sni uatelme.ngcp.abnamro.org sni str(uatelme.ngcp.abnamro.org) check port 443
+  server abnppdwrknd03 172.25.8.38:443  ssl verify none check-sni uatelme.ngcp.abnamro.org sni str(uatelme.ngcp.abnamro.org) check port 443
+  server abnppdwrknd04 172.25.8.39:443  ssl verify none check-sni uatelme.ngcp.abnamro.org sni str(uatelme.ngcp.abnamro.org) check port 443
+backend uatportal-workers
+  balance source
+  mode http
+  http-request set-header Connection keep-alive
+  http-request set-header Host uatportal.ngcp.abnamro.org
+  http-request set-header X-Forwarded-Proto https
+  server abnppdwrknd01 172.25.8.36:443  ssl verify none check-sni uatportal.ngcp.abnamro.org sni str(uatportal.ngcp.abnamro.org) check port 443
+  server abnppdwrknd02 172.25.8.37:443  ssl verify none check-sni uatportal.ngcp.abnamro.org sni str(uatportal.ngcp.abnamro.org) check port 443
+  server abnppdwrknd03 172.25.8.38:443  ssl verify none check-sni uatportal.ngcp.abnamro.org sni str(uatportal.ngcp.abnamro.org) check port 443
+  server abnppdwrknd04 172.25.8.39:443  ssl verify none check-sni uatportal.ngcp.abnamro.org sni str(uatportal.ngcp.abnamro.org) check port 443

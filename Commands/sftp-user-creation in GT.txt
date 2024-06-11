@@ -1,0 +1,89 @@
+Check the given user is exists or not 
+
+ 
+
+ 
+
+Add new user with nologin shell and sftpusers group  
+
+ 
+
+#useradd -m -d /home/ -s /sbin/nologin -U nazara
+
+ 
+
+Create user home folder under /sftp filesystem and change the ownership to respective user and sftpusers group 
+
+ 
+
+# mkdir -p /sftp/fero/home  
+
+# chown fero:sftpusers /sftp/fero/home 
+
+Create respective folder which is given by customer. 
+
+ 
+
+#mkdir -p /sftp/fero/home/FERO_INVOICE 
+
+ 
+
+Change the ownership and permissions to respective folder  
+
+#chown fero:sftpusers /sftp/fero/home/FERO_INVOICE 
+
+#chmod 755 /sftp/fero/home/FERO_INVOICE 
+
+ 
+
+Change the respective user home directory under /sftp folder ( see highlighted one default is 750, we should set to 755 of  fero user. 
+
+ 
+
+[root@gtocitdep01 sftp]# ll 
+
+total 0 
+
+drwxr-xr-x. 4 root root 33 Jun 27  2021 cargowise 
+
+drwxr-xr-x. 3 root root 17 Feb  3 16:27 carl.morpheus 
+
+drwxr-xr-x. 3 root root 22 Apr 28  2021 cos 
+
+drwxr-xr-x. 3 root root 18 Apr 26  2021 fec 
+
+drwxr-x---. 3 root root 18 May  6 11:33 fero 
+
+drwxr-xr-x. 3 root root 22 May  2  2021 gtl 
+
+drwxr-xr-x. 3 root root 88 Sep 19  2021 machinv 
+
+drwxr-xr-x. 3 root root 22 May 24  2021 mrsk 
+
+drwxr-xr-x. 3 root root 22 Apr 28  2021 oocl 
+
+ 
+
+# chmod 755 /sftp/fero/ 
+
+ 
+
+Set the new password for created user 
+
+ 
+
+#passwd  fero 
+
+ 
+
+Check the sftp connectivity  
+
+ 
+
+#sftp root@localhost 
+
+Give the password  
+
+Sftp> ls 
+
+Should show the FERO_INVOICE folder. 

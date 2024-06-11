@@ -1,0 +1,22 @@
+To verify any ports are allowed though selinux
+
+semanage port -l |grep  10050
+ 
+To allow any ports through selinux
+
+semanage port -a -t http_port_t -p tcp 10050                                                                                                                  semanage port -l |grep  10050
+to verify the available zones
+firewall-cmd --get-zones
+to verify the cureent zone
+firewall-cmd --get-default-zone
+to allow the port thoguh firewall
+firewall-cmd --add-port=10050/tcp --permanent
+to reflect the chages
+systemctl restart firewalld.service
+to list out all serverice 
+firewall-cmd --list-all
+
+sudo iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+
+sudo iptables -L -n -v
+

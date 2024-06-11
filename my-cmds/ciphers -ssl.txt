@@ -1,0 +1,35 @@
+apache:
+
+SSLProtocol all -TLSv1.1 -TLSv1 -SSLv2 -SSLv3
+SSLCipherSuite ALL:+HIGH:!ADH:!EXP:!SSLv2:!SSLv3:!MEDIUM:!LOW:!NULL:!aNULL
+SSLHonorCipherOrder on
+
+nginx:
+
+ssl_protocols TLSv1.2;
+ssl_prefer_server_ciphers on;
+ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+
+HTTPD OPTIONS 
+
+<Directory /var/www/>
+<Limit OPTIONS>
+ Order deny,allow
+ Deny from all
+</Limit>
+</Directory>
+
+
+Apache Server mod_status is Publicly Accessible
+
+<Location /server-status>
+ SetHandler server-status
+</Location>
+
+
+PHP-8.0
+
+ Track
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} ^(TRACE|TRACK)
+RewriteRule .* - [F]

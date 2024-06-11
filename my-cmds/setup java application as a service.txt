@@ -1,0 +1,41 @@
+Create a Bash Script:
+Open a text editor and create a script, let's call it run_mcas.sh, with the following content:
+
+
+#!/bin/bash
+java -jar /home/gtadmin/MCAS_SIEM_Sensor/mcas-siemagent-0.111.126-signed.jar --token SFpDSVtORkFKXRsBSloBX0BdW05DAUxDQFpLTl9fXEpMWl1GW1YBTEBCUx1OS0ofSxoWHBoZGhkWHEkXGEoXGk0eTk5OHhoYS04fThsXTkwbTEkfSUkYFxZOHhwbHR9NGhsZSUscHRpMFh0=
+Save the file and make it executable:
+
+bash
+Copy code
+chmod +x /home/gtadmin/MCAS_SIEM_Sensor/run_mcas.sh
+Create a Systemd Service:
+Create a systemd service file, for example, mcas.service, in the /etc/systemd/system/ directory:
+
+
+[Unit]
+Description=MCAS SIEM Sensor
+
+[Service]
+ExecStart=/home/gtadmin/MCAS_SIEM_Sensor/run_mcas.sh
+Restart=always
+User=root
+Group=root
+
+[Install]
+WantedBy=default.target
+Ensure that the paths are correct in the ExecStart line, and adjust the User and Group according to your system.
+
+Enable and Start the Service:
+Run the following commands to enable and start the service:
+
+
+sudo systemctl enable mcas.service
+sudo systemctl start mcas.service
+This will make sure that your Java application is started at boot and will be restarted if it crashes.
+
+Check the Status:
+You can check the status of your service using:
+
+
+sudo systemctl status mcas.service

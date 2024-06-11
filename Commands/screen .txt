@@ -1,0 +1,10 @@
+screen -S sessionname  Create a screen session with a meaningful session name
+$ echo $STY  Check if you are in a screen session
+screen -d   Exit and keep screen session running (detach)
+screen -ls  See existing screen sessions
+screen -r sessionname   Reattach to existing screen sessions
+
+save with out quit
+Ctrl + A, then d
+
+screen -r <session_id>

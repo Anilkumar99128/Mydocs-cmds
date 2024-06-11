@@ -1,0 +1,1 @@
+VPN Details(if VPN details not available let us know how to connect MOT environment), Complete VM inventory which are residing on Hyper V Setup, SOW, Physical/Virtual Hyper V Setup details, Run Books, root / user logins of VMs. Customer Escalation Matrix, Last 6 months Tickets data. 

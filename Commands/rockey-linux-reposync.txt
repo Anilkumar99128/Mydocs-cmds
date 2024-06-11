@@ -1,0 +1,9 @@
+
+dnf reposync -p /REPO --repoid=appstream --newest-only --download-metadata
+nohup dnf reposync -g --delete -p /REPO --repoid=baseos --newest-only --download-metadata &
+dnf reposync -p /REPO --repoid=baseos --newest-only --download-metadata
+
+
+dnf reposync -g --delete -p /REPO --repoid=baseos --newest-only --download-metadata
+dnf reposync -g --delete -p /REPO --repoid=appstream --newest-only --download-metadata
+

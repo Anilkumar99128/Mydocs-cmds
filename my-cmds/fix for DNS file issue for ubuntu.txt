@@ -1,0 +1,18 @@
+For ubuntu servers /etc/resolv.conf file will having a symlink so every time the server or DNS or netowrk service got restarted it will generate a new file by eraising old entries
+we can use the below fix for the issue
+
+step1: take backup of /etc/resolv.conf file
+cp /etc/resolv.conf /etc/resolv.conf-bkp
+
+step2: remove the /etc/resolv.conf file
+rm -f /etc/resolv.conf
+
+step3: create a new file and add the old entries from backup
+vi /etc/resolv.conf
+
+stpe4: change the permissions to 644 for /etc/resolv.conf
+chmod 644 /etc/resolv.conf
+
+step5: restart the resolvd service
+systemctl restart systemd-resolv.service
+

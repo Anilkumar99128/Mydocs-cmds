@@ -1,0 +1,35 @@
+Pod:
+
+A Pod is the smallest deployable unit in Kubernetes.
+It represents a single instance of a running process in a cluster and can contain one or more containers.
+Containers within a Pod share the same network namespace and can communicate with each other using localhost.
+Pods are generally considered ephemeral, and their lifespan is tied to the lifespan of the application or task they are running.
+Deployment:
+
+A Deployment is a higher-level abstraction that manages the deployment and scaling of multiple identical Pods.
+It allows you to declaratively define the desired state for your application, and it ensures that the specified number of replicas (Pod instances) are running at all times.
+Deployments provide features such as rolling updates and rollbacks, making it easy to manage changes to your application.
+StatefulSet:
+
+A StatefulSet is another higher-level abstraction, specifically designed for managing stateful applications.
+StatefulSets are used for applications that require stable network identities and stable storage, such as databases.
+Each Pod in a StatefulSet gets a unique and stable hostname, and the Pods are created and scaled in a predictable order.
+StatefulSets provide guarantees about the ordering and uniqueness of Pods, which is crucial for applications that need to maintain state across restarts.
+Key Differences:
+
+Scaling:hist	
+
+Deployment: Scales statelessly. Each replica of a Deployment is identical, and scaling is typically based on the number of replicas.
+StatefulSet: Scales in a more controlled and ordered way. Scaling up or down in a StatefulSet respects the ordered creation or deletion of Pods.
+Stability and Identity:
+
+Deployment: Does not provide stable network identities or storage.
+StatefulSet: Provides stable network identities (hostname) and persistent storage for each Pod. This is important for stateful applications like databases.
+Use Cases:
+
+Deployment: Suitable for stateless applications where each instance of the application is interchangeable.
+StatefulSet: Suitable for stateful applications where each instance has a unique identity and requires stable storage.
+Rolling Updates:
+
+Deployment: Supports rolling updates seamlessly, updating Pods without affecting the availability of the application.
+StatefulSet: Supports rolling updates but with additional considerations due to the ordered nature of Pods.

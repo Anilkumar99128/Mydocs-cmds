@@ -1,0 +1,434 @@
+Using username "sociam".
+Pre-authentication banner message from server:
+| ---------------------------- WARNING ----------------------------------------
+> ---
+| This system is for the use of authorized users only. Individuals
+| using this computer system without authority or in excess of their authority
+| are subject to having all their activities on this system monitored and
+| recorded by system personnel. Anyone using this system expressly consents to
+| such monitoring and is advised that if such monitoring reveals possible
+| evidence of criminal activity system personal may provide the evidence of suc
+> h
+| monitoring to law enforcement officials.
+| -----------------------------------------------------------------------------
+> ---
+|
+End of banner message from server
+Last login: Tue Nov 28 13:16:24 2023 from 10.10.51.15
+-bash: TMOUT: readonly variable
+-bash: TMOUT: readonly variable
+[sociam@INTBIB.COM@dbsuatsftp ~]$ sudo -o
+sudo: invalid option -- 'o'
+usage: sudo -h | -K | -k | -V
+usage: sudo -v [-AknS] [-g group] [-h host] [-p prompt] [-u user]
+usage: sudo -l [-AknS] [-g group] [-h host] [-p prompt] [-U user] [-u user] [command]
+usage: sudo [-AbEHknPS] [-r role] [-t type] [-C num] [-g group] [-h host] [-p prompt] [-T timeout] [-u user] [VAR=value] [-i|-s] [<command>]
+usage: sudo -e [-AknS] [-r role] [-t type] [-C num] [-g group] [-h host] [-p prompt] [-T timeout] [-u user] file ...
+[sociam@INTBIB.COM@dbsuatsftp ~]$ sudo -i
+-bash: TMOUT: readonly variable
+-bash: TMOUT: readonly variable
+-bash: TMOUT: readonly variable
+[root@dbsuatsftp ~]#
+[root@dbsuatsftp ~]#
+[root@dbsuatsftp ~]#
+[root@dbsuatsftp ~]# yum install leapp-upgrade
+Loaded plugins: product-id, search-disabled-repos, subscription-manager
+Resolving Dependencies
+--> Running transaction check
+---> Package leapp-upgrade-el7toel8.noarch 0:0.19.0-1.el7_9 will be installed
+--> Processing Dependency: leapp-repository-dependencies = 9 for package: leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch
+--> Processing Dependency: leapp-framework >= 5.0 for package: leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch
+--> Processing Dependency: leapp for package: leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch
+--> Processing Dependency: python2-leapp for package: leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch
+--> Running transaction check
+---> Package leapp.noarch 0:0.16.0-1.el7_9 will be installed
+---> Package leapp-upgrade-el7toel8-deps.noarch 0:0.19.0-1.el7_9 will be installed
+--> Processing Dependency: dnf >= 4 for package: leapp-upgrade-el7toel8-deps-0.19.0-1.el7_9.noarch
+--> Processing Dependency: pciutils for package: leapp-upgrade-el7toel8-deps-0.19.0-1.el7_9.noarch
+---> Package python2-leapp.noarch 0:0.16.0-1.el7_9 will be installed
+--> Processing Dependency: leapp-framework-dependencies = 5 for package: python2-leapp-0.16.0-1.el7_9.noarch
+--> Running transaction check
+---> Package dnf.noarch 0:4.0.9.2-2.el7_9 will be installed
+--> Processing Dependency: python2-dnf = 4.0.9.2-2.el7_9 for package: dnf-4.0.9.2-2.el7_9.noarch
+---> Package leapp-deps.noarch 0:0.16.0-1.el7_9 will be installed
+---> Package pciutils.x86_64 0:3.5.1-3.el7 will be installed
+--> Running transaction check
+---> Package python2-dnf.noarch 0:4.0.9.2-2.el7_9 will be installed
+--> Processing Dependency: dnf-data = 4.0.9.2-2.el7_9 for package: python2-dnf-4.0.9.2-2.el7_9.noarch
+--> Processing Dependency: libmodulemd >= 1.4.0 for package: python2-dnf-4.0.9.2-2.el7_9.noarch
+--> Processing Dependency: python2-hawkey >= 0.22.5 for package: python2-dnf-4.0.9.2-2.el7_9.noarch
+--> Processing Dependency: python2-libcomps >= 0.1.8 for package: python2-dnf-4.0.9.2-2.el7_9.noarch
+--> Processing Dependency: python2-libdnf >= 0.22.5 for package: python2-dnf-4.0.9.2-2.el7_9.noarch
+--> Processing Dependency: python2-libdnf for package: python2-dnf-4.0.9.2-2.el7_9.noarch
+--> Running transaction check
+---> Package dnf-data.noarch 0:4.0.9.2-2.el7_9 will be installed
+--> Processing Dependency: libreport-filesystem for package: dnf-data-4.0.9.2-2.el7_9.noarch
+---> Package libmodulemd.x86_64 0:1.6.3-1.el7 will be installed
+---> Package python2-hawkey.x86_64 0:0.22.5-2.el7_9 will be installed
+--> Processing Dependency: libdnf(x86-64) = 0.22.5-2.el7_9 for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: libsolv.so.0(SOLV_1.0)(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: libsolvext.so.0(SOLV_1.0)(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: libdnf.so.2()(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: libjson-glib-1.0.so.0()(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: librepo.so.0()(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: librhsm.so.0()(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: libsolv.so.0()(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+--> Processing Dependency: libsolvext.so.0()(64bit) for package: python2-hawkey-0.22.5-2.el7_9.x86_64
+---> Package python2-libcomps.x86_64 0:0.1.8-14.el7 will be installed
+--> Processing Dependency: libcomps(x86-64) = 0.1.8-14.el7 for package: python2-libcomps-0.1.8-14.el7.x86_64
+--> Processing Dependency: libcomps.so.0.1.6()(64bit) for package: python2-libcomps-0.1.8-14.el7.x86_64
+---> Package python2-libdnf.x86_64 0:0.22.5-2.el7_9 will be installed
+--> Running transaction check
+---> Package json-glib.x86_64 0:1.4.2-2.el7 will be installed
+---> Package libcomps.x86_64 0:0.1.8-14.el7 will be installed
+---> Package libdnf.x86_64 0:0.22.5-2.el7_9 will be installed
+---> Package librepo.x86_64 0:1.8.1-8.el7_9 will be installed
+---> Package libreport-filesystem.x86_64 0:2.1.11-53.el7 will be installed
+---> Package librhsm.x86_64 0:0.0.3-3.el7_9 will be installed
+---> Package libsolv.x86_64 0:0.6.34-4.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+========================================================================================================================================================================
+ Package                                          Arch                        Version                              Repository                                      Size
+========================================================================================================================================================================
+Installing:
+ leapp-upgrade-el7toel8                           noarch                      0.19.0-1.el7_9                       rhel-7-server-extras-rpms                      1.1 M
+Installing for dependencies:
+ dnf                                              noarch                      4.0.9.2-2.el7_9                      rhel-7-server-extras-rpms                      357 k
+ dnf-data                                         noarch                      4.0.9.2-2.el7_9                      rhel-7-server-extras-rpms                       51 k
+ json-glib                                        x86_64                      1.4.2-2.el7                          rhel-7-server-rpms                             134 k
+ leapp                                            noarch                      0.16.0-1.el7_9                       rhel-7-server-extras-rpms                       29 k
+ leapp-deps                                       noarch                      0.16.0-1.el7_9                       rhel-7-server-extras-rpms                       11 k
+ leapp-upgrade-el7toel8-deps                      noarch                      0.19.0-1.el7_9                       rhel-7-server-extras-rpms                       32 k
+ libcomps                                         x86_64                      0.1.8-14.el7                         rhel-7-server-extras-rpms                       75 k
+ libdnf                                           x86_64                      0.22.5-2.el7_9                       rhel-7-server-extras-rpms                      536 k
+ libmodulemd                                      x86_64                      1.6.3-1.el7                          rhel-7-server-extras-rpms                      153 k
+ librepo                                          x86_64                      1.8.1-8.el7_9                        rhel-7-server-rpms                              82 k
+ libreport-filesystem                             x86_64                      2.1.11-53.el7                        rhel-7-server-rpms                              41 k
+ librhsm                                          x86_64                      0.0.3-3.el7_9                        rhel-7-server-extras-rpms                       28 k
+ libsolv                                          x86_64                      0.6.34-4.el7                         rhel-7-server-rpms                             329 k
+ pciutils                                         x86_64                      3.5.1-3.el7                          rhel-7-server-rpms                              93 k
+ python2-dnf                                      noarch                      4.0.9.2-2.el7_9                      rhel-7-server-extras-rpms                      414 k
+ python2-hawkey                                   x86_64                      0.22.5-2.el7_9                       rhel-7-server-extras-rpms                       71 k
+ python2-leapp                                    noarch                      0.16.0-1.el7_9                       rhel-7-server-extras-rpms                      177 k
+ python2-libcomps                                 x86_64                      0.1.8-14.el7                         rhel-7-server-extras-rpms                       47 k
+ python2-libdnf                                   x86_64                      0.22.5-2.el7_9                       rhel-7-server-extras-rpms                      611 k
+
+Transaction Summary
+========================================================================================================================================================================
+Install  1 Package (+19 Dependent packages)
+
+Total download size: 4.3 M
+Installed size: 21 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/20): json-glib-1.4.2-2.el7.x86_64.rpm                                                                                                         | 134 kB  00:00:02
+(2/20): dnf-4.0.9.2-2.el7_9.noarch.rpm                                                                                                           | 357 kB  00:00:03
+(3/20): dnf-data-4.0.9.2-2.el7_9.noarch.rpm                                                                                                      |  51 kB  00:00:05
+(4/20): leapp-0.16.0-1.el7_9.noarch.rpm                                                                                                          |  29 kB  00:00:03
+(5/20): leapp-deps-0.16.0-1.el7_9.noarch.rpm                                                                                                     |  11 kB  00:00:01
+(6/20): leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch.rpm                                                                                         | 1.1 MB  00:00:01
+(7/20): leapp-upgrade-el7toel8-deps-0.19.0-1.el7_9.noarch.rpm                                                                                    |  32 kB  00:00:03
+(8/20): libcomps-0.1.8-14.el7.x86_64.rpm                                                                                                         |  75 kB  00:00:03
+(9/20): libdnf-0.22.5-2.el7_9.x86_64.rpm                                                                                                         | 536 kB  00:00:01
+(10/20): libmodulemd-1.6.3-1.el7.x86_64.rpm                                                                                                      | 153 kB  00:00:02
+(11/20): librhsm-0.0.3-3.el7_9.x86_64.rpm                                                                                                        |  28 kB  00:00:01
+(12/20): librepo-1.8.1-8.el7_9.x86_64.rpm                                                                                                        |  82 kB  00:00:03
+(13/20): libreport-filesystem-2.1.11-53.el7.x86_64.rpm                                                                                           |  41 kB  00:00:03
+(14/20): libsolv-0.6.34-4.el7.x86_64.rpm                                                                                                         | 329 kB  00:00:01
+(15/20): pciutils-3.5.1-3.el7.x86_64.rpm                                                                                                         |  93 kB  00:00:01
+(16/20): python2-hawkey-0.22.5-2.el7_9.x86_64.rpm                                                                                                |  71 kB  00:00:02
+(17/20): python2-dnf-4.0.9.2-2.el7_9.noarch.rpm                                                                                                  | 414 kB  00:00:02
+(18/20): python2-libcomps-0.1.8-14.el7.x86_64.rpm                                                                                                |  47 kB  00:00:01
+(19/20): python2-leapp-0.16.0-1.el7_9.noarch.rpm                                                                                                 | 177 kB  00:00:02
+(20/20): python2-libdnf-0.22.5-2.el7_9.x86_64.rpm                                                                                                | 611 kB  00:00:01
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                   197 kB/s | 4.3 MB  00:00:22
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libmodulemd-1.6.3-1.el7.x86_64                                                                                                                      1/20
+  Installing : json-glib-1.4.2-2.el7.x86_64                                                                                                                        2/20
+  Installing : librhsm-0.0.3-3.el7_9.x86_64                                                                                                                        3/20
+  Installing : libsolv-0.6.34-4.el7.x86_64                                                                                                                         4/20
+  Installing : librepo-1.8.1-8.el7_9.x86_64                                                                                                                        5/20
+  Installing : libdnf-0.22.5-2.el7_9.x86_64                                                                                                                        6/20
+  Installing : python2-libdnf-0.22.5-2.el7_9.x86_64                                                                                                                7/20
+  Installing : python2-hawkey-0.22.5-2.el7_9.x86_64                                                                                                                8/20
+  Installing : leapp-deps-0.16.0-1.el7_9.noarch                                                                                                                    9/20
+  Installing : python2-leapp-0.16.0-1.el7_9.noarch                                                                                                                10/20
+  Installing : pciutils-3.5.1-3.el7.x86_64                                                                                                                        11/20
+  Installing : libcomps-0.1.8-14.el7.x86_64                                                                                                                       12/20
+  Installing : python2-libcomps-0.1.8-14.el7.x86_64                                                                                                               13/20
+  Installing : libreport-filesystem-2.1.11-53.el7.x86_64                                                                                                          14/20
+  Installing : dnf-data-4.0.9.2-2.el7_9.noarch                                                                                                                    15/20
+  Installing : python2-dnf-4.0.9.2-2.el7_9.noarch                                                                                                                 16/20
+  Installing : dnf-4.0.9.2-2.el7_9.noarch                                                                                                                         17/20
+  Installing : leapp-upgrade-el7toel8-deps-0.19.0-1.el7_9.noarch                                                                                                  18/20
+  Installing : leapp-0.16.0-1.el7_9.noarch                                                                                                                        19/20
+  Installing : leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch                                                                                                       20/20
+  Verifying  : leapp-upgrade-el7toel8-deps-0.19.0-1.el7_9.noarch                                                                                                   1/20
+  Verifying  : python2-libcomps-0.1.8-14.el7.x86_64                                                                                                                2/20
+  Verifying  : dnf-4.0.9.2-2.el7_9.noarch                                                                                                                          3/20
+  Verifying  : librepo-1.8.1-8.el7_9.x86_64                                                                                                                        4/20
+  Verifying  : leapp-0.16.0-1.el7_9.noarch                                                                                                                         5/20
+  Verifying  : librhsm-0.0.3-3.el7_9.x86_64                                                                                                                        6/20
+  Verifying  : json-glib-1.4.2-2.el7.x86_64                                                                                                                        7/20
+  Verifying  : libmodulemd-1.6.3-1.el7.x86_64                                                                                                                      8/20
+  Verifying  : python2-leapp-0.16.0-1.el7_9.noarch                                                                                                                 9/20
+  Verifying  : leapp-upgrade-el7toel8-0.19.0-1.el7_9.noarch                                                                                                       10/20
+  Verifying  : dnf-data-4.0.9.2-2.el7_9.noarch                                                                                                                    11/20
+  Verifying  : libdnf-0.22.5-2.el7_9.x86_64                                                                                                                       12/20
+  Verifying  : libreport-filesystem-2.1.11-53.el7.x86_64                                                                                                          13/20
+  Verifying  : python2-dnf-4.0.9.2-2.el7_9.noarch                                                                                                                 14/20
+  Verifying  : libcomps-0.1.8-14.el7.x86_64                                                                                                                       15/20
+  Verifying  : pciutils-3.5.1-3.el7.x86_64                                                                                                                        16/20
+  Verifying  : libsolv-0.6.34-4.el7.x86_64                                                                                                                        17/20
+  Verifying  : leapp-deps-0.16.0-1.el7_9.noarch                                                                                                                   18/20
+  Verifying  : python2-hawkey-0.22.5-2.el7_9.x86_64                                                                                                               19/20
+  Verifying  : python2-libdnf-0.22.5-2.el7_9.x86_64                                                                                                               20/20
+
+Installed:
+  leapp-upgrade-el7toel8.noarch 0:0.19.0-1.el7_9
+
+Dependency Installed:
+  dnf.noarch 0:4.0.9.2-2.el7_9                     dnf-data.noarch 0:4.0.9.2-2.el7_9                     json-glib.x86_64 0:1.4.2-2.el7
+  leapp.noarch 0:0.16.0-1.el7_9                    leapp-deps.noarch 0:0.16.0-1.el7_9                    leapp-upgrade-el7toel8-deps.noarch 0:0.19.0-1.el7_9
+  libcomps.x86_64 0:0.1.8-14.el7                   libdnf.x86_64 0:0.22.5-2.el7_9                        libmodulemd.x86_64 0:1.6.3-1.el7
+  librepo.x86_64 0:1.8.1-8.el7_9                   libreport-filesystem.x86_64 0:2.1.11-53.el7           librhsm.x86_64 0:0.0.3-3.el7_9
+  libsolv.x86_64 0:0.6.34-4.el7                    pciutils.x86_64 0:3.5.1-3.el7                         python2-dnf.noarch 0:4.0.9.2-2.el7_9
+  python2-hawkey.x86_64 0:0.22.5-2.el7_9           python2-leapp.noarch 0:0.16.0-1.el7_9                 python2-libcomps.x86_64 0:0.1.8-14.el7
+  python2-libdnf.x86_64 0:0.22.5-2.el7_9
+
+Complete!
+[root@dbsuatsftp ~]# subscription-manager repos --list-enabled | grep "^Repo ID"
+Repo ID:   rhel-7-server-extras-rpms
+Repo ID:   rhel-7-server-rpms
+[root@dbsuatsftp ~]# screen
+        Check all dialogs and notify that user needs to make some choices.
+====> * verify_check_results
+        Check all generated results messages and notify user about them.
+
+Debug output written to /var/log/leapp/leapp-preupgrade.log
+
+============================================================
+                      REPORT OVERVIEW
+============================================================
+
+Upgrade has been inhibited due to the following problems:
+    1. Leapp detected loaded kernel drivers which have been removed in RHEL 8. Upgrade cannot proceed.
+    2. OpenSSH configured to use removed mac
+    3. Multiple devel kernels installed
+    4. Detected partitions mounted with the "noexec" option, preventing a successful in-place upgrade.
+    5. Missing required answers in the answer file
+    6. Missing required answers in the answer file
+
+HIGH and MEDIUM severity reports:
+    1. Packages available in excluded repositories will not be installed
+    2. Packages not signed by Red Hat found on the system
+    3. Difference in Python versions and support in RHEL 8
+    4. SSSD Domain "INTBIB.COM": sudo rules containing wildcards will stop working.
+    5. GRUB2 core will be automatically updated during the upgrade
+
+Reports summary:
+    Errors:                      0
+    Inhibitors:                  6
+    HIGH severity reports:       5
+    MEDIUM severity reports:     0
+    LOW severity reports:        4
+    INFO severity reports:       3
+
+Before continuing consult the full report:
+    A report has been generated at /var/log/leapp/leapp-report.json
+    A report has been generated at /var/log/leapp/leapp-report.txt
+
+============================================================
+                   END OF REPORT OVERVIEW
+============================================================
+
+Answerfile has been generated at /var/log/leapp/answerfile
+[root@dbsuatsftp ~]#
+
+
+The Inhibitors should be 0 
+[root@dbsuatsftp ~]# more /var/log/leapp/leapp-report.txt
+
+
+Key: f08a07da902958defa4f5c2699fae9ec2eb67c5b
+----------------------------------------
+Risk Factor: high (inhibitor)
+Title: OpenSSH configured to use removed mac
+Summary: OpenSSH is configured to use removed mac hmac-ripemd160. This MAC was removed from OpenSSH and if present the sshd daemon will not start in RHEL 8
+Remediation: [hint] Remove the following MACs from sshd_config: hmac-ripemd160
+Key: 5e212f4c38746acafd30e981b42b6a61b5802e77
+----------------------------------------
+Risk Factor: high (inhibitor)
+Title: Multiple devel kernels installed
+Summary: DNF cannot produce a valid upgrade transaction when multiple kernel-devel packages are installed.
+Remediation: [hint] Remove all but one kernel-devel packages before running Leapp again.
+[command] yum -y remove kernel-devel-3.10.0-1160.95.1.el7 kernel-devel-3.10.0-1160.105.1.el7
+Key: 8ceea81afbbb1a329b7d82ca7212b21509e5b256
+----------------------------------------
+Risk Factor: high (inhibitor)
+Title: Detected partitions mounted with the "noexec" option, preventing a successful in-place upgrade.
+Summary: Leapp detected that the /var mountpoint is mounted with the "noexec" option, which prevents binaries necessary for the upgrade from being executed. The upgrade
+ process cannot continue with /var mounted using the "noexec" option.
+Remediation: [hint] Temporarily remove the "noexec" option from /var entry in /etc/fstab until the system is upgraded, and remount the partition without the "noexec" op
+tion.
+Key: 981b3e9e95ccdfab3d4c83c591d8082596aca1ad
+----------------------------------------
+Risk Factor: high (inhibitor)
+Title: Missing required answers in the answer file
+Summary: One or more sections in answerfile are missing user choices: authselect_check.confirm
+For more information consult https://red.ht/leapp-dialogs.
+Remediation: [hint] Please register user choices with leapp answer cli command or by manually editing the answerfile.
+[command] leapp answer --section authselect_check.confirm=True
+Key: 68c3ee4354bd3c4e56697a9c34a9be5ce450ecf8
+----------------------------------------
+Risk Factor: high (inhibitor)
+Title: Missing required answers in the answer file
+Summary: One or more sections in answerfile are missing user choices: remove_pam_pkcs11_module_check.confirm
+For more information consult https://red.ht/leapp-dialogs.
+Remediation: [hint] Please register user choices with leapp answer cli command or by manually editing the answerfile.
+[command] leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+Key: d35f6c6b1b1fa6924ef442e3670d90fa92f0d54b
+----------------------------------------
+Risk Factor: high
+Title: Packages available in excluded repositories will not be installed
+Summary: 4 packages will be skipped because they are available only in target system repositories that are intentionally excluded from the list of repositories used dur
+ing the upgrade. See the report message titled "Excluded target system repositories" for details.
+The list of these packages:
+- libnsl2-devel (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+- python3-pyxattr (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+- rpcgen (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+- rpcsvc-proto-devel (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+Key: 2437e204808f987477c0e9be8e4c95b3a87a9f3e
+----------------------------------------
+Risk Factor: high
+Title: Packages not signed by Red Hat found on the system
+Summary: The following packages have not been signed by Red Hat and may be removed during the upgrade process in case Red Hat-signed packages to be removed during the u
+pgrade depend on them:
+- atop
+- ds_agent
+- zabbix-agent
+Key: 13f0791ae5f19f50e7d0d606fb6501f91b1efb2c
+----------------------------------------
+Risk Factor: high
+Title: Difference in Python versions and support in RHEL 8
+Summary: In RHEL 8, there is no 'python' command. Python 3 (backward incompatible) is the primary Python version and Python 2 is available with limited support and limi
+ted set of packages. If you no longer require Python 2 packages following the upgrade, please remove them. Read more here: https://red.ht/rhel-8-python
+Remediation: [hint] Please run "alternatives --set python /usr/bin/python3" after upgrade
+Key: 0c98585b1d8d252eb540bf61560094f3495351f5
+----------------------------------------
+Risk Factor: high
+Title: SSSD Domain "INTBIB.COM": sudo rules containing wildcards will stop working.
+Summary: Default value of ldap_sudo_include_regexp changed from true to false for performance reason.
+Remediation: [hint] If you use sudo rules with wildcards, set this option to true explicitly.
+Key: 9eec7fca8e72775346c4ff2fa772ea20d9f42717
+----------------------------------------
+Risk Factor: high
+Title: GRUB2 core will be automatically updated during the upgrade
+Summary: On legacy (BIOS) systems, GRUB2 core (located in the gap between the MBR and the first partition) cannot be updated during the rpm transaction and Leapp has to
+ initiate the update running "grub2-install" after the transaction. No action is needed before the upgrade. After the upgrade, it is recommended to check the GRUB confi
+guration.
+Key: ac7030e05d2ee248d34f08a9fa040b352bc410a3
+----------------------------------------
+Risk Factor: low
+Title: chrony using non-default configuration
+Summary: chrony behavior will not change in RHEL8
+Key: 9acbfcce3d310a70b602c7ab0a9c2cb94eb6b63f
+----------------------------------------
+Risk Factor: low
+Title: OpenSSH configured with removed configuration Protocol
+Summary: OpenSSH is configured with removed configuration option Protocol. If this used to be for enabling SSHv1, this is no longer supported in RHEL 8. Otherwise this
+option can be simply removed.
+Key: 5744a935aab15fe2386ea52849d21edd6525e4d7
+----------------------------------------
+Risk Factor: low
+Title: Postfix has incompatible changes in the next major version
+Summary: Postfix 3.x has so called "compatibility safety net" that runs Postfix programs with backwards-compatible default settings. It will log a warning whenever back
+wards-compatible default setting may be required for continuity of service. Based on this logging the system administrator can decide if any backwards-compatible settin
+gs need to be made permanent in main.cf or master.cf, before turning off the backwards-compatibility safety net.
+The backward compatibility safety net is by default turned off in Red Hat Enterprise Linux 8.
+It can be turned on by running:  "postconf -e compatibility_level=0
+It can be turned off by running: "postconf -e compatibility_level=2
+
+In the Postfix MySQL database client, the default "option_group" value has changed to "client", i.e. it now reads options from the [client] group from the MySQL configu
+ration file. To disable it, set "option_group" to the empty string.
+
+The postqueue command no longer forces all message arrival times to be reported in UTC. To get the old behavior, set TZ=UTC in main.cf:import_environment.
+
+Postfix 3.2 enables elliptic curve negotiation. This changes the default smtpd_tls_eecdh_grade setting to "auto", and introduces a new parameter "tls_eecdh_auto_curves"
+ with the names of curves that may be negotiated.
+
+The "master.cf" chroot default value has changed from "y" (yes) to "n" (no). This applies to master.cf services where chroot field is not explicitly specified.
+
+The "append_dot_mydomain" default value has changed from "yes" to "no". You may need changing it to "yes" if senders cannot use complete domain names in e-mail addresse
+s.
+
+The "relay_domains" default value has changed from "$mydestination" to the empty value. This could result in unexpected "Relay access denied" errors or ETRN errors, bec
+ause now will postfix by default relay only for the localhost.
+
+The "mynetworks_style" default value has changed from "subnet" to "host". This parameter is used to implement the "permit_mynetworks" feature. The change could result i
+n unexpected "access denied" errors, because postfix will now by default trust only the local machine, not the remote SMTP clients on the same IP subnetwork.
+
+Postfix now supports dynamically loaded database plugins. Plugins are shipped in individual RPM sub-packages. Correct database plugins have to be installed, otherwise t
+he specific database client will not work. For example for PostgreSQL map to work, the postfix-pgsql RPM package has to be installed.
+
+Key: 5721e0a07a67d82cf7e5ea6f17662cd4f82e0a33
+----------------------------------------
+Risk Factor: low
+Title: Grep has incompatible changes in the next major version
+Summary: If a file contains data improperly encoded for the current locale, and this is discovered before any of the file's contents are output, grep now treats the fil
+e as binary.
+The 'grep -P' no longer reports an error and exits when given invalid UTF-8 data. Instead, it considers the data to be non-matching.
+In locales with multibyte character encodings other than UTF-8, grep -P now reports an error and exits instead of misbehaving.
+When searching binary data, grep now may treat non-text bytes as line terminators. This can boost performance significantly.
+The 'grep -z' no longer automatically treats the byte '\200' as binary data.
+Context no longer excludes selected lines omitted because of -m. For example, 'grep "^" -m1 -A1' now outputs the first two input lines, not just the first line.
+
+Remediation: [hint] Please update your scripts to be compatible with the changes.
+Key: 94665a499e2eeee35eca3e7093a7abe183384b16
+----------------------------------------
+Risk Factor: info
+Title: Excluded target system repositories
+Summary: The following repositories are not supported by Red Hat and are excluded from the list of repositories used during the upgrade.
+- codeready-builder-beta-for-rhel-8-s390x-rpms
+- codeready-builder-beta-for-rhel-8-ppc64le-rpms
+- rhui-codeready-builder-for-rhel-8-x86_64-rhui-rpms
+- codeready-builder-for-rhel-8-aarch64-eus-rpms
+- codeready-builder-for-rhel-8-ppc64le-eus-rpms
+- codeready-builder-beta-for-rhel-8-x86_64-rpms
+- codeready-builder-for-rhel-8-aarch64-rpms
+- codeready-builder-for-rhel-8-s390x-rpms
+- codeready-builder-for-rhel-8-s390x-eus-rpms
+- codeready-builder-for-rhel-8-x86_64-eus-rpms
+- codeready-builder-beta-for-rhel-8-aarch64-rpms
+- codeready-builder-for-rhel-8-rhui-rpms
+- codeready-builder-for-rhel-8-x86_64-rhui-rpms
+- codeready-builder-for-rhel-8-x86_64-rpms
+- codeready-builder-for-rhel-8-x86_64-eus-rhui-rpms
+- codeready-builder-for-rhel-8-ppc64le-rpms
+Remediation: [hint] If some of excluded repositories are still required to be used during the upgrade, execute leapp with the --enablerepo option with the repoid of the
+ repository required to be enabled as an argument (the option can be used multiple times).
+Key: 1b9132cb2362ae7830e48eee7811be9527747de8
+----------------------------------------
+Risk Factor: info
+Title: SElinux disabled
+Summary: SElinux disabled, continuing...
+Key: 4f25fea9b15b9d1d07d52cc1de02073f295dac3d
+----------------------------------------
+Risk Factor: info
+Title: Automatic registration into Red Hat Insights
+Summary: After the upgrade, this system will be automatically registered into Red Hat Insights. The 'insights-client' package required for the registration will be inst
+alled during the upgrade. To skip the automatic registration, use the '--no-insights-register' command line option or set the LEAPP_NO_INSIGHTS_REGISTER environment var
+iable.
+Key: 693963253195f418526f045b6d630a1f4c7a193d
+----------------------------------------
+[root@dbsuatsftp ~]#
+
+
+

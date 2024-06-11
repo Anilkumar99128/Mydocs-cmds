@@ -1,0 +1,24 @@
+---
+- hosts: BACKUP
+  become: true
+  gather_facts: no
+   
+  tasks:
+  - name: Replace backup IPs
+  tasks:
+    - name: Update backup IP
+      lineinfile:
+        path: /etc/sysconfig/network-scripts/ifcfg-enp5s0
+        regexp: '^IPADDR='
+        line: "IPADDR={{ new_backup_ip }}" 
+    - name: chaging subnet
+      lineinfile:
+        path: /etc/sysconfig/network-scripts/ifcfg-enp5s0
+        regexp: '^NETMASK'
+        line: "NETMASK=255.255.254.0"
+    - name: change prefix
+      replace:
+        path: /etc/sysconfig/network-scripts/ifcfg-enp5s0
+        regexp: "PREFIX"
+        replace: "#PREFIX"
+

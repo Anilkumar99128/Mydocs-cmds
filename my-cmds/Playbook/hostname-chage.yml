@@ -1,0 +1,29 @@
+---
+- hosts: hostname
+  become: true
+  gather_facts: no
+  vars:
+   newpass: Q1w2e3r4@143$#$
+
+  tasks:
+
+  - name: Change HostName
+    command: hostnamectl set-hostname {{ hostname }}
+
+  - name: Remove AD ROOT ACCESS
+    shell: cd /etc/sudoers.d/;rm -rf IBM-*-ROOT-ACCESS
+
+  - name: leave AD
+    shell: realm leave
+
+  - name: Joinining the AD realm
+    shell: echo '{{ newpass }}' | realm join --user SRV.LINUX  IBM.LOCAL -v
+
+  - name: append line to sssd configuration
+    lineinfile:
+      path: /etc/sssd/sssd.conf
+      line: "ad_maximum_machine_account_password_age = 0"
+
+  - name: add AD group access permit
+    shell: realm permit -g IBM-`hostname`-SSH-ACCESS;echo  "%IBM-`hostname|tr “[a-z]” “[A-Z]”`-ROOT-ACCESS        ALL=(ALL)       ALL" > /etc/sudoers.d/IBM-`hostname|tr “[a-z]” “[A-Z]”`-ROOT-ACCESS;systemctl restart sssd ; systemctl enable sssd
+

@@ -1,0 +1,64 @@
+To configure virtual hosting on ports 80 and 443 with Apache2 on Ubuntu, follow these steps:
+
+Create a new virtual host configuration file for port 80:
+
+bash
+Copy code
+sudo nano /etc/apache2/sites-available/example.com.conf
+Replace example.com with your own domain name.
+
+Add the following content to the virtual host configuration file:
+
+bash
+Copy code
+<VirtualHost *:80>
+    ServerName example.com
+    ServerAlias www.example.com
+    DocumentRoot /var/www/example.com/public_html
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+This specifies the domain name, document root, and log files for your website.
+
+Create a new virtual host configuration file for port 443:
+
+bash
+Copy code
+sudo nano /etc/apache2/sites-available/example.com-ssl.conf
+Replace example.com with your own domain name.
+
+Add the following content to the virtual host configuration file:
+
+bash
+Copy code
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerName example.com
+        ServerAlias www.example.com
+        DocumentRoot /var/www/example.com/public_html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        SSLEngine on
+        SSLCertificateFile /path/to/ssl/certificate/file
+        SSLCertificateKeyFile /path/to/ssl/certificate/key/file
+        SSLCertificateChainFile /path/to/ssl/certificate/chain/file
+    </VirtualHost>
+</IfModule>
+This specifies the domain name, document root, log files, and SSL/TLS certificate information for your website.
+
+Enable the virtual host configurations:
+
+Copy code
+sudo a2ensite example.com.conf
+sudo a2ensite example.com-ssl.conf
+Restart Apache to apply the changes:
+
+Copy code
+sudo systemctl restart apache2
+Optionally, test the configuration by visiting your website using both HTTP and HTTPS protocols:
+
+arduino
+Copy code
+http://example.com/
+https://example.com/
+Replace example.com with your own domain name.

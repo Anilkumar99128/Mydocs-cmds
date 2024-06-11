@@ -1,0 +1,5 @@
+ ip route del 10.174.8.60 via 255.255.254.0 dev bond0 
+ 
+ 
+
+

@@ -1,0 +1,14 @@
+curl -kv --url 'smtp://10.172.30.142:25' --mail-from 'hidyatulla.khan.guranni@ibm.com' --mail-rcpt 'hidyatulla.khan.guranni@ibm.com' --upload-file mail.txt --user anil.panthangi@cloud4c.com:
+
+EHLO cloud4c.com
+RCPT TO: <anil.panthangi@cloud4c.com>
+DATA
+Subject: Test Email
+To: <anil.panthangi@cloud4c.com>
+
+This is a test email.
+.
+QUIT
+
+
+https://easydmarc.com/blog/how-to-configure-dkim-opendkim-with-postfix/

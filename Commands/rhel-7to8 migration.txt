@@ -1,0 +1,153 @@
+subscription-manager repos --enable rhel-7-server-rpms
+subscription-manager repos --enable rhel-7-server-extras-rpms
+yum versionlock clear
+yum update
+reboot
+yum install leapp-upgrade
+subscription-manager repos --list-enabled | grep "^Repo ID"
+Repo ID:   rhel-7-server-extras-rpms
+Repo ID:   rhel-7-server-
+
+leapp preupgrade --target <target_os_version>
+
+will get the below errors
+        Check all dialogs and notify that user needs to make some choices.
+====> * verify_check_results
+        Check all generated results messages and notify user about them.
+
+Debug output written to /var/log/leapp/leapp-preupgrade.log
+
+============================================================
+                      REPORT OVERVIEW
+============================================================
+
+Upgrade has been inhibited due to the following problems:
+    1. Leapp detected loaded kernel drivers which have been removed in RHEL 8. Upgrade cannot proceed.
+    2. OpenSSH configured to use removed mac
+    3. Multiple devel kernels installed
+    4. Detected partitions mounted with the "noexec" option, preventing a successful in-place upgrade.
+    5. Missing required answers in the answer file
+    6. Missing required answers in the answer file
+
+HIGH and MEDIUM severity reports:
+    1. Packages available in excluded repositories will not be installed
+    2. Packages not signed by Red Hat found on the system
+    3. Difference in Python versions and support in RHEL 8
+    4. SSSD Domain "INTBIB.COM": sudo rules containing wildcards will stop working.
+    5. GRUB2 core will be automatically updated during the upgrade
+
+Reports summary:
+    Errors:                      0
+    Inhibitors:                  6
+    HIGH severity reports:       5
+    MEDIUM severity reports:     0
+    LOW severity reports:        4
+    INFO severity reports:       3
+
+Before continuing consult the full report:
+    A report has been generated at /var/log/leapp/leapp-report.json
+    A report has been generated at /var/log/leapp/leapp-report.txt
+
+============================================================
+                   END OF REPORT OVERVIEW
+============================================================
+
+Answerfile has been generated at /var/log/leapp/answerfile
+[root@dbsuatsftp ~]#
+
+verify the beolow file resolution
+
+Risk Factor: high (inhibitor)
+Title: Leapp detected loaded kernel drivers which have been removed in RHEL 8. Upgrade cannot proceed.
+Summary: Support for the following RHEL 7 device drivers has been removed in RHEL 8:
+     - floppy
+     - pata_acpi
+	 
+	 rmmod  floppy
+	 rmmod pata_acpi
+
+[root@dbsuatsftp ~]# more /var/log/leapp/leapp-report.txt
+
+Summary: OpenSSH is configured to use removed mac hmac-ripemd160. This MAC was removed from OpenSSH and if present the sshd daemon will not start in RHEL 8
+Remediation: [hint] Remove the following MACs from sshd_config: hmac-ripemd160
+ 
+ remove the mac and restart sshd
+
+Remediation: [hint] Remove all but one kernel-devel packages before running Leapp again.
+[command] yum -y remove kernel-devel-3.10.0-1160.95.1.el7 kernel-devel-3.10.0-1160.105.1.el7
+yum -y remove kernel-devel-3.10.0-1160.95.1.el7 kernel-devel-3.10.0-1160.105.1.el7
+
+remove the devel kernel
+
+Title: Detected partitions mounted with the "noexec" option, preventing a successful in-place upgrade.
+Summary: Leapp detected that the /var mountpoint is mounted with the "noexec" option, which prevents binaries necessary for the upgrade from being executed. The upgrade
+ process cannot continue with /var mounted using the "noexec" option.
+Remediation: [hint] Temporarily remove the "noexec" option from /var entry in /etc/fstab until the system is upgraded, and remount the partition without the "noexec" op
+tion.
+
+Remediation: [hint] Please register user choices with leapp answer cli command or by manually editing the answerfile.
+[command] leapp answer --section authselect_check.confirm=True
+
+Remediation: [hint] Please register user choices with leapp answer cli command or by manually editing the answerfile.
+[command] leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+
+[root@dbsuatsftp ~]# cat /var/log/leapp/answerfile
+[authselect_check]
+confirm = True
+
+[remove_pam_pkcs11_module_check]
+
+[root@dbsuatsftp ~]# /var/log/leapp/answerfile^C
+[root@dbsuatsftp ~]# leapp answer --section remove_pam_pkcs11_module_check.confirm=True
+[root@dbsuatsftp ~]# cat /var/log/leapp/answerfile
+[authselect_check]
+confirm = True
+
+[remove_pam_pkcs11_module_check]
+confirm = True
+
+Title: Packages available in excluded repositories will not be installed
+Summary: 4 packages will be skipped because they are available only in target system repositories that are intentionally excluded from the list of repositories used dur
+ing the upgrade. See the report message titled "Excluded target system repositories" for details.
+The list of these packages:
+- libnsl2-devel (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+- python3-pyxattr (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+- rpcgen (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+- rpcsvc-proto-devel (repoid: codeready-builder-for-rhel-8-x86_64-rpms)
+Key: 2437e204808f987477c0e9be8e4c95b3a87a9f3e
+----------------------------------------
+
+
+
+Risk Factor: high
+Title: Packages not signed by Red Hat found on the system
+Summary: The following packages have not been signed by Red Hat and may be removed during the upgrade process in case Red Hat-signed packages to be removed during the u
+pgrade depend on them:
+- atop
+- ds_agent
+- zabbix-agent
+
+
+Title: Difference in Python versions and support in RHEL 8
+Summary: In RHEL 8, there is no 'python' command. Python 3 (backward incompatible) is the primary Python version and Python 2 is available with limited support and limi
+ted set of packages. If you no longer require Python 2 packages following the upgrade, please remove them. Read more here: https://red.ht/rhel-8-python
+Remediation: [hint] Please run "alternatives --set python /usr/bin/python3" after upgrade
+
+alternatives --set python /usr/bin/python3
+
+Risk Factor: high
+Title: SSSD Domain "INTBIB.COM": sudo rules containing wildcards will stop working.
+Summary: Default value of ldap_sudo_include_regexp changed from true to false for performance reason.
+Remediation: [hint] If you use sudo rules with wildcards, set this option to true explicitly.
+Key: 9eec7fca8e72775346c4ff2fa772ea20d9f42717
+
+
+
+Title: GRUB2 core will be automatically updated during the upgrade
+Summary: On legacy (BIOS) systems, GRUB2 core (located in the gap between the MBR and the first partition) cannot be updated during the rpm transaction and Leapp has to
+ initiate the update running "grub2-install" after the transaction. No action is needed before the upgrade. After the upgrade, it is recommended to check the GRUB confi
+guration.
+
+clear all  above issue run # leapp preupgrade --target 8.6
+
+leapp upgrade --target 8.6

@@ -1,0 +1,15 @@
+===========================setting envirement variables to provide command access=====================
+echo $PATH
+/home/srv.ubssitrw@EVNABFID.LOCAL/.local/bin:/home/srv.ubssitrw@EVNABFID.LOCAL/bin:/usr/share/Modules/bin:/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+add the required path for the commands on .bashrc
+export PATH=$PATH:/usr/local/bin
+source ~/.bashrc   # or source ~/.zshrc for Zsh
+it will update the Env chages
+
+============================To install ansible aws kube etc packages============
+upgrade python3
+install pip using python3
+install other packages using pip3
+if aws doesnt work with python script error upgrade pip3 to latest version which is compatilble for python3
+if local user geetting isssue like errr00 /usr/bin/newuidmap 
+provide the suid to /usr/bin/newuidmap to fix
